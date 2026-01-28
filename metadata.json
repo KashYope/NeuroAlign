@@ -1,0 +1,5 @@
+{
+  "name": "NeuroAlign: Adult Neurodiversity Screening",
+  "description": "A sleek, minimalist web application for self-screening adult neurodivergent traits including Autism, ADHD, Dyslexia, and more, based on DSM-5-TR and ICD-11 protocols.",
+  "requestFramePermissions": []
+}
