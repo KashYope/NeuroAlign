@@ -9,6 +9,16 @@ import { calculateReport } from './utils/scoring';
 import { saveProgress, loadProgress, clearProgress } from './utils/persistence';
 
 
+const ModuleIcon: React.FC<{ name: string; className?: string }> = ({ name, className = "w-5 h-5" }) => {
+  switch (name) {
+    case 'adhd': return <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>;
+    case 'autism': return <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>;
+    case 'dyslexia': return <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>;
+    case 'dyspraxia': return <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 00-3 0v2a7.5 7.5 0 0015 0v-5a1.5 1.5 0 00-3 0m-6-3V11m0-5.5v-1a1.5 1.5 0 013 0v1m0 0V11m0-5.5a1.5 1.5 0 013 0v3m0 0V11" /></svg>;
+    case 'dyscalculia': return <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>;
+    default: return null;
+  }
+};
 const FAQAccordion: React.FC<{ items: { q: string, a: string }[], title: string }> = ({ items, title }) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   return (
@@ -35,17 +45,6 @@ const FAQAccordion: React.FC<{ items: { q: string, a: string }[], title: string 
 const DomainsOverview: React.FC<{ t: any }> = ({ t }) => {
   const domains = ['adhd', 'autism', 'dyslexia', 'dyspraxia', 'dyscalculia'];
 
-  const getIcon = (key: string) => {
-    switch (key) {
-      case 'adhd': return <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>;
-      case 'autism': return <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>;
-      case 'dyslexia': return <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>;
-      case 'dyspraxia': return <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 00-3 0v2a7.5 7.5 0 0015 0v-5a1.5 1.5 0 00-3 0m-6-3V11m0-5.5v-1a1.5 1.5 0 013 0v1m0 0V11m0-5.5a1.5 1.5 0 013 0v3m0 0V11" /></svg>;
-      case 'dyscalculia': return <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>;
-      default: return null;
-    }
-  };
-
   return (
     <div className="w-full max-w-5xl mx-auto mb-12 animate-in fade-in slide-in-from-bottom-5 delay-150 px-4">
       <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] mb-8 text-center">{t.domainsTitle}</h3>
@@ -55,7 +54,7 @@ const DomainsOverview: React.FC<{ t: any }> = ({ t }) => {
           return (
             <div key={key} className="bg-white p-4 rounded-2xl border border-slate-100 shadow-[0_2px_10px_rgba(0,0,0,0.02)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center h-full">
               <div className="w-8 h-8 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-3 shrink-0">
-                {getIcon(key)}
+                <ModuleIcon name={key} className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
               <span className="text-[10px] font-black text-slate-800 uppercase tracking-widest mb-2">{title}</span>
               <p className="text-[9px] text-slate-500 font-medium leading-relaxed">{t.domainIntros[key]}</p>
@@ -122,7 +121,7 @@ const MethodologySection: React.FC<{ t: any; onShowMethods: () => void }> = ({ t
           {Object.entries(t.methodology.modules).map(([key, mod]: [string, any]) => (
             <div key={key} className="flex items-start gap-5 group">
               <div className="w-10 h-10 rounded-2xl bg-indigo-500/50 flex items-center justify-center shrink-0 border border-indigo-400/30 group-hover:bg-white group-hover:text-indigo-600 transition-colors duration-300">
-                <span className="text-[10px] font-black uppercase">{key.substring(0, 2)}</span>
+                <ModuleIcon name={key} className="w-5 h-5" />
               </div>
               <div>
                 <p className="text-[10px] font-bold uppercase tracking-widest text-indigo-200 mb-1">{mod.source}</p>
@@ -170,6 +169,9 @@ const DebugOverlay: React.FC<{ isDebug: boolean, liveReport: any, generateRandom
           <div className="flex gap-2">
             <button onClick={generateRandom} className="px-2 py-1 bg-slate-800 rounded text-[7px] font-black uppercase hover:bg-slate-700">Rand</button>
             <button onClick={forceFinish} className="px-2 py-1 bg-indigo-600 rounded text-[7px] font-black uppercase hover:bg-indigo-500">End</button>
+            <button onClick={() => {
+              (window as any).triggerChaos();
+            }} className="px-2 py-1 bg-rose-600 rounded text-[7px] font-black uppercase hover:bg-rose-500 animate-pulse">Chaos</button>
           </div>
         </div>
         <button onClick={close} className="text-slate-500 hover:text-white"><svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg></button>
@@ -258,6 +260,29 @@ const App: React.FC = () => {
   const generateRandom = () => {
     setAnswers(QUESTIONS.map(q => ({ questionId: q.id, score: Math.floor(Math.random() * 5) + 1 })));
   };
+
+  // Chaos Trigger for debugging
+  useEffect(() => {
+    (window as any).triggerChaos = () => {
+      // Generate high intensity answers
+      const chaosAnswers = QUESTIONS.map(q => ({ questionId: q.id, score: 5 }));
+      setAnswers(chaosAnswers);
+
+      // Force a report with every possible flag and clinical urgency
+      const chaosReport = calculateReport(chaosAnswers);
+      chaosReport.isClinicalUrgent = true;
+      chaosReport.flags = ['coOccurrence', 'maskingFlag', 'headInjuryFlag', 'depressionFlag'];
+
+      // Add full functional impact
+      chaosReport.functionalImpact = {
+        "7.1": 5, "7.2": 4, "7.3": 5, "7.4": 3, "7.5": 5
+      };
+
+      setReport(chaosReport);
+      setShowDisclaimer(true);
+      alert("🚨 CHAOS MODE ACTIVATED: All visual elements triggered for debugging.");
+    };
+  }, [t]);
 
   // Fixed restart logic to avoid window.location.reload errors and properly reset component state
   const restart = () => {
