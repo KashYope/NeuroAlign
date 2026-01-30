@@ -128,7 +128,7 @@ const LanguageSwitcher: React.FC<{ locale: Locale, setLocale: (l: Locale) => voi
 );
 
 const DebugToggle: React.FC<{ isDebug: boolean, setIsDebug: (d: boolean) => void }> = ({ isDebug, setIsDebug }) => (
-  <div className="fixed top-4 sm:top-6 right-4 sm:right-6 z-[101] scale-90 sm:scale-100 origin-right">
+  <div className="fixed bottom-4 left-4 z-[101] scale-90 sm:scale-100 origin-bottom-left opacity-50 hover:opacity-100 transition-opacity">
     <button onClick={() => setIsDebug(!isDebug)} aria-label="Toggle debug view" className={`p-2 sm:p-2.5 rounded-full border transition-all shadow-lg ${isDebug ? 'bg-red-600 border-red-600 text-white shadow-red-200' : 'bg-white/80 backdrop-blur-md border-slate-200 text-slate-400 hover:text-slate-800 shadow-slate-200/50'}`}>
       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
     </button>
