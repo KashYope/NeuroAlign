@@ -124,17 +124,11 @@ export function calculateReport(answers: UserAnswer[]): ScreeningReport {
       else if (normalized > 20) interpretation = 'possible';
     }
 
+    // Subscale Scores Calculation
     const subscaleScores: Record<string, number> = {};
     Object.entries(subscaleData).forEach(([name, data]) => {
       subscaleScores[name] = data.count > 0 ? Math.round((data.sum / data.count) * 100) : 0;
     });
-
-    // Subitizing Flag (Special case for Dyscalculia)
-    if (phase === Phase.DYSCALCULIA) {
-      // Check NUM_02
-      const q2 = answerMap.get('NUM_02') || 0;
-      if (q2 >= 4) subscaleScores['_Flag_Subitizing'] = 100; // Internal marker
-    }
 
     // Childhood Flag (Dyspraxia)
     let childhoodFlag = false;

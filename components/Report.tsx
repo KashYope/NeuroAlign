@@ -554,21 +554,23 @@ const Report: React.FC<ReportProps> = ({ report, answers, onReset, locale }) => 
         <div>
           <h4 className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-6">{t.reportLabels.subscaleBreakdown}</h4>
           <div className="space-y-5">
-            {Object.entries(domain.subscales).map(([name, score]: [string, any]) => (
-              <div key={name}>
-                <div className="flex justify-between text-[10px] font-bold text-slate-600 mb-1.5">
-                  <span className="truncate pr-2">{(t.subscales as any)[name] || name}</span>
-                  <span className="shrink-0">{score}%</span>
+            {Object.entries(domain.subscales)
+              .filter(([name]) => !name.startsWith('_'))
+              .map(([name, score]: [string, any]) => (
+                <div key={name}>
+                  <div className="flex justify-between text-[10px] font-bold text-slate-600 mb-1.5">
+                    <span className="truncate pr-2">{(t.subscales as any)[name] || name}</span>
+                    <span className="shrink-0">{score}%</span>
+                  </div>
+                  <div className="h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                    <div
+                      className={`h-full rounded-full transition-all duration-1000 ${score > 60 ? 'bg-rose-400' : score > 40 ? 'bg-amber-400' : 'bg-indigo-400'
+                        }`}
+                      style={{ width: `${score}%` }}
+                    />
+                  </div>
                 </div>
-                <div className="h-1.5 bg-slate-100 rounded-full overflow-hidden">
-                  <div
-                    className={`h-full rounded-full transition-all duration-1000 ${score > 60 ? 'bg-rose-400' : score > 40 ? 'bg-amber-400' : 'bg-indigo-400'
-                      }`}
-                    style={{ width: `${score}%` }}
-                  />
-                </div>
-              </div>
-            ))}
+              ))}
           </div>
         </div>
 
