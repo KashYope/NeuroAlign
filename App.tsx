@@ -58,7 +58,7 @@ const DomainsOverview: React.FC<{ t: any }> = ({ t }) => {
 
 
 const MethodologySection: React.FC<{ t: any; onShowMethods: () => void }> = ({ t, onShowMethods }) => (
-  <section className="w-full max-w-5xl mb-24 sm:mb-32 animate-in fade-in slide-in-from-bottom-8 delay-300 duration-1000 px-4">
+  <section className="w-full max-w-5xl mt-32 mb-24 sm:mb-32 animate-in fade-in slide-in-from-bottom-8 delay-300 duration-1000 px-4">
     <div className="text-center mb-16">
       <div className="inline-block px-4 py-1.5 bg-indigo-50 text-indigo-600 rounded-full text-[9px] font-black uppercase tracking-[0.3em] mb-6">
         {t.methodology.title}
@@ -315,6 +315,20 @@ const App: React.FC = () => {
               <DomainsOverview t={t} />
 
               <button onClick={handleStartRequest} className="w-full max-w-sm py-4 sm:py-5 bg-indigo-600 text-white rounded-2xl font-black text-base sm:text-lg uppercase tracking-widest hover:bg-indigo-700 shadow-xl shadow-indigo-100 transition-all active:scale-[0.98] outline-none">{answers.length > 0 ? t.continueBtn : t.startBtn}</button>
+
+              {answers.length > 0 && (
+                <button
+                  onClick={() => {
+                    if (window.confirm("Are you sure? This will clear your current progress.")) {
+                      restart();
+                      setTimeout(() => setShowDisclaimer(true), 100);
+                    }
+                  }}
+                  className="mt-4 text-xs font-bold text-slate-400 hover:text-indigo-600 uppercase tracking-widest transition-colors"
+                >
+                  {t.startNewBtn}
+                </button>
+              )}
 
               <MethodologySection t={t} onShowMethods={() => setShowMethods(true)} />
 
