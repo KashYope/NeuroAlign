@@ -73,6 +73,7 @@ export const translations = {
     methodology: {
       title: "Science & Methodology",
       description: "NeuroAlign (MethodeII) takes a holistic approach. Unlike traditional diagnostics that look for deficits, we map your cognitive traits onto a 'Spiky Profile'—highlighting both your challenges and your strengths.",
+      learnBtn: "Learn about the methods",
       sourcesTitle: "Clinical Instruments Adapted",
       spikyProfileTitle: "The Spiky Profile",
       spikyProfileDesc: "Neurodivergent individuals often have significant disparities between widely varying skills (e.g., high verbal ability but low processing speed). We visualize this variance.",
@@ -409,6 +410,7 @@ export const translations = {
     methodology: {
       title: "Science & Méthodologie",
       description: "NeuroAlign (MethodeII) adopte une approche globale. Contrairement aux approches basées sur les déficits, nous cartographions vos traits sur un 'Profil Hétérogène' — mettant en lumière à la fois vos défis et vos forces.",
+      learnBtn: "Découvrir la méthodologie",
       sourcesTitle: "Instruments Cliniques Adaptés",
       spikyProfileTitle: "Le Profil Hétérogène",
       spikyProfileDesc: "Les personnes neurodivergentes présentent souvent des écarts significatifs entre des compétences très variées (ex: forte capacité verbale mais faible vitesse de traitement). Nous visualisons cette variance.",

@@ -114,7 +114,7 @@ const MethodologySection: React.FC<{ t: any; onShowMethods: () => void }> = ({ t
         onClick={onShowMethods}
         className="group relative px-8 py-4 bg-white text-indigo-600 rounded-2xl border-2 border-indigo-100 font-black text-xs sm:text-sm uppercase tracking-widest hover:bg-indigo-50 hover:border-indigo-200 transition-all shadow-lg shadow-indigo-100/50 hover:shadow-indigo-200 hover:-translate-y-1 active:translate-y-0 active:scale-95 flex items-center gap-3 mx-auto overflow-hidden"
       >
-        <span className="relative z-10">Learn about the methods</span>
+        <span className="relative z-10">{t.methodology.learnBtn}</span>
         <svg className="w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
       </button>
     </div>
