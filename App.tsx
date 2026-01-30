@@ -1,40 +1,30 @@
-
 import React, { useState, useEffect, useMemo } from 'react';
 import { Phase, UserAnswer, ScreeningReport, Locale } from './types';
 import { QUESTIONS } from './questions';
 import { translations } from './i18n';
 import LikertScale from './components/LikertScale';
 import Report from './components/Report';
+import MethodsPage from './components/MethodsPage';
 import { calculateReport } from './utils/scoring';
 import { saveProgress, loadProgress, clearProgress } from './utils/persistence';
 
-// Simple FAQ Component for the landing page
+
 const FAQAccordion: React.FC<{ items: { q: string, a: string }[], title: string }> = ({ items, title }) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-
   return (
-    <section className="w-full max-w-4xl mt-32 mb-20 animate-in fade-in slide-in-from-bottom-8 duration-1000">
-      <h2 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.4em] mb-12 text-center">{title}</h2>
-      <div className="space-y-4">
+    <section className="w-full max-w-4xl mt-24 sm:mt-32 mb-16 sm:mb-20 animate-in fade-in slide-in-from-bottom-8 duration-1000">
+      <h2 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.4em] mb-10 text-center">{title}</h2>
+      <div className="space-y-3 sm:space-y-4">
         {items.map((item, idx) => (
-          <div key={idx} className="bg-white border border-slate-100 rounded-[2rem] overflow-hidden transition-all duration-300">
+          <div key={idx} className="bg-white border border-slate-100 rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden transition-all duration-300">
             <button
               onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
-              className="w-full px-8 py-6 text-left flex justify-between items-center group"
+              className="w-full px-6 sm:px-8 py-5 sm:py-6 text-left flex justify-between items-center group focus:outline-none focus:bg-slate-50"
             >
-              <span className="font-bold text-slate-800 group-hover:text-indigo-600 transition-colors pr-4">{item.q}</span>
-              <svg 
-                className={`w-5 h-5 text-slate-400 transition-transform duration-300 ${openIndex === idx ? 'rotate-180 text-indigo-500' : ''}`} 
-                fill="none" 
-                stroke="currentColor" 
-                viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" />
-              </svg>
+              <span className="font-bold text-sm sm:text-base text-slate-800 group-hover:text-indigo-600 transition-colors pr-4">{item.q}</span>
+              <svg className={`w-4 h-4 sm:w-5 h-5 text-slate-400 transition-transform duration-300 shrink-0 ${openIndex === idx ? 'rotate-180 text-indigo-500' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" /></svg>
             </button>
-            <div className={`transition-all duration-300 ease-in-out ${openIndex === idx ? 'max-h-[300px] opacity-100 pb-8 px-8' : 'max-h-0 opacity-0'}`}>
-              <p className="text-slate-500 leading-relaxed text-sm">{item.a}</p>
-            </div>
+            <div className={`transition-all duration-300 ease-in-out ${openIndex === idx ? 'max-h-[500px] opacity-100 pb-6 sm:pb-8 px-6 sm:px-8' : 'max-h-0 opacity-0 overflow-hidden'}`}><p className="text-slate-500 leading-relaxed text-sm">{item.a}</p></div>
           </div>
         ))}
       </div>
@@ -42,30 +32,156 @@ const FAQAccordion: React.FC<{ items: { q: string, a: string }[], title: string 
   );
 };
 
+const DomainsOverview: React.FC<{ t: any }> = ({ t }) => {
+  const domains = ['adhd', 'autism', 'dyslexia', 'dyspraxia', 'dyscalculia'];
+
+  return (
+    <div className="w-full max-w-5xl mx-auto mb-12 animate-in fade-in slide-in-from-bottom-5 delay-150 px-4">
+      <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] mb-8 text-center">{t.domainsTitle}</h3>
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+        {domains.map((key) => {
+          const title = t.methodology.modules[key]?.title.replace(/Module\s*|\s*Module/gi, '').trim();
+          return (
+            <div key={key} className="bg-white p-4 rounded-2xl border border-slate-100 shadow-[0_2px_10px_rgba(0,0,0,0.02)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center h-full">
+              <div className="w-8 h-8 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-[10px] font-black mb-3 shrink-0">
+                {title.substring(0, 2).toUpperCase()}
+              </div>
+              <span className="text-[10px] font-black text-slate-800 uppercase tracking-widest mb-2">{title}</span>
+              <p className="text-[9px] text-slate-500 font-medium leading-relaxed">{t.domainIntros[key]}</p>
+            </div>
+          )
+        })}
+      </div>
+    </div>
+  );
+};
+
+
+const MethodologySection: React.FC<{ t: any; onShowMethods: () => void }> = ({ t, onShowMethods }) => (
+  <section className="w-full max-w-5xl mb-24 sm:mb-32 animate-in fade-in slide-in-from-bottom-8 delay-300 duration-1000 px-4">
+    <div className="text-center mb-16">
+      <div className="inline-block px-4 py-1.5 bg-indigo-50 text-indigo-600 rounded-full text-[9px] font-black uppercase tracking-[0.3em] mb-6">
+        {t.methodology.title}
+      </div>
+      <p className="text-xl sm:text-2xl text-slate-800 max-w-3xl mx-auto leading-relaxed font-bold tracking-tight">
+        {t.methodology.description}
+      </p>
+    </div>
+
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+      {/* Spiky Profile Card */}
+      <div className="bg-white p-8 sm:p-10 rounded-[2.5rem] shadow-xl shadow-slate-200/50 border border-slate-100 md:col-span-1 flex flex-col">
+        <div className="w-12 h-12 bg-rose-50 text-rose-500 rounded-2xl flex items-center justify-center mb-6">
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
+        </div>
+        <h3 className="text-2xl font-black text-slate-900 mb-4">{t.methodology.spikyProfileTitle}</h3>
+        <p className="text-slate-500 leading-relaxed font-medium mb-8 flex-1">
+          {t.methodology.spikyProfileDesc}
+        </p>
+        <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
+          <div className="flex items-end gap-2 h-24 mb-2 justify-between px-2">
+            <div className="w-4 bg-indigo-200 rounded-t-lg h-[40%]" />
+            <div className="w-4 bg-indigo-500 rounded-t-lg h-[90%]" />
+            <div className="w-4 bg-indigo-300 rounded-t-lg h-[30%]" />
+            <div className="w-4 bg-indigo-600 rounded-t-lg h-[80%]" />
+            <div className="w-4 bg-indigo-400 rounded-t-lg h-[50%]" />
+          </div>
+          <p className="text-[9px] text-center font-black uppercase tracking-widest text-slate-400">Visualization Concept</p>
+        </div>
+      </div>
+
+      {/* Modules Card */}
+      <div className="bg-indigo-600 p-8 sm:p-10 rounded-[2.5rem] shadow-2xl shadow-indigo-200 text-white md:col-span-1">
+        <h3 className="text-2xl font-black mb-8 px-2">{t.methodology.sourcesTitle}</h3>
+        <div className="space-y-6">
+          {Object.entries(t.methodology.modules).map(([key, mod]: [string, any]) => (
+            <div key={key} className="flex items-start gap-5 group">
+              <div className="w-10 h-10 rounded-2xl bg-indigo-500/50 flex items-center justify-center shrink-0 border border-indigo-400/30 group-hover:bg-white group-hover:text-indigo-600 transition-colors duration-300">
+                <span className="text-[10px] font-black uppercase">{key.substring(0, 2)}</span>
+              </div>
+              <div>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-indigo-200 mb-1">{mod.source}</p>
+                <p className="text-lg font-bold leading-tight">{mod.title}</p>
+                <p className="text-xs text-indigo-200/80 mt-1 leading-relaxed">{mod.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+    <div className="mt-12 text-center animate-in fade-in slide-in-from-bottom-4 delay-500 duration-1000">
+      <button
+        onClick={onShowMethods}
+        className="group relative px-8 py-4 bg-white text-indigo-600 rounded-2xl border-2 border-indigo-100 font-black text-xs sm:text-sm uppercase tracking-widest hover:bg-indigo-50 hover:border-indigo-200 transition-all shadow-lg shadow-indigo-100/50 hover:shadow-indigo-200 hover:-translate-y-1 active:translate-y-0 active:scale-95 flex items-center gap-3 mx-auto overflow-hidden"
+      >
+        <span className="relative z-10">Learn about the methods</span>
+        <svg className="w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+      </button>
+    </div>
+  </section >
+);
+const LanguageSwitcher: React.FC<{ locale: Locale, setLocale: (l: Locale) => void }> = ({ locale, setLocale }) => (
+  <nav aria-label="Language selection" className="fixed top-4 sm:top-6 right-16 sm:right-24 flex bg-white/80 backdrop-blur-md rounded-full p-1 border border-slate-200 z-[101] shadow-lg shadow-slate-200/50 scale-90 sm:scale-100 origin-right">
+    <button onClick={() => setLocale('en')} className={`px-3 sm:px-4 py-1.5 rounded-full text-[10px] sm:text-xs font-black transition-all outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 ${locale === 'en' ? 'bg-indigo-600 text-white shadow-md' : 'text-slate-500 hover:text-slate-800'}`}>EN</button>
+    <button onClick={() => setLocale('fr')} className={`px-3 sm:px-4 py-1.5 rounded-full text-[10px] sm:text-xs font-black transition-all outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 ${locale === 'fr' ? 'bg-indigo-600 text-white shadow-md' : 'text-slate-500 hover:text-slate-800'}`}>FR</button>
+  </nav>
+);
+
+const DebugToggle: React.FC<{ isDebug: boolean, setIsDebug: (d: boolean) => void }> = ({ isDebug, setIsDebug }) => (
+  <div className="fixed top-4 sm:top-6 right-4 sm:right-6 z-[101] scale-90 sm:scale-100 origin-right">
+    <button onClick={() => setIsDebug(!isDebug)} aria-label="Toggle debug view" className={`p-2 sm:p-2.5 rounded-full border transition-all shadow-lg ${isDebug ? 'bg-red-600 border-red-600 text-white shadow-red-200' : 'bg-white/80 backdrop-blur-md border-slate-200 text-slate-400 hover:text-slate-800 shadow-slate-200/50'}`}>
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
+    </button>
+  </div>
+);
+
+const DebugOverlay: React.FC<{ isDebug: boolean, liveReport: any, generateRandom: () => void, forceFinish: () => void, close: () => void, t: any }> = ({ isDebug, liveReport, generateRandom, forceFinish, close, t }) => {
+  if (!isDebug) return null;
+  return (
+    <aside className="fixed bottom-4 sm:bottom-6 left-4 right-4 sm:left-6 sm:right-6 bg-slate-900/95 text-white p-5 sm:p-6 rounded-[2rem] sm:rounded-[2.5rem] shadow-2xl z-[110] backdrop-blur-md border border-slate-800 animate-in slide-in-from-bottom-6 max-h-[50vh] overflow-y-auto">
+      <div className="flex justify-between items-center mb-5 sticky top-0 bg-slate-900/40 py-1">
+        <div className="flex items-center gap-3 sm:gap-4">
+          <span className="text-[9px] font-black uppercase tracking-widest text-indigo-400">Stream Log</span>
+          <div className="flex gap-2">
+            <button onClick={generateRandom} className="px-2 py-1 bg-slate-800 rounded text-[7px] font-black uppercase hover:bg-slate-700">Rand</button>
+            <button onClick={forceFinish} className="px-2 py-1 bg-indigo-600 rounded text-[7px] font-black uppercase hover:bg-indigo-500">End</button>
+          </div>
+        </div>
+        <button onClick={close} className="text-slate-500 hover:text-white"><svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg></button>
+      </div>
+      <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-3">
+        {liveReport ? liveReport.domainScores.map((d: any) => (
+          <div key={d.name} className="bg-slate-800/50 p-3 rounded-xl border border-slate-700/50">
+            <p className="text-[7px] font-black uppercase tracking-widest text-slate-500 mb-1 truncate">{(t.phases as any)[d.name] || d.name}</p>
+            <p className="text-base sm:text-lg font-black text-indigo-400">{d.score}%</p>
+          </div>
+        )) : <div className="col-span-full py-4 text-center text-slate-500 text-[9px] font-black uppercase tracking-widest">Awaiting context...</div>}
+      </div>
+    </aside>
+  );
+};
+
 const App: React.FC = () => {
   const [locale, setLocale] = useState<Locale>('en');
-  const [currentIndex, setCurrentIndex] = useState(-1); // -1 = Intro
+  const [currentIndex, setCurrentIndex] = useState(-1);
   const [answers, setAnswers] = useState<UserAnswer[]>([]);
   const [report, setReport] = useState<ScreeningReport | null>(null);
   const [isDebug, setIsDebug] = useState(false);
   const [isAdvancing, setIsAdvancing] = useState(false);
+  const [showDisclaimer, setShowDisclaimer] = useState(false);
+  const [disclaimerChecked, setDisclaimerChecked] = useState(false);
+  const [showMethods, setShowMethods] = useState(false);
 
   const t = translations[locale];
 
-  // Load persistence on mount
   useEffect(() => {
-    try {
-      const saved = loadProgress();
-      if (saved) {
-        if (saved.answers) setAnswers(saved.answers);
-        if (saved.locale) setLocale(saved.locale);
-      }
-    } catch (e) {
-      console.error("Critical: Progress loading failed", e);
+    const saved = loadProgress();
+    if (saved) {
+      if (saved.answers) setAnswers(saved.answers);
+      if (saved.locale) setLocale(saved.locale);
     }
   }, []);
 
-  // Save persistence when answers or index change
   useEffect(() => {
     if (currentIndex >= 0 && !report) {
       saveProgress({ index: currentIndex, answers, locale });
@@ -74,23 +190,15 @@ const App: React.FC = () => {
 
   const liveReport = useMemo(() => {
     if (answers.length === 0) return null;
-    try {
-      return calculateReport(answers);
-    } catch (e) {
-      console.error("Live scoring error:", e);
-      return null;
-    }
+    try { return calculateReport(answers); } catch (e) { return null; }
   }, [answers]);
 
   const handleAnswer = (score: number) => {
     if (isAdvancing) return;
-    
     setIsAdvancing(true);
     const questionId = QUESTIONS[currentIndex].id;
     const newAnswers = [...answers.filter(a => a.questionId !== questionId), { questionId, score }];
     setAnswers(newAnswers);
-    
-    // Auto-advance with visual feedback delay
     setTimeout(() => {
       if (currentIndex < QUESTIONS.length - 1) {
         setCurrentIndex(prev => prev + 1);
@@ -108,267 +216,143 @@ const App: React.FC = () => {
       setReport(calculatedReport);
       clearProgress();
     } catch (e) {
-      alert(locale === 'en' ? "An error occurred during scoring. Please try again." : "Une erreur est survenue lors du calcul du score. Veuillez réessayer.");
-      console.error(e);
+      alert(t.errors.scoring);
     }
-  };
-
-  const startNewAssessment = () => {
-    if (answers.length > 0) {
-      const msg = locale === 'en' 
-        ? "This will clear all your progress. Are you sure you want to start over?" 
-        : "Cela effacera toute votre progression. Êtes-vous sûr de vouloir recommencer ?";
-      if (confirm(msg)) {
-        clearProgress();
-        window.location.reload();
-      }
-    } else {
-      setCurrentIndex(0);
-    }
-  };
-
-  const resumeAssessment = () => {
-    const saved = loadProgress();
-    if (saved && saved.index !== undefined) {
-      setCurrentIndex(saved.index);
-    } else {
-      setCurrentIndex(0);
-    }
-  };
-
-  const forceReset = () => {
-    clearProgress();
-    window.location.reload();
-  };
-
-  const handleSaveAndExit = () => {
-    saveProgress({ index: currentIndex, answers, locale });
-    setCurrentIndex(-1);
-  };
-
-  const generateRandomAnswers = () => {
-    const randoms = QUESTIONS.map(q => ({
-      questionId: q.id,
-      score: Math.floor(Math.random() * 5) + 1
-    }));
-    setAnswers(randoms);
   };
 
   const forceReport = () => {
-    const targetAnswers = answers.length > 0 ? answers : QUESTIONS.map(q => ({
-      questionId: q.id,
-      score: Math.floor(Math.random() * 5) + 1
-    }));
+    const targetAnswers = answers.length > 0 ? answers : QUESTIONS.map(q => ({ questionId: q.id, score: Math.floor(Math.random() * 5) + 1 }));
     finishAssessment(targetAnswers);
   };
 
-  const LanguageSwitcher = () => (
-    <nav aria-label="Language selection" className="fixed top-6 right-24 flex bg-white/70 backdrop-blur rounded-full p-1 border border-slate-200 z-50 shadow-sm">
-      <button 
-        onClick={() => setLocale('en')}
-        aria-pressed={locale === 'en'}
-        className={`px-4 py-1.5 rounded-full text-xs font-black transition-all outline-none ${locale === 'en' ? 'bg-indigo-600 text-white shadow-md' : 'text-slate-500 hover:text-slate-800'}`}
-      >
-        EN
-      </button>
-      <button 
-        onClick={() => setLocale('fr')}
-        aria-pressed={locale === 'fr'}
-        className={`px-4 py-1.5 rounded-full text-xs font-black transition-all outline-none ${locale === 'fr' ? 'bg-indigo-600 text-white shadow-md' : 'text-slate-500 hover:text-slate-800'}`}
-      >
-        FR
-      </button>
-    </nav>
-  );
+  const generateRandom = () => {
+    setAnswers(QUESTIONS.map(q => ({ questionId: q.id, score: Math.floor(Math.random() * 5) + 1 })));
+  };
 
-  const DebugToggle = () => (
-    <div className="fixed top-6 right-6 z-50">
-      <button 
-        onClick={() => setIsDebug(!isDebug)}
-        aria-label="Toggle clinical debug mode"
-        className={`p-2.5 rounded-full border transition-all shadow-sm ${isDebug ? 'bg-red-600 border-red-600 text-white shadow-lg' : 'bg-white/70 border-slate-200 text-slate-400 hover:text-slate-800'}`}
-      >
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
-      </button>
-    </div>
-  );
+  // Fixed restart logic to avoid window.location.reload errors and properly reset component state
+  const restart = () => {
+    clearProgress();
+    setReport(null);
+    setAnswers([]);
+    setCurrentIndex(-1);
+    setShowDisclaimer(false);
+    setDisclaimerChecked(false);
+  };
 
-  if (report) {
-    return (
-      <main className="min-h-screen bg-slate-50">
-        <LanguageSwitcher />
-        <DebugToggle />
-        <Report report={report} answers={answers} onReset={forceReset} locale={locale} />
-      </main>
-    );
-  }
-
-  if (currentIndex === -1) {
-    const hasProgress = answers.length > 0;
-    const domains = [
-      { id: 'autism', title: t.phases["Autism Spectrum"], desc: t.domainIntros.autism, icon: 'M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z', color: 'text-indigo-600 bg-indigo-50' },
-      { id: 'adhd', title: t.phases.ADHD, desc: t.domainIntros.adhd, icon: 'M13 10V3L4 14h7v7l9-11h-7z', color: 'text-amber-600 bg-amber-50' },
-      { id: 'dyslexia', title: t.phases.Dyslexia, desc: t.domainIntros.dyslexia, icon: 'M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253', color: 'text-emerald-600 bg-emerald-50' },
-      { id: 'dyscalculia', title: t.phases.Dyscalculia, desc: t.domainIntros.dyscalculia, icon: 'M7 20l4-16m2 16l4-16M6 9h14M4 15h14', color: 'text-rose-600 bg-rose-50' },
-      { id: 'dyspraxia', title: t.phases.Dyspraxia, desc: t.domainIntros.dyspraxia, icon: 'M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0V12m-3-1.5a3 3 0 00-6 0V14a3 3 0 006 0v-2.5m3 1.5V9a1.5 1.5 0 113 0v4.5m-3-4.5a3 3 0 00-6 0V14a3 3 0 006 0V9.5m3 1.5V10.5a1.5 1.5 0 113 0v4m-3-4a3 3 0 00-6 0V14a3 3 0 006 0v-3.5m3 1.5V12a1.5 1.5 0 113 0v2.5m-3-2.5a3 3 0 00-6 0V14a3 3 0 006 0v-1.5', color: 'text-sky-600 bg-sky-50' },
-      { id: 'language', title: t.phases["Language Disorder"], desc: t.domainIntros.language, icon: 'M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z', color: 'text-purple-600 bg-purple-50' },
-      { id: 'wellbeing', title: t.phases.Comorbidities, desc: t.domainIntros.wellbeing, icon: 'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z', color: 'text-pink-600 bg-pink-50' }
-    ];
-
-    return (
-      <main className="min-h-screen py-20 px-6 bg-slate-50 flex flex-col items-center">
-        <LanguageSwitcher />
-        <DebugToggle />
-        
-        <div className="max-w-4xl w-full flex flex-col items-center">
-          <div className="w-20 h-20 bg-indigo-600 text-white rounded-3xl flex items-center justify-center mb-10 shadow-xl shadow-indigo-100 animate-in zoom-in duration-700">
-            <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" /></svg>
-          </div>
-          
-          <h1 className="text-5xl font-black text-slate-900 mb-6 tracking-tight text-center">{t.introTitle}</h1>
-          <p className="text-xl text-slate-600 max-w-2xl text-center leading-relaxed font-medium mb-16">
-            {t.introDesc}
-          </p>
-
-          <section className="w-full mb-20">
-            <h2 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.4em] mb-10 text-center">{t.domainsTitle}</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {domains.map((d) => (
-                <div key={d.id} className="bg-white p-6 rounded-[2.5rem] border border-slate-100 shadow-sm flex gap-6 hover:shadow-md transition-shadow">
-                  <div className={`w-14 h-14 shrink-0 rounded-2xl flex items-center justify-center ${d.color}`}>
-                    <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={d.icon} /></svg>
-                  </div>
-                  <div>
-                    <h3 className="font-black text-slate-900 mb-1">{d.title}</h3>
-                    <p className="text-sm text-slate-500 leading-snug">{d.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          <div className="w-full max-w-sm flex flex-col gap-4">
-            {hasProgress ? (
-              <>
-                <button 
-                  onClick={resumeAssessment}
-                  className="w-full py-5 bg-indigo-600 text-white rounded-2xl font-black text-lg uppercase tracking-widest hover:bg-indigo-700 shadow-xl shadow-indigo-100 transition-all active:scale-[0.98] outline-none"
-                >
-                  {t.continueBtn}
-                </button>
-                <button 
-                  onClick={startNewAssessment}
-                  className="w-full py-4 text-slate-400 font-bold text-sm uppercase tracking-widest hover:text-slate-800 transition-colors"
-                >
-                  {t.startBtn}
-                </button>
-              </>
-            ) : (
-              <button 
-                onClick={() => setCurrentIndex(0)}
-                className="w-full py-5 bg-indigo-600 text-white rounded-2xl font-black text-lg uppercase tracking-widest hover:bg-indigo-700 shadow-xl shadow-indigo-100 transition-all active:scale-[0.98] outline-none"
-              >
-                {t.startBtn}
-              </button>
-            )}
-            <p className="text-slate-400 text-[10px] font-black uppercase tracking-[0.2em] mt-6 text-center leading-relaxed">
-              {t.saveNotice}
-            </p>
-          </div>
-
-          <FAQAccordion items={t.faq} title={t.faqTitle} />
-        </div>
-      </main>
-    );
-  }
-
-  const currentQ = QUESTIONS[currentIndex];
-  const progress = ((currentIndex + 1) / QUESTIONS.length) * 100;
+  const handleStartRequest = () => {
+    if (answers.length > 0) {
+      setCurrentIndex(0); // Resume existing
+    } else {
+      setShowDisclaimer(true); // Show mandatory disclaimer for new starts
+    }
+  };
 
   return (
-    <main className="min-h-screen bg-slate-50 flex flex-col items-center p-6 sm:p-12 pb-32">
-      <LanguageSwitcher />
-      <DebugToggle />
-      
-      {/* Real-time Debug Scorer Overlay */}
-      {isDebug && liveReport && (
-        <aside className="fixed bottom-6 left-6 right-6 bg-slate-900/95 text-white p-6 rounded-[2.5rem] shadow-2xl z-50 backdrop-blur-md border border-slate-800 animate-in slide-in-from-bottom-6">
-          <div className="flex justify-between items-center mb-6">
-            <div className="flex items-center gap-4">
-              <span className="text-[10px] font-black uppercase tracking-widest text-indigo-400">Clinical Data Stream</span>
-              <div className="flex gap-2">
-                <button onClick={generateRandomAnswers} className="px-2 py-1 bg-slate-800 rounded text-[8px] font-bold uppercase hover:bg-slate-700">Randomize</button>
-                <button onClick={forceReport} className="px-2 py-1 bg-indigo-600 rounded text-[8px] font-bold uppercase hover:bg-indigo-500">Finish</button>
+    <div className="min-h-screen bg-slate-50 flex flex-col antialiased overflow-x-hidden">
+      <LanguageSwitcher locale={locale} setLocale={setLocale} />
+      <DebugToggle isDebug={isDebug} setIsDebug={setIsDebug} />
+      <DebugOverlay isDebug={isDebug} liveReport={liveReport} generateRandom={generateRandom} forceFinish={forceReport} close={() => setIsDebug(false)} t={t} />
+
+      {showDisclaimer && (
+        <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-md z-[200] flex items-center justify-center p-4 animate-in fade-in duration-300">
+          <div className="bg-white max-w-lg w-full p-8 sm:p-10 rounded-[2.5rem] shadow-2xl animate-in zoom-in slide-in-from-bottom-8 duration-500 border border-slate-100">
+            <h2 className="text-2xl font-black text-slate-900 mb-4">{t.disclaimerTitle}</h2>
+            <p className="text-slate-500 text-sm sm:text-base leading-relaxed mb-8 font-medium">
+              {t.disclaimerText}
+            </p>
+            <label className="flex items-start gap-4 mb-8 cursor-pointer group">
+              <div className="relative flex items-center mt-1">
+                <input
+                  type="checkbox"
+                  checked={disclaimerChecked}
+                  onChange={(e) => setDisclaimerChecked(e.target.checked)}
+                  className="peer h-5 w-5 cursor-pointer appearance-none rounded-md border border-slate-300 transition-all checked:bg-indigo-600 checked:border-indigo-600 focus:outline-none"
+                />
+                <svg className="absolute w-4 h-4 text-white p-0.5 opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="4" d="M5 13l4 4L19 7" /></svg>
               </div>
+              <span className="text-xs sm:text-sm font-bold text-slate-700 group-hover:text-indigo-600 transition-colors">
+                {t.disclaimerCheck}
+              </span>
+            </label>
+            <div className="flex flex-col gap-3">
+              <button
+                disabled={!disclaimerChecked}
+                onClick={() => { setShowDisclaimer(false); setCurrentIndex(0); }}
+                className="w-full py-4 bg-indigo-600 text-white rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-indigo-700 disabled:opacity-50 transition-all shadow-lg shadow-indigo-100 active:scale-95"
+              >
+                {t.disclaimerBtn}
+              </button>
+              <button
+                onClick={() => setShowDisclaimer(false)}
+                className="w-full py-4 text-slate-400 font-black text-[10px] uppercase tracking-widest hover:text-slate-600"
+              >
+                {t.back}
+              </button>
             </div>
-            <button onClick={() => setIsDebug(false)} className="text-slate-500 hover:text-white"><svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg></button>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-4">
-            {liveReport.domainScores.map(d => (
-              <div key={d.name} className="bg-slate-800/50 p-3 rounded-2xl">
-                <p className="text-[7px] font-black uppercase tracking-widest text-slate-500 mb-1 truncate">{(t.phases as any)[d.name] || d.name}</p>
-                <p className="text-lg font-black text-indigo-400">{d.score}%</p>
-              </div>
-            ))}
-          </div>
-        </aside>
+        </div>
       )}
 
-      <nav className="w-full max-w-4xl flex items-center justify-between mb-12">
-        <button onClick={() => setCurrentIndex(-1)} className="p-2 text-slate-400 hover:text-slate-800 transition-colors">
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M15 19l-7-7 7-7" /></svg>
-        </button>
-        <span className="text-xs font-black text-slate-400 uppercase tracking-[0.3em]">
-          {(t.phases as any)[currentQ.phase]}
-        </span>
-        <div className="text-xs font-black text-indigo-600 bg-indigo-50 px-4 py-1.5 rounded-full tracking-tighter">
-          {currentIndex + 1} / {QUESTIONS.length}
-        </div>
-      </nav>
+      <div className="flex-1 flex flex-col">
+        {showMethods ? (
+          <MethodsPage onBack={() => setShowMethods(false)} onStart={() => { setShowMethods(false); handleStartRequest(); }} t={t} />
+        ) : report ? (
+          <Report report={report} answers={answers} onReset={restart} locale={locale} />
+        ) : currentIndex === -1 ? (
+          <main className="flex-1 py-16 sm:py-24 px-4 sm:px-6 flex flex-col items-center">
+            <div className="max-w-4xl w-full flex flex-col items-center">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-indigo-600 text-white rounded-2xl sm:rounded-3xl flex items-center justify-center mb-8 sm:mb-10 shadow-xl shadow-indigo-100 animate-in zoom-in duration-700">
+                <svg className="w-8 h-8 sm:w-10 sm:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" /></svg>
+              </div>
+              <h1 className="text-4xl sm:text-6xl font-black text-slate-900 mb-6 tracking-tight text-center">{t.introTitle}</h1>
+              <p className="text-lg sm:text-xl text-slate-600 max-w-2xl text-center leading-relaxed font-medium mb-8 sm:mb-10 px-2">{t.introDesc}</p>
 
-      <div className="w-full max-w-4xl h-2 bg-slate-200 rounded-full mb-16 overflow-hidden">
-        <div className="h-full bg-indigo-500 transition-all duration-500 rounded-full" style={{ width: `${progress}%` }} />
+              <DomainsOverview t={t} />
+
+              <button onClick={handleStartRequest} className="w-full max-w-sm py-4 sm:py-5 bg-indigo-600 text-white rounded-2xl font-black text-base sm:text-lg uppercase tracking-widest hover:bg-indigo-700 shadow-xl shadow-indigo-100 transition-all active:scale-[0.98] outline-none">{answers.length > 0 ? t.continueBtn : t.startBtn}</button>
+
+              <MethodologySection t={t} onShowMethods={() => setShowMethods(true)} />
+
+              <FAQAccordion items={t.faq} title={t.faqTitle} />
+            </div>
+          </main>
+        ) : (
+          <main className="flex-1 flex flex-col items-center pt-24 p-4 sm:p-12 pb-24">
+            <nav className="w-full max-w-4xl flex items-center justify-between mb-8 sm:mb-12">
+              <button onClick={() => setCurrentIndex(-1)} className="p-2 text-slate-400 hover:text-slate-800 transition-colors"><svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M15 19l-7-7 7-7" /></svg></button>
+              <span className="text-[9px] sm:text-xs font-black text-slate-400 uppercase tracking-[0.2em] sm:tracking-[0.3em] truncate px-4">{(t.phases as any)[QUESTIONS[currentIndex].phase]}</span>
+              <div className="text-[10px] sm:text-xs font-black text-indigo-600 bg-indigo-50 px-3 sm:px-4 py-1.5 rounded-full shrink-0">{currentIndex + 1} / {QUESTIONS.length}</div>
+            </nav>
+            <div className="w-full max-w-4xl h-2 bg-slate-200 rounded-full mb-12 sm:mb-16 overflow-hidden"><div className="h-full bg-indigo-500 transition-all duration-500" style={{ width: `${((currentIndex + 1) / QUESTIONS.length) * 100}%` }} /></div>
+            <article className={`w-full max-w-4xl bg-white p-4 sm:p-24 rounded-[3rem] sm:rounded-[4rem] shadow-xl shadow-slate-200/50 transition-all duration-500 ${isAdvancing ? 'opacity-40 scale-[0.98]' : 'opacity-100 scale-100'}`}>
+              <span className="inline-block px-3 py-1 bg-slate-50 text-slate-500 rounded-full text-[9px] font-black uppercase tracking-widest mb-6 sm:mb-8">{(t.subscales as any)[QUESTIONS[currentIndex].subscale] || QUESTIONS[currentIndex].subscale}</span>
+              <h2 className="text-xl sm:text-4xl font-black text-slate-900 leading-[1.3] mb-12 sm:mb-20 tracking-tight min-h-[5rem] sm:min-h-[6rem]">{QUESTIONS[currentIndex].text[locale]}</h2>
+              <LikertScale key={QUESTIONS[currentIndex].id} value={answers.find(a => a.questionId === QUESTIONS[currentIndex].id)?.score || 0} onChange={handleAnswer} locale={locale} type="frequency" />
+              <div className="mt-16 sm:mt-20 flex justify-between items-center">
+                <button
+                  disabled={currentIndex === 0 || isAdvancing}
+                  onClick={() => setCurrentIndex(prev => prev - 1)}
+                  className="text-[10px] font-black text-slate-400 uppercase tracking-widest hover:text-slate-900 disabled:opacity-0 transition-all"
+                >
+                  ← {t.back}
+                </button>
+                <button
+                  onClick={() => setCurrentIndex(-1)}
+                  className="flex items-center gap-2 px-5 py-2.5 bg-slate-50 rounded-xl text-[9px] font-black uppercase tracking-widest text-slate-500 hover:bg-slate-100 transition-colors"
+                >
+                  {t.saveAndExit}
+                </button>
+              </div>
+            </article>
+          </main>
+        )}
       </div>
 
-      <article className={`w-full max-w-4xl bg-white p-10 sm:p-24 rounded-[4rem] shadow-xl shadow-slate-200/50 transition-all duration-500 ${isAdvancing ? 'opacity-40 scale-[0.98]' : 'opacity-100 scale-100'}`}>
-        <span className="inline-block px-4 py-1 bg-slate-50 text-slate-500 rounded-full text-[10px] font-black uppercase tracking-widest mb-8">
-          {(t.subscales as any)[currentQ.subscale] || currentQ.subscale}
-        </span>
-        
-        <h2 className="text-2xl sm:text-4xl font-black text-slate-900 leading-[1.2] mb-20 tracking-tight min-h-[6rem]">
-          {currentQ.text[locale]}
-        </h2>
-        
-        <LikertScale 
-          key={currentQ.id}
-          value={answers.find(a => a.questionId === currentQ.id)?.score || 0}
-          onChange={handleAnswer}
-          locale={locale}
-        />
-
-        <div className="mt-20 flex justify-between items-center">
-          <button 
-            disabled={currentIndex === 0 || isAdvancing}
-            onClick={() => setCurrentIndex(prev => prev - 1)}
-            className="text-xs font-black text-slate-400 uppercase tracking-widest hover:text-slate-900 disabled:opacity-0 transition-all"
-          >
-            ← {t.back}
-          </button>
-          <button 
-            onClick={handleSaveAndExit}
-            className="flex items-center gap-2 px-6 py-2.5 bg-slate-50 rounded-2xl text-[10px] font-black uppercase tracking-widest text-slate-500 hover:bg-slate-100 transition-colors"
-          >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" /></svg>
-            {t.saveAndExit}
-          </button>
-        </div>
-      </article>
-
-      <footer className="mt-auto py-12 text-center flex flex-col items-center gap-2">
-        <p className="text-[10px] font-black text-slate-300 uppercase tracking-[0.5em]">{t.footer}</p>
-        <p className="text-xs font-medium text-slate-400">Vibe coded by Kash 🦄 - 2026 - Sharing is caring ❤️</p>
+      <footer className="w-full py-10 sm:py-12 bg-white text-center flex flex-col items-center gap-2 mt-auto border-t border-slate-100 shadow-[0_-1px_3px_rgba(0,0,0,0.02)]">
+        <p className="px-6 text-[9px] font-black text-slate-400 uppercase tracking-[0.4em] leading-relaxed max-w-2xl">{t.footer}</p>
+        <p className="text-[10px] font-medium text-slate-400">Vibe coded by Kash 🦄 - 2026 - Open Source - Sharing is caring ❤️</p>
       </footer>
-    </main>
+    </div>
   );
 };
 
