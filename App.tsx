@@ -188,6 +188,11 @@ const App: React.FC = () => {
     }
   }, [currentIndex, answers, report, locale]);
 
+  // Scroll to top on view change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [showMethods, report, currentIndex]);
+
   const liveReport = useMemo(() => {
     if (answers.length === 0) return null;
     try { return calculateReport(answers); } catch (e) { return null; }
