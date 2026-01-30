@@ -35,6 +35,17 @@ const FAQAccordion: React.FC<{ items: { q: string, a: string }[], title: string 
 const DomainsOverview: React.FC<{ t: any }> = ({ t }) => {
   const domains = ['adhd', 'autism', 'dyslexia', 'dyspraxia', 'dyscalculia'];
 
+  const getIcon = (key: string) => {
+    switch (key) {
+      case 'adhd': return <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>;
+      case 'autism': return <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>;
+      case 'dyslexia': return <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>;
+      case 'dyspraxia': return <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 00-3 0v2a7.5 7.5 0 0015 0v-5a1.5 1.5 0 00-3 0m-6-3V11m0-5.5v-1a1.5 1.5 0 013 0v1m0 0V11m0-5.5a1.5 1.5 0 013 0v3m0 0V11" /></svg>;
+      case 'dyscalculia': return <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>;
+      default: return null;
+    }
+  };
+
   return (
     <div className="w-full max-w-5xl mx-auto mb-12 animate-in fade-in slide-in-from-bottom-5 delay-150 px-4">
       <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] mb-8 text-center">{t.domainsTitle}</h3>
@@ -43,8 +54,8 @@ const DomainsOverview: React.FC<{ t: any }> = ({ t }) => {
           const title = t.methodology.modules[key]?.title.replace(/Module\s*|\s*Module/gi, '').trim();
           return (
             <div key={key} className="bg-white p-4 rounded-2xl border border-slate-100 shadow-[0_2px_10px_rgba(0,0,0,0.02)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center h-full">
-              <div className="w-8 h-8 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-[10px] font-black mb-3 shrink-0">
-                {title.substring(0, 2).toUpperCase()}
+              <div className="w-8 h-8 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-3 shrink-0">
+                {getIcon(key)}
               </div>
               <span className="text-[10px] font-black text-slate-800 uppercase tracking-widest mb-2">{title}</span>
               <p className="text-[9px] text-slate-500 font-medium leading-relaxed">{t.domainIntros[key]}</p>
@@ -78,13 +89,27 @@ const MethodologySection: React.FC<{ t: any; onShowMethods: () => void }> = ({ t
         <p className="text-slate-500 leading-relaxed font-medium mb-8 flex-1">
           {t.methodology.spikyProfileDesc}
         </p>
-        <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
-          <div className="flex items-end gap-2 h-24 mb-2 justify-between px-2">
-            <div className="w-4 bg-indigo-200 rounded-t-lg h-[40%]" />
-            <div className="w-4 bg-indigo-500 rounded-t-lg h-[90%]" />
-            <div className="w-4 bg-indigo-300 rounded-t-lg h-[30%]" />
-            <div className="w-4 bg-indigo-600 rounded-t-lg h-[80%]" />
-            <div className="w-4 bg-indigo-400 rounded-t-lg h-[50%]" />
+        <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100 flex flex-col items-center">
+          <div className="w-full max-w-[200px] aspect-square relative mb-4">
+            <svg viewBox="0 0 100 100" className="w-full h-full text-indigo-500" fill="none" stroke="currentColor" strokeWidth="1.5">
+              {/* Grid */}
+              <circle cx="50" cy="50" r="20" strokeOpacity="0.2" />
+              <circle cx="50" cy="50" r="35" strokeOpacity="0.2" />
+              <path d="M50 10 L50 90 M10 50 L90 50 M22 22 L78 78 M22 78 L78 22" strokeOpacity="0.2" />
+
+              {/* Spiky Shape */}
+              <path d="M50 15 L70 30 L85 50 L70 75 L50 85 L25 65 L20 40 L35 25 Z"
+                fill="currentColor" fillOpacity="0.2" strokeWidth="2.5" className="drop-shadow-sm" />
+              {/* Points */}
+              <circle cx="50" cy="15" r="2.5" fill="currentColor" />
+              <circle cx="70" cy="30" r="2.5" fill="currentColor" />
+              <circle cx="85" cy="50" r="2.5" fill="currentColor" />
+              <circle cx="70" cy="75" r="2.5" fill="currentColor" />
+              <circle cx="50" cy="85" r="2.5" fill="currentColor" />
+              <circle cx="25" cy="65" r="2.5" fill="currentColor" />
+              <circle cx="20" cy="40" r="2.5" fill="currentColor" />
+              <circle cx="35" cy="25" r="2.5" fill="currentColor" />
+            </svg>
           </div>
           <p className="text-[9px] text-center font-black uppercase tracking-widest text-slate-400">Visualization Concept</p>
         </div>
