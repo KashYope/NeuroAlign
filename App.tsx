@@ -121,7 +121,7 @@ const MethodologySection: React.FC<{ t: any; onShowMethods: () => void }> = ({ t
   </section >
 );
 const LanguageSwitcher: React.FC<{ locale: Locale, setLocale: (l: Locale) => void }> = ({ locale, setLocale }) => (
-  <nav aria-label="Language selection" className="fixed top-4 sm:top-6 right-16 sm:right-24 flex bg-white/80 backdrop-blur-md rounded-full p-1 border border-slate-200 z-[101] shadow-lg shadow-slate-200/50 scale-90 sm:scale-100 origin-right">
+  <nav aria-label="Language selection" className="fixed top-4 sm:top-6 right-4 sm:right-6 flex bg-white/80 backdrop-blur-md rounded-full p-1 border border-slate-200 z-[101] shadow-lg shadow-slate-200/50 scale-90 sm:scale-100 origin-right">
     <button onClick={() => setLocale('en')} className={`px-3 sm:px-4 py-1.5 rounded-full text-[10px] sm:text-xs font-black transition-all outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 ${locale === 'en' ? 'bg-indigo-600 text-white shadow-md' : 'text-slate-500 hover:text-slate-800'}`}>EN</button>
     <button onClick={() => setLocale('fr')} className={`px-3 sm:px-4 py-1.5 rounded-full text-[10px] sm:text-xs font-black transition-all outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 ${locale === 'fr' ? 'bg-indigo-600 text-white shadow-md' : 'text-slate-500 hover:text-slate-800'}`}>FR</button>
   </nav>
