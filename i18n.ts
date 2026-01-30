@@ -227,6 +227,7 @@ export const translations = {
     maskingFlag: "High Masking (CAT-Q > 120): Results may be suppressed by coping strategies.",
     headInjuryFlag: "Head Injury Noted.",
     depressionFlag: "Depression Alert.",
+    specialistFlag: "Neurological consultation recommended due to medical history.",
     likert: {
       stronglyDisagree: "Strongly Disagree",
       disagree: "Disagree",
@@ -563,8 +564,9 @@ export const translations = {
     urgentFlag: "URGENT : Soutien immédiat conseillé.",
     coOccurrence: "Profil AuDHD : Chevauchement Autisme / TDAH.",
     maskingFlag: "Masquage Élevé (CAT-Q > 120) : Résultats potentiellement supprimés.",
-    headInjuryFlag: "Blessure à la Tête Notée.",
+    headInjuryFlag: "Traumatisme crânien noté.",
     depressionFlag: "Alerte Dépression.",
+    specialistFlag: "Consultation neurologique recommandée en raison des antécédents médicaux.",
     likert: {
       stronglyDisagree: "Pas du tout d'accord",
       disagree: "Pas d'accord",

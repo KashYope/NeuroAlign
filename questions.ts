@@ -2,6 +2,46 @@ import { Phase, Question } from './types';
 
 export const QUESTIONS: Question[] = [
   // ==================================================================================
+  // PHASE 0: INTAKE & CONTEXT (SCREENING FOR CONFOUNDERS)
+  // ==================================================================================
+  {
+    id: 'INT_01',
+    phase: Phase.INTAKE,
+    subscale: 'Mood',
+    text: {
+      en: "How often do you experience persistent low mood, lack of energy, or a feeling of 'emptiness' that affects your daily activities?",
+      fr: "À quelle fréquence ressentez-vous une humeur basse persistante, un manque d'énergie ou un sentiment de 'vide' qui affecte vos activités ?"
+    }
+  },
+  {
+    id: 'INT_02',
+    phase: Phase.INTAKE,
+    subscale: 'Injury',
+    text: {
+      en: "Have you ever experienced a significant head injury, concussion, or loss of consciousness (e.g., from an accident or sports)?",
+      fr: "Avez-vous déjà subi une blessure à la tête importante, une commotion cérébrale ou une perte de connaissance (ex: accident, sport) ?"
+    }
+  },
+  {
+    id: 'INT_03',
+    phase: Phase.INTAKE,
+    subscale: 'Neurology',
+    text: {
+      en: "Have you been diagnosed with or do you suspect a major neurological condition (such as epilepsy, Parkinson's, or MS)?",
+      fr: "Avez-vous été diagnostiqué avec ou soupçonnez-vous une condition neurologique majeure (épilepsie, Parkinson, SEP, etc.) ?"
+    }
+  },
+  {
+    id: 'INT_04',
+    phase: Phase.INTAKE,
+    subscale: 'Crisis',
+    text: {
+      en: "How often do you experience 'dark thoughts' or a feeling that you are in a state of crisis and need immediate help?",
+      fr: "À quelle fréquence avez-vous des 'idées noires' ou le sentiment d'être en état de crise et d'avoir besoin d'une aide immédiate ?"
+    }
+  },
+
+  // ==================================================================================
   // MODULE I: ADHD (ASRS v1.1 COMPATIBLE)
   // ==================================================================================
 

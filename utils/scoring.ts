@@ -175,20 +175,24 @@ export function calculateReport(answers: UserAnswer[]): ScreeningReport {
     // Leaving out for now or pushing a custom string if i18n allows.
   }
 
-  // 4. Urgent Mental Health (This was 7.10, removed in MethodeII? 
-  // MethodeII doesn't explicitely list 7.10 "Self harm" in the questions list.
-  // It mentions "Phase 0: Intake" and "Phase 7 impact" in the text description but the list doesn't detail them.
-  // I updated questions.ts with Modules 1-5 only.
-  // So I'll remove the urgent flag logic based on 7.10.
+  // 4. Intake Context Flags
+  if (answerMap.get('INT_01')! >= 4) flags.push('depressionFlag');
+  if (answerMap.get('INT_02')! >= 4) flags.push('headInjuryFlag');
+  if (answerMap.get('INT_03')! >= 4) flags.push('specialistFlag');
+  if (answerMap.get('INT_04')! >= 4) {
+    if (!flags.includes('depressionFlag')) flags.push('depressionFlag');
+  }
+
+  const isClinicalUrgent = (answerMap.get('INT_04') || 0) >= 4;
 
   const functionalImpact: Record<string, number> = {};
   const mentalHealthMarkers: Record<string, number> = {};
 
   return {
     domainScores,
-    flags,
-    functionalImpact, // Populated empty as explicit Phase 7 questions are gone?
+    flags: Array.from(new Set(flags)), // Deduplicate
+    functionalImpact,
     mentalHealthMarkers,
-    isClinicalUrgent: false
+    isClinicalUrgent
   };
 }
