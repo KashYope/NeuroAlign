@@ -264,7 +264,7 @@ export const translations = {
     methodsPage: {
       title: "Scientific Methodology",
       subtitle: "Unified Adult Neurodiversity Assessment Framework",
-      backBtn: "Back to Assessment",
+      backBtn: "Back to Home",
       startBtn: "Start Assessment",
       intro: {
         title: "The Paradigm Shift",
@@ -600,7 +600,7 @@ export const translations = {
     methodsPage: {
       title: "Méthodologie Scientifique",
       subtitle: "Cadre Unifié d'Évaluation de la Neurodiversité Adulte",
-      backBtn: "Retour à l'évaluation",
+      backBtn: "Retour à l'accueil",
       startBtn: "Commencer l'évaluation",
       intro: {
         title: "Le Changement de Paradigme",
