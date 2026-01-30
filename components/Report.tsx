@@ -252,6 +252,26 @@ const Report: React.FC<ReportProps> = ({ report, answers, onReset, locale }) => 
       doc.text(splitDesc, margin, currentY);
       currentY += (splitDesc.length * 6) + 15;
 
+      // URGENT BANNER IF APPLICABLE
+      if (report.isClinicalUrgent) {
+        doc.setFillColor(254, 242, 242); // rose-50
+        doc.rect(margin, currentY, pageWidth - (margin * 2), 25, 'F');
+        doc.setDrawColor(254, 205, 211); // rose-200
+        doc.rect(margin, currentY, pageWidth - (margin * 2), 25, 'S');
+
+        doc.setTextColor(159, 18, 57); // rose-900
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(12);
+        doc.text(t.urgentFlag.toUpperCase(), margin + 5, currentY + 10);
+
+        doc.setFontSize(9);
+        doc.setFont('helvetica', 'normal');
+        const splitUrgent = doc.splitTextToSize(t.urgentDesc, pageWidth - (margin * 2) - 10);
+        doc.text(splitUrgent, margin + 5, currentY + 16);
+
+        currentY += 35;
+      }
+
       // RADAR CHART IMAGE
       if (radarChartRef.current) {
         try {
@@ -619,7 +639,7 @@ const Report: React.FC<ReportProps> = ({ report, answers, onReset, locale }) => 
               <p className="text-[10px] font-black uppercase tracking-[0.2em] text-rose-500 mb-1">{t.clinicalPath}</p>
               <h3 className="text-xl font-black text-rose-900 mb-2">{t.urgentFlag}</h3>
               <p className="text-rose-700/80 text-sm font-medium leading-relaxed max-w-xl">
-                Your responses indicate significant acute distress. Please prioritize reaching out to a healthcare professional or emergency services for immediate support.
+                {t.urgentDesc}
               </p>
             </div>
           </div>

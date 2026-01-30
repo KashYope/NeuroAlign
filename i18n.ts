@@ -223,6 +223,7 @@ export const translations = {
       "7.10": "Crisis Risk Markers"
     },
     urgentFlag: "URGENT: Immediate mental health support advised.",
+    urgentDesc: "Your responses indicate significant acute distress. Please prioritize reaching out to a healthcare professional or emergency services for immediate support.",
     coOccurrence: "AuDHD Pattern: Overlap of Autism and ADHD traits.",
     maskingFlag: "High Masking (CAT-Q > 120): Results may be suppressed by coping strategies.",
     headInjuryFlag: "Head Injury Noted.",
@@ -562,6 +563,7 @@ export const translations = {
       "7.10": "Marqueurs de Risque de Crise"
     },
     urgentFlag: "URGENT : Soutien immédiat conseillé.",
+    urgentDesc: "Vos réponses indiquent une détresse aiguë importante. Veuillez contacter en priorité un professionnel de santé ou les services d'urgence.",
     coOccurrence: "Profil AuDHD : Chevauchement Autisme / TDAH.",
     maskingFlag: "Masquage Élevé (CAT-Q > 120) : Résultats potentiellement supprimés.",
     headInjuryFlag: "Traumatisme crânien noté.",
