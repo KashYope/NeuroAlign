@@ -108,13 +108,16 @@ const MethodsPage: React.FC<MethodsPageProps> = ({ onBack, onStart, t }) => {
                         <p className="text-slate-300 leading-relaxed font-medium text-lg mb-8">
                             {content.spikyProfile.text}
                         </p>
-                        {/* Mini visual */}
-                        <div className="flex gap-2 h-16 items-end opacity-50">
-                            <div className="w-3 bg-indigo-500 h-[30%] rounded-t-sm" />
-                            <div className="w-3 bg-indigo-500 h-[80%] rounded-t-sm" />
-                            <div className="w-3 bg-indigo-500 h-[60%] rounded-t-sm" />
-                            <div className="w-3 bg-indigo-500 h-[90%] rounded-t-sm" />
-                            <div className="w-3 bg-indigo-500 h-[40%] rounded-t-sm" />
+                        {/* Mini visual - Spider Web / Radar Icon */}
+                        <div className="flex items-center justify-center opacity-40 mt-6">
+                            <svg className="w-24 h-24 text-indigo-400" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2">
+                                {/* Spider web structure */}
+                                <path d="M50 10 L50 90 M10 50 L90 50 M22 22 L78 78 M22 78 L78 22" strokeOpacity="0.5" />
+                                <path d="M50 10 L78 22 L90 50 L78 78 L50 90 L22 78 L10 50 L22 22 Z" strokeOpacity="0.5" />
+                                <path d="M50 30 L64 36 L70 50 L64 64 L50 70 L36 64 L30 50 L36 36 Z" strokeOpacity="0.5" />
+                                {/* The "Spike" */}
+                                <path d="M50 20 L75 35 L70 50 L80 75 L50 80 L25 60 L30 50 L20 25 Z" fill="currentColor" fillOpacity="0.3" stroke="currentColor" strokeWidth="3" />
+                            </svg>
                         </div>
                     </div>
                 </div>
@@ -122,7 +125,7 @@ const MethodsPage: React.FC<MethodsPageProps> = ({ onBack, onStart, t }) => {
                 {/* Modules Grid */}
                 <div className="space-y-16 mb-24">
                     <div className="text-center mb-10">
-                        <h2 className="text-3xl font-black text-slate-900">Assessment Modules</h2>
+                        <h2 className="text-3xl font-black text-slate-900">{content.modulesTitle}</h2>
                         <div className="w-24 h-1.5 bg-indigo-600 rounded-full mx-auto mt-4" />
                     </div>
 

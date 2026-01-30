@@ -274,6 +274,7 @@ export const translations = {
         title: "The 'Spiky Profile'",
         text: "Unlike binary diagnostic tools, we do not produce a singular 'neurodiversity score'. Instead, we generate a 'Neurodivergent Heatmap' or 'Spiky Profile'. This visualization maps your cognitive peaks and dips, identifying specific signatures like the 'AuDHD' profile where high structure-seeking traits (Autism) may mask impulsivity (ADHD)."
       },
+      modulesTitle: "Assessment Modules",
       modules: {
         adhd: {
           title: "Module I: ADHD",
@@ -609,6 +610,7 @@ export const translations = {
         title: "Le 'Profil Hétérogène'",
         text: "Contrairement aux outils binaires, nous ne produisons pas un score unique. Nous générons une 'Carte Thermique' ou 'Profil Hétérogène'. Cette visualisation cartographie vos pics et vos creux cognitifs, identifiant des signatures spécifiques comme le profil 'AuDHD' où le besoin de structure (Autisme) peut masquer l'impulsivité (TDAH)."
       },
+      modulesTitle: "Modules d'Évaluation",
       modules: {
         adhd: {
           title: "Module I: TDAH",
