@@ -58,23 +58,14 @@ const MethodsPage: React.FC<MethodsPageProps> = ({ onBack, onStart, t }) => {
     return (
         <div className="min-h-screen bg-slate-50 text-slate-900 pb-24">
             {/* Sticky Header */}
-            <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-slate-200 px-6 py-4 relative flex items-center shadow-sm">
-                <button
-                    onClick={onBack}
-                    className="relative z-10 flex items-center gap-2 text-slate-500 hover:text-indigo-600 transition-colors font-bold text-sm"
-                >
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M15 19l-7-7 7-7" /></svg>
-                    {content.backBtn}
-                </button>
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    <button
-                        onClick={onStart}
-                        className="pointer-events-auto px-6 py-2.5 bg-indigo-600 text-white rounded-full font-black text-xs uppercase tracking-widest hover:bg-indigo-700 shadow-lg shadow-indigo-200 transition-all active:scale-95"
-                    >
-                        {content.startBtn}
-                    </button>
-                </div>
-            </nav>
+            {/* Fixed Back Button - Aligned with Language Switcher */}
+            <button
+                onClick={onBack}
+                className="fixed top-4 sm:top-6 left-4 sm:left-6 z-50 flex items-center gap-2 bg-white/80 backdrop-blur-md border border-slate-200 px-4 py-2 rounded-full shadow-lg shadow-slate-200/50 text-slate-500 hover:text-indigo-600 transition-all font-bold text-xs sm:text-sm"
+            >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M15 19l-7-7 7-7" /></svg>
+                {content.backBtn}
+            </button>
 
             <div className="max-w-5xl mx-auto px-6 py-12 sm:py-20">
 
@@ -202,8 +193,18 @@ const MethodsPage: React.FC<MethodsPageProps> = ({ onBack, onStart, t }) => {
                     </button>
                 </div>
 
+                {/* Floating Action Button (FAB) - Fixed Bottom Right */}
+                <button
+                    onClick={onStart}
+                    className="fixed bottom-6 right-6 z-[100] px-6 py-4 bg-indigo-600 text-white rounded-full font-black text-xs uppercase tracking-widest hover:bg-indigo-700 transition-all hover:scale-105 active:scale-95 flex items-center gap-3 animate-in fade-in slide-in-from-bottom-10 duration-700"
+                >
+                    <span>{content.startBtn}</span>
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
+                </button>
             </div>
+
         </div>
+
     );
 };
 
