@@ -563,7 +563,7 @@ export const translations = {
       "7.10": "Marqueurs de Risque de Crise"
     },
     urgentFlag: "URGENT : Soutien immédiat conseillé.",
-    urgentDesc: "Vos réponses indiquent une détresse aiguë importante. Veuillez contacter en priorité un professionnel de santé ou les services d'urgence.",
+    urgentDesc: "Vos réponses indiquent une détresse aiguë importante. Veuillez contacter en priorité les services d'urgence ou un professionnel de santé. (Centre de Crise Belgique : 107 ou 02/648.40.14)",
     coOccurrence: "Profil AuDHD : Chevauchement Autisme / TDAH.",
     maskingFlag: "Masquage Élevé (CAT-Q > 120) : Résultats potentiellement supprimés.",
     headInjuryFlag: "Traumatisme crânien noté.",

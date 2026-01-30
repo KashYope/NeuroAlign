@@ -36,8 +36,8 @@ export const QUESTIONS: Question[] = [
     phase: Phase.INTAKE,
     subscale: 'Crisis',
     text: {
-      en: "How often do you experience 'dark thoughts' or a feeling that you are in a state of crisis and need immediate help?",
-      fr: "À quelle fréquence avez-vous des 'idées noires' ou le sentiment d'être en état de crise et d'avoir besoin d'une aide immédiate ?"
+      en: "How often do you experience 'dark thoughts' or suicidal ideation, or a feeling that you are in a state of crisis?",
+      fr: "À quelle fréquence avez-vous des 'idées noires' ou des pensées suicidaires, ou le sentiment d'être en état de crise ?"
     }
   },
 
