@@ -1,4 +1,3 @@
-
 export enum Phase {
   INTAKE = 'Intake',
   AUTISM = 'Autism Spectrum',
@@ -8,11 +7,18 @@ export enum Phase {
   DYSPRAXIA = 'Dyspraxia',
   LANGUAGE = 'Language Disorder',
   IMPACT = 'Functional Impact',
-  // Added COMORBIDITIES to fix the compilation error in Report.tsx
   COMORBIDITIES = 'Comorbidities'
 }
 
 export type Locale = 'en' | 'fr';
+
+export type ScaleType =
+  | 'likert_5'       // 1-5 Agreement (Strongly Disagree -> Strongly Agree)
+  | 'likert_7'       // 1-7 Agreement (Strongly Disagree -> Strongly Agree)
+  | 'frequency_0_4'  // 0-4 Frequency (Never -> Very Often)
+  | 'frequency_1_5'  // 1-5 Frequency (Never -> Very Often)
+  | 'frequency_0_3'  // 0-3 Frequency (Never -> Always)
+  | 'yes_no';        // 0-1 (No -> Yes)
 
 export interface LocalizedString {
   en: string;
@@ -25,11 +31,12 @@ export interface Question {
   subscale: string;
   text: LocalizedString;
   isReverse?: boolean;
+  scale?: ScaleType; // Defaults to 'likert_5' if undefined
 }
 
 export interface UserAnswer {
   questionId: string;
-  score: number; // 1-5 Likert
+  score: number; // Value depends on scale (0-4, 1-7, 0-1, etc.)
 }
 
 export interface DomainScore {
