@@ -423,7 +423,13 @@ const App: React.FC = () => {
             <article className={`w-full max-w-4xl bg-white p-4 sm:p-24 rounded-[3rem] sm:rounded-[4rem] shadow-xl shadow-slate-200/50 transition-all duration-500 ${isAdvancing ? 'opacity-40 scale-[0.98]' : 'opacity-100 scale-100'}`}>
               <span className="inline-block px-3 py-1 bg-slate-50 text-slate-500 rounded-full text-[9px] font-black uppercase tracking-widest mb-6 sm:mb-8">{(t.subscales as any)[QUESTIONS[currentIndex].subscale] || QUESTIONS[currentIndex].subscale}</span>
               <h2 className="text-xl sm:text-4xl font-black text-slate-900 leading-[1.3] mb-12 sm:mb-20 tracking-tight min-h-[5rem] sm:min-h-[6rem]">{QUESTIONS[currentIndex].text[locale]}</h2>
-              <LikertScale key={QUESTIONS[currentIndex].id} value={answers.find(a => a.questionId === QUESTIONS[currentIndex].id)?.score || 0} onChange={handleAnswer} locale={locale} type="frequency" />
+              <LikertScale
+                key={QUESTIONS[currentIndex].id}
+                value={answers.find(a => a.questionId === QUESTIONS[currentIndex].id)?.score ?? -1}
+                onChange={handleAnswer}
+                locale={locale}
+                type={QUESTIONS[currentIndex].scale}
+              />
               <div className="mt-16 sm:mt-20 flex justify-between items-center">
                 <button
                   disabled={currentIndex === 0 || isAdvancing}

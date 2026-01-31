@@ -174,6 +174,9 @@ export const translations = {
       Compensation: "Social Compensation",
       Masking: "Masking Strategies",
       Assimilation: "Social Assimilation",
+      Sensory: "Sensory Sensitivity",
+      Predictability: "Predictability Needs",
+      Energy: "Social Energy Cost",
 
       // Dyslexia
       Laterality: "Left/Right Laterality",
@@ -186,6 +189,9 @@ export const translations = {
       Graphomotor: "Graphomotor Skills",
       Organization: "Temporal Organization",
       Accuracy: "Clerical Accuracy",
+      WrittenLoad: "Written Load Sensitivity",
+      AdminFriction: "Administrative Friction",
+      VerbalPref: "Verbal Preference",
 
       // Dyspraxia
       child_FineMotor: "Childhood Fine Motor",
@@ -194,6 +200,8 @@ export const translations = {
       adult_GrossMotor: "Adult Gross Motor",
       adult_Planning: "Motor Planning (Praxis)",
       adult_FineMotor: "Adult Fine Motor",
+      ExecutionGap: "Idea-Action Gap",
+      PhysicalFatigue: "Physical Fatigue",
 
       // Dyscalculia
       NumberSense: "Core Number Sense",
@@ -206,7 +214,9 @@ export const translations = {
       Functional: "Functional Numeracy",
       Anxiety: "Math Anxiety",
       MentalMath: "Mental Math",
-      MathMemory: "Numerical Memory"
+      MathMemory: "Numerical Memory",
+      TimeMoney: "Time & Money Abstraction",
+      Financial: "Financial Load"
     },
     impactLabels: {
       "7.1": "Work & Education",
@@ -229,18 +239,26 @@ export const translations = {
     headInjuryFlag: "Head Injury Noted.",
     depressionFlag: "Depression Alert.",
     specialistFlag: "Neurological consultation recommended due to medical history.",
+    SensoryOverload: "Significant Sensory Overload Risk",
+    AnxietyMasking: "Potential Anxiety Masking Effect",
+    MathAnxiety: "Math Anxiety (vs Dyscalculia)",
     likert: {
       stronglyDisagree: "Strongly Disagree",
       disagree: "Disagree",
+      somewhatDisagree: "Somewhat Disagree",
       neutral: "Neutral",
+      somewhatAgree: "Somewhat Agree",
       agree: "Agree",
       stronglyAgree: "Strongly Agree",
+      yes: "Yes",
+      no: "No",
       frequency: {
         never: "Never",
         rarely: "Rarely",
         sometimes: "Sometimes",
         often: "Often",
-        veryOften: "Very Often"
+        veryOften: "Very Often",
+        always: "Always"
       }
     },
     phases: {
@@ -514,6 +532,9 @@ export const translations = {
       Compensation: "Compensation Sociale",
       Masking: "Stratégies de Masquage",
       Assimilation: "Assimilation Sociale",
+      Sensory: "Hypersensibilité Sensorielle",
+      Predictability: "Besoin de Prédictibilité",
+      Energy: "Coût Énergétique Social",
 
       // Dyslexia
       Laterality: "Latéralité Gauche/Droite",
@@ -526,6 +547,9 @@ export const translations = {
       Graphomotor: "Graphomotricité (Écriture)",
       Organization: "Organisation Temporelle",
       Accuracy: "Précision Administrative",
+      WrittenLoad: "Sensibilité à la Charge Écrite",
+      AdminFriction: "Friction Administrative",
+      VerbalPref: "Préférence Verbale",
 
       // Dyspraxia
       child_FineMotor: "Motricité Fine (Enfance)",
@@ -534,6 +558,8 @@ export const translations = {
       adult_GrossMotor: "Motricité Globale (Adulte)",
       adult_Planning: "Planification Motrice",
       adult_FineMotor: "Motricité Fine (Adulte)",
+      ExecutionGap: "Décalage Idée-Action",
+      PhysicalFatigue: "Fatigue Physique",
 
       // Dyscalculia
       NumberSense: "Sens du Nombre",
@@ -546,7 +572,9 @@ export const translations = {
       Functional: "Calcul Fonctionnel",
       Anxiety: "Anxiété Mathématique",
       MentalMath: "Calcul Mental",
-      MathMemory: "Mémoire Numérique"
+      MathMemory: "Mémoire Numérique",
+      TimeMoney: "Abstraction Temps & Argent",
+      Financial: "Charge Cognitive Financière"
     },
     impactLabels: {
       "7.1": "Travail & Études",
@@ -569,18 +597,26 @@ export const translations = {
     headInjuryFlag: "Traumatisme crânien noté.",
     depressionFlag: "Alerte Dépression.",
     specialistFlag: "Consultation neurologique recommandée en raison des antécédents médicaux.",
+    SensoryOverload: "Risque de Surcharge Sensorielle Significatif",
+    AnxietyMasking: "Effet de Masquage par l'Anxiété Potentiel",
+    MathAnxiety: "Anxiété Mathématique (vs Dyscalculie)",
     likert: {
       stronglyDisagree: "Pas du tout d'accord",
       disagree: "Pas d'accord",
+      somewhatDisagree: "Plutôt pas d'accord",
       neutral: "Neutre",
+      somewhatAgree: "Plutôt d'accord",
       agree: "D'accord",
       stronglyAgree: "Tout à fait d'accord",
+      yes: "Oui",
+      no: "Non",
       frequency: {
         never: "Jamais",
         rarely: "Rarement",
         sometimes: "Parfois",
         often: "Souvent",
-        veryOften: "Très Souvent"
+        veryOften: "Très Souvent",
+        always: "Toujours"
       }
     },
     phases: {
@@ -589,7 +625,7 @@ export const translations = {
       ADHD: "TDAH (Exécutif)",
       Dyslexia: "Dyslexie",
       Dyscalculia: "Dyscalculie",
-      Dyspraxia: "Dyspraxie (TDC)",
+      Dyspraxia: "Dyspraxie (DCD)",
       "Language Disorder": "Trouble du Langage",
       Comorbidities: "Co-occurrences",
       "Functional Impact": "Impact Fonctionnel"
