@@ -144,6 +144,32 @@ const MethodologySection: React.FC<{ t: any; onShowMethods: () => void }> = ({ t
     </div>
   </section >
 );
+const FeedbackBanner: React.FC<{ locale: Locale }> = ({ locale }) => {
+  const handleFeedbackClick = () => {
+    const user = 'cestmoikash+neuroalign';
+    const domain = 'gmail.com';
+    const subject = encodeURIComponent('NeuroAlign Beta Feedback');
+    window.location.href = `mailto:${user}@${domain}?subject=${subject}`;
+  };
+
+  return (
+    <div className="fixed top-0 left-0 z-[101]">
+      <button
+        onClick={handleFeedbackClick}
+        className="bg-indigo-600 text-white px-4 py-2 rounded-br-2xl shadow-lg hover:bg-indigo-700 transition-all flex items-center gap-2 group"
+        aria-label={locale === 'fr' ? 'Envoyer des commentaires' : 'Send feedback'}
+      >
+        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        </svg>
+        <span className="text-[10px] sm:text-xs font-black uppercase tracking-wider">
+          {locale === 'fr' ? 'Retour' : 'Feedback'}
+        </span>
+      </button>
+    </div>
+  );
+};
+
 const LanguageSwitcher: React.FC<{ locale: Locale, setLocale: (l: Locale) => void }> = ({ locale, setLocale }) => (
   <nav aria-label="Language selection" className="fixed top-4 sm:top-6 right-4 sm:right-6 flex bg-white/80 backdrop-blur-md rounded-full p-1 border border-slate-200 z-[101] shadow-lg shadow-slate-200/50 scale-90 sm:scale-100 origin-right">
     <button onClick={() => setLocale('en')} className={`px-3 sm:px-4 py-1.5 rounded-full text-[10px] sm:text-xs font-black transition-all outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 ${locale === 'en' ? 'bg-indigo-600 text-white shadow-md' : 'text-slate-500 hover:text-slate-800'}`}>EN</button>
@@ -304,6 +330,7 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col antialiased overflow-x-hidden">
+      <FeedbackBanner locale={locale} />
       <LanguageSwitcher locale={locale} setLocale={setLocale} />
       <DebugToggle isDebug={isDebug} setIsDebug={setIsDebug} />
       <DebugOverlay isDebug={isDebug} liveReport={liveReport} generateRandom={generateRandom} forceFinish={forceReport} close={() => setIsDebug(false)} t={t} />
