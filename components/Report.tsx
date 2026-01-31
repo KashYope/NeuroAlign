@@ -1,9 +1,12 @@
 import React, { useState, useRef } from 'react';
-import { ScreeningReport, Locale, Phase, UserAnswer } from '../types';
+import { ScreeningReport, Locale, Phase, UserAnswer, Translation } from '../types';
 import { translations } from '../i18n';
 import { QUESTIONS } from '../questions';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
+import ModuleIcon from './ModuleIcon';
+import { Check, AlertTriangle, Copy } from 'lucide-react';
 
-// Bare imports resolved by import map
 import {
   Chart as ChartJS,
   RadialLinearScale,
@@ -40,19 +43,8 @@ interface ReportProps {
   locale: Locale;
 }
 
-const ModuleIcon: React.FC<{ name: string; className?: string }> = ({ name, className = "w-5 h-5" }) => {
-  switch (name) {
-    case 'adhd': return <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>;
-    case 'autism': return <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>;
-    case 'dyslexia': return <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>;
-    case 'dyspraxia': return <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 00-3 0v2a7.5 7.5 0 0015 0v-5a1.5 1.5 0 00-3 0m-6-3V11m0-5.5v-1a1.5 1.5 0 013 0v1m0 0V11m0-5.5a1.5 1.5 0 013 0v3m0 0V11" /></svg>;
-    case 'dyscalculia': return <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>;
-    default: return null;
-  }
-};
-
 const Report: React.FC<ReportProps> = ({ report, answers, onReset, locale }) => {
-  const t = translations[locale];
+  const t: Translation = translations[locale];
   const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
   const [city, setCity] = useState('');
   const [country, setCountry] = useState('');
@@ -65,7 +57,7 @@ const Report: React.FC<ReportProps> = ({ report, answers, onReset, locale }) => 
   const wellbeingDomains = report.domainScores.filter(d => d.name === Phase.COMORBIDITIES);
 
   const radarLabels = allDomains.map(d => {
-    const label = (t.phases as any)[d.name] || d.name;
+    const label = t.phases[d.name] || d.name;
     if (label.includes(' & ')) return label.split(' & ');
     if (label.includes(' (')) {
       const parts = label.split(' (');
@@ -129,7 +121,7 @@ const Report: React.FC<ReportProps> = ({ report, answers, onReset, locale }) => 
 
   const impactEntries = Object.entries(report.functionalImpact) as [string, number][];
   const barData = {
-    labels: impactEntries.map(([id]) => (t.impactLabels as any)[id] || id),
+    labels: impactEntries.map(([id]) => t.impactLabels[id] || id),
     datasets: [
       {
         label: t.chart.barrierLevel,
@@ -179,7 +171,7 @@ const Report: React.FC<ReportProps> = ({ report, answers, onReset, locale }) => 
     let conditions: string[] = [];
     allDomains.forEach(d => {
       if (d.score >= 60) {
-        const domainName = (t.phases as any)[d.name] || d.name;
+        const domainName = t.phases[d.name] || d.name;
         conditions.push(domainName);
       }
     });
@@ -203,12 +195,6 @@ const Report: React.FC<ReportProps> = ({ report, answers, onReset, locale }) => 
   const generateDetailedPdf = async () => {
     setIsGeneratingPdf(true);
     try {
-      // @ts-ignore
-      const { jsPDF } = await import('https://esm.sh/jspdf@^2.5.1');
-      // @ts-ignore
-      const autoTableModule = await import('https://esm.sh/jspdf-autotable@^3.8.2');
-      const autoTable = autoTableModule.default;
-
       const doc = new jsPDF();
       const pageWidth = doc.internal.pageSize.getWidth();
       const pageHeight = doc.internal.pageSize.getHeight();
@@ -335,7 +321,7 @@ const Report: React.FC<ReportProps> = ({ report, answers, onReset, locale }) => 
           doc.setTextColor(15, 23, 42);
           doc.setFont('helvetica', 'bold');
           doc.setFontSize(14);
-          const domainName = (t.phases as any)[domain.name] || domain.name;
+          const domainName = t.phases[domain.name] || domain.name;
           doc.text(`${domainName} (${domain.score}%)`, margin + 5, currentY + 10);
           currentY += 25;
 
@@ -439,9 +425,9 @@ const Report: React.FC<ReportProps> = ({ report, answers, onReset, locale }) => 
       currentY += 10;
 
       const domainTableData = report.domainScores.map(d => [
-        (t.phases as any)[d.name] || d.name,
+        t.phases[d.name] || d.name,
         `${d.score}%`,
-        (t.interpretations as any)[d.interpretation] || d.interpretation
+        t.interpretations[d.interpretation] || d.interpretation
       ]);
 
       autoTable(doc, {
@@ -464,7 +450,7 @@ const Report: React.FC<ReportProps> = ({ report, answers, onReset, locale }) => 
       const allAnswersData = QUESTIONS.map(q => {
         const userAns = answers.find(a => a.questionId === q.id);
         const score = userAns ? userAns.score : '-';
-        const phaseLabel = (t.phases as any)[q.phase] || q.phase;
+        const phaseLabel = t.phases[q.phase] || q.phase;
         // Handle long question text
         return [q.id, phaseLabel, q.text[locale], score];
       });
@@ -526,7 +512,7 @@ const Report: React.FC<ReportProps> = ({ report, answers, onReset, locale }) => 
             <ul className="space-y-2">
               {info.strengths.map((s: string, i: number) => (
                 <li key={i} className={`flex items-start gap-2 text-sm font-bold ${textClass}`}>
-                  <svg className="w-4 h-4 mt-0.5 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" /></svg>
+                  <Check className="w-4 h-4 mt-0.5 opacity-60" />
                   {s}
                 </li>
               ))}
@@ -552,10 +538,10 @@ const Report: React.FC<ReportProps> = ({ report, answers, onReset, locale }) => 
       <div className="flex flex-col sm:flex-row justify-between items-start gap-6 border-b border-slate-50 pb-8 mb-8">
         <div className="flex-1">
           <div className="inline-block px-3 py-1 bg-slate-100 rounded-full text-[9px] font-black uppercase tracking-widest text-slate-500 mb-3">
-            {(t.phases as any)[domain.name] || domain.name}
+            {t.phases[domain.name] || domain.name}
           </div>
           <h3 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight mb-2">
-            {(t.interpretations as any)[domain.interpretation] || domain.interpretation}
+            {t.interpretations[domain.interpretation] || domain.interpretation}
           </h3>
           <div className="h-2 w-full max-w-xs bg-slate-100 rounded-full overflow-hidden mt-4">
             <div
@@ -633,7 +619,7 @@ const Report: React.FC<ReportProps> = ({ report, answers, onReset, locale }) => 
         <div className="mb-12 animate-in fade-in slide-in-from-top-4 duration-700">
           <div className="bg-rose-50 border-2 border-rose-200 p-6 sm:p-8 rounded-[2.5rem] flex flex-col sm:flex-row items-center gap-6 shadow-xl shadow-rose-100/50">
             <div className="w-16 h-16 rounded-3xl bg-rose-600 text-white flex items-center justify-center shrink-0 shadow-lg shadow-rose-200 animate-pulse">
-              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+              <AlertTriangle className="w-8 h-8" />
             </div>
             <div className="text-center sm:text-left">
               <p className="text-[10px] font-black uppercase tracking-[0.2em] text-rose-500 mb-1">{t.clinicalPath}</p>
@@ -762,16 +748,12 @@ const Report: React.FC<ReportProps> = ({ report, answers, onReset, locale }) => 
             >
               {isCopied ? (
                 <>
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
-                  </svg>
+                  <Check className="w-4 h-4" />
                   {locale === 'en' ? 'Copied to Clipboard!' : 'Copié dans le presse-papiers!'}
                 </>
               ) : (
                 <>
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                  </svg>
+                  <Copy className="w-4 h-4" />
                   {locale === 'en' ? 'Generate & Copy Search Query' : 'Générer et copier la requête'}
                 </>
               )}
