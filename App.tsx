@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { Phase, UserAnswer, ScreeningReport, Locale } from './types';
+import { Phase, UserAnswer, ScreeningReport, Locale, Translation } from './types';
 import { QUESTIONS } from './questions';
 import { translations } from './i18n';
 import LikertScale from './components/LikertScale';
@@ -7,18 +7,10 @@ import Report from './components/Report';
 import MethodsPage from './components/MethodsPage';
 import { calculateReport } from './utils/scoring';
 import { saveProgress, loadProgress, clearProgress } from './utils/persistence';
+import ModuleIcon from './components/ModuleIcon';
+import { ChevronDown, Activity, ArrowRight, Mail, Code, X, ChevronLeft, BrainCircuit } from 'lucide-react';
 
 
-const ModuleIcon: React.FC<{ name: string; className?: string }> = ({ name, className = "w-5 h-5" }) => {
-  switch (name) {
-    case 'adhd': return <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>;
-    case 'autism': return <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>;
-    case 'dyslexia': return <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>;
-    case 'dyspraxia': return <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 00-3 0v2a7.5 7.5 0 0015 0v-5a1.5 1.5 0 00-3 0m-6-3V11m0-5.5v-1a1.5 1.5 0 013 0v1m0 0V11m0-5.5a1.5 1.5 0 013 0v3m0 0V11" /></svg>;
-    case 'dyscalculia': return <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>;
-    default: return null;
-  }
-};
 const FAQAccordion: React.FC<{ items: { q: string, a: string }[], title: string }> = ({ items, title }) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   return (
@@ -32,7 +24,7 @@ const FAQAccordion: React.FC<{ items: { q: string, a: string }[], title: string 
               className="w-full px-6 sm:px-8 py-5 sm:py-6 text-left flex justify-between items-center group focus:outline-none focus:bg-slate-50"
             >
               <span className="font-bold text-sm sm:text-base text-slate-800 group-hover:text-indigo-600 transition-colors pr-4">{item.q}</span>
-              <svg className={`w-4 h-4 sm:w-5 h-5 text-slate-400 transition-transform duration-300 shrink-0 ${openIndex === idx ? 'rotate-180 text-indigo-500' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" /></svg>
+              <ChevronDown className={`w-4 h-4 sm:w-5 h-5 text-slate-400 transition-transform duration-300 shrink-0 ${openIndex === idx ? 'rotate-180 text-indigo-500' : ''}`} />
             </button>
             <div className={`transition-all duration-300 ease-in-out ${openIndex === idx ? 'max-h-[500px] opacity-100 pb-6 sm:pb-8 px-6 sm:px-8' : 'max-h-0 opacity-0 overflow-hidden'}`}><p className="text-slate-500 leading-relaxed text-sm">{item.a}</p></div>
           </div>
@@ -42,7 +34,7 @@ const FAQAccordion: React.FC<{ items: { q: string, a: string }[], title: string 
   );
 };
 
-const DomainsOverview: React.FC<{ t: any }> = ({ t }) => {
+const DomainsOverview: React.FC<{ t: Translation }> = ({ t }) => {
   const domains = ['adhd', 'autism', 'dyslexia', 'dyspraxia', 'dyscalculia'];
 
   return (
@@ -67,7 +59,7 @@ const DomainsOverview: React.FC<{ t: any }> = ({ t }) => {
 };
 
 
-const MethodologySection: React.FC<{ t: any; onShowMethods: () => void }> = ({ t, onShowMethods }) => (
+const MethodologySection: React.FC<{ t: Translation; onShowMethods: () => void }> = ({ t, onShowMethods }) => (
   <section className="w-full max-w-5xl mt-32 mb-24 sm:mb-32 animate-in fade-in slide-in-from-bottom-8 delay-300 duration-1000 px-4">
     <div className="text-center mb-16">
       <div className="inline-block px-4 py-1.5 bg-indigo-50 text-indigo-600 rounded-full text-[9px] font-black uppercase tracking-[0.3em] mb-6">
@@ -82,7 +74,7 @@ const MethodologySection: React.FC<{ t: any; onShowMethods: () => void }> = ({ t
       {/* Spiky Profile Card */}
       <div className="bg-white p-8 sm:p-10 rounded-[2.5rem] shadow-xl shadow-slate-200/50 border border-slate-100 md:col-span-1 flex flex-col">
         <div className="w-12 h-12 bg-rose-50 text-rose-500 rounded-2xl flex items-center justify-center mb-6">
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
+          <Activity className="w-6 h-6" />
         </div>
         <h3 className="text-2xl font-black text-slate-900 mb-4">{t.methodology.spikyProfileTitle}</h3>
         <p className="text-slate-500 leading-relaxed font-medium mb-8 flex-1">
@@ -118,7 +110,7 @@ const MethodologySection: React.FC<{ t: any; onShowMethods: () => void }> = ({ t
       <div className="bg-indigo-600 p-8 sm:p-10 rounded-[2.5rem] shadow-2xl shadow-indigo-200 text-white md:col-span-1">
         <h3 className="text-2xl font-black mb-8 px-2">{t.methodology.sourcesTitle}</h3>
         <div className="space-y-6">
-          {Object.entries(t.methodology.modules).map(([key, mod]: [string, any]) => (
+        {Object.entries(t.methodology.modules).map(([key, mod]: [string, any]) => (
             <div key={key} className="flex items-start gap-5 group">
               <div className="w-10 h-10 rounded-2xl bg-indigo-500/50 flex items-center justify-center shrink-0 border border-indigo-400/30 group-hover:bg-white group-hover:text-indigo-600 transition-colors duration-300">
                 <ModuleIcon name={key} className="w-5 h-5" />
@@ -139,7 +131,7 @@ const MethodologySection: React.FC<{ t: any; onShowMethods: () => void }> = ({ t
         className="group relative px-8 py-4 bg-white text-indigo-600 rounded-2xl border-2 border-indigo-100 font-black text-xs sm:text-sm uppercase tracking-widest hover:bg-indigo-50 hover:border-indigo-200 transition-all shadow-lg shadow-indigo-100/50 hover:shadow-indigo-200 hover:-translate-y-1 active:translate-y-0 active:scale-95 flex items-center gap-3 mx-auto overflow-hidden"
       >
         <span className="relative z-10">{t.methodology.learnBtn}</span>
-        <svg className="w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+        <ArrowRight className="w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1" />
       </button>
     </div>
   </section >
@@ -159,9 +151,7 @@ const FeedbackBanner: React.FC<{ locale: Locale }> = ({ locale }) => {
         className="bg-indigo-600 text-white px-4 py-2 rounded-br-2xl shadow-lg hover:bg-indigo-700 transition-all flex items-center gap-2 group"
         aria-label={locale === 'fr' ? 'Envoyer des commentaires' : 'Send feedback'}
       >
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-        </svg>
+        <Mail className="w-4 h-4" />
         <span className="text-[10px] sm:text-xs font-black uppercase tracking-wider">
           {locale === 'fr' ? 'Retour' : 'Feedback'}
         </span>
@@ -180,12 +170,12 @@ const LanguageSwitcher: React.FC<{ locale: Locale, setLocale: (l: Locale) => voi
 const DebugToggle: React.FC<{ isDebug: boolean, setIsDebug: (d: boolean) => void }> = ({ isDebug, setIsDebug }) => (
   <div className="fixed bottom-4 left-4 z-[101] scale-90 sm:scale-100 origin-bottom-left opacity-50 hover:opacity-100 transition-opacity">
     <button onClick={() => setIsDebug(!isDebug)} aria-label="Toggle debug view" className={`p-2 sm:p-2.5 rounded-full border transition-all shadow-lg ${isDebug ? 'bg-red-600 border-red-600 text-white shadow-red-200' : 'bg-white/80 backdrop-blur-md border-slate-200 text-slate-400 hover:text-slate-800 shadow-slate-200/50'}`}>
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
+      <Code className="w-5 h-5" />
     </button>
   </div>
 );
 
-const DebugOverlay: React.FC<{ isDebug: boolean, liveReport: any, generateRandom: () => void, forceFinish: () => void, close: () => void, t: any }> = ({ isDebug, liveReport, generateRandom, forceFinish, close, t }) => {
+const DebugOverlay: React.FC<{ isDebug: boolean, liveReport: any, generateRandom: () => void, forceFinish: () => void, close: () => void, t: Translation }> = ({ isDebug, liveReport, generateRandom, forceFinish, close, t }) => {
   if (!isDebug) return null;
   return (
     <aside className="fixed bottom-4 sm:bottom-6 left-4 right-4 sm:left-6 sm:right-6 bg-slate-900/95 text-white p-5 sm:p-6 rounded-[2rem] sm:rounded-[2.5rem] shadow-2xl z-[110] backdrop-blur-md border border-slate-800 animate-in slide-in-from-bottom-6 max-h-[50vh] overflow-y-auto">
@@ -200,12 +190,12 @@ const DebugOverlay: React.FC<{ isDebug: boolean, liveReport: any, generateRandom
             }} className="px-2 py-1 bg-rose-600 rounded text-[7px] font-black uppercase hover:bg-rose-500 animate-pulse">Chaos</button>
           </div>
         </div>
-        <button onClick={close} className="text-slate-500 hover:text-white"><svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg></button>
+        <button onClick={close} className="text-slate-500 hover:text-white"><X className="w-5 h-5" /></button>
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-3">
         {liveReport ? liveReport.domainScores.map((d: any) => (
           <div key={d.name} className="bg-slate-800/50 p-3 rounded-xl border border-slate-700/50">
-            <p className="text-[7px] font-black uppercase tracking-widest text-slate-500 mb-1 truncate">{(t.phases as any)[d.name] || d.name}</p>
+            <p className="text-[7px] font-black uppercase tracking-widest text-slate-500 mb-1 truncate">{t.phases[d.name] || d.name}</p>
             <p className="text-base sm:text-lg font-black text-indigo-400">{d.score}%</p>
           </div>
         )) : <div className="col-span-full py-4 text-center text-slate-500 text-[9px] font-black uppercase tracking-widest">Awaiting context...</div>}
@@ -225,7 +215,7 @@ const App: React.FC = () => {
   const [disclaimerChecked, setDisclaimerChecked] = useState(false);
   const [showMethods, setShowMethods] = useState(false);
 
-  const t = translations[locale];
+  const t: Translation = translations[locale];
 
   useEffect(() => {
     const saved = loadProgress();
@@ -384,7 +374,7 @@ const App: React.FC = () => {
           <main className="flex-1 py-16 sm:py-24 px-4 sm:px-6 flex flex-col items-center">
             <div className="max-w-4xl w-full flex flex-col items-center">
               <div className="w-16 h-16 sm:w-20 sm:h-20 bg-indigo-600 text-white rounded-2xl sm:rounded-3xl flex items-center justify-center mb-8 sm:mb-10 shadow-xl shadow-indigo-100 animate-in zoom-in duration-700">
-                <svg className="w-8 h-8 sm:w-10 sm:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" /></svg>
+                <BrainCircuit className="w-8 h-8 sm:w-10 sm:h-10" />
               </div>
               <h1 className="text-4xl sm:text-6xl font-black text-slate-900 mb-6 tracking-tight text-center">{t.introTitle}</h1>
               <p className="text-lg sm:text-xl text-slate-600 max-w-2xl text-center leading-relaxed font-medium mb-8 sm:mb-10 px-2">{t.introDesc}</p>
@@ -415,7 +405,7 @@ const App: React.FC = () => {
         ) : (
           <main className="flex-1 flex flex-col items-center pt-24 p-4 sm:p-12 pb-24">
             <nav className="w-full max-w-4xl flex items-center justify-between mb-8 sm:mb-12">
-              <button onClick={() => setCurrentIndex(-1)} className="p-2 text-slate-400 hover:text-slate-800 transition-colors"><svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M15 19l-7-7 7-7" /></svg></button>
+              <button onClick={() => setCurrentIndex(-1)} className="p-2 text-slate-400 hover:text-slate-800 transition-colors"><ChevronLeft className="w-6 h-6" /></button>
               <span className="text-[9px] sm:text-xs font-black text-slate-400 uppercase tracking-[0.2em] sm:tracking-[0.3em] truncate px-4">{(t.phases as any)[QUESTIONS[currentIndex].phase]}</span>
               <div className="text-[10px] sm:text-xs font-black text-indigo-600 bg-indigo-50 px-3 sm:px-4 py-1.5 rounded-full shrink-0">{currentIndex + 1} / {QUESTIONS.length}</div>
             </nav>
