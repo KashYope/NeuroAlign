@@ -61,7 +61,7 @@ const MethodsPage: React.FC<MethodsPageProps> = ({ onBack, onStart, t }) => {
             {/* Fixed Back Button - Aligned with Language Switcher */}
             <button
                 onClick={onBack}
-                className="fixed top-20 sm:top-24 left-4 sm:left-6 z-50 flex items-center gap-2 bg-white/80 backdrop-blur-md border border-slate-200 px-4 py-2 rounded-full shadow-lg shadow-slate-200/50 text-slate-500 hover:text-indigo-600 transition-all font-bold text-xs sm:text-sm"
+                className="fixed top-4 sm:top-6 left-4 sm:left-6 z-50 flex items-center gap-2 bg-white/80 backdrop-blur-md border border-slate-200 px-4 py-2 rounded-full shadow-lg shadow-slate-200/50 text-slate-500 hover:text-indigo-600 transition-all font-bold text-xs sm:text-sm"
             >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M15 19l-7-7 7-7" /></svg>
                 {content.backBtn}
