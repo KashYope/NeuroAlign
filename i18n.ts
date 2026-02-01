@@ -40,33 +40,45 @@ export const translations = {
       adhd: {
         whatItMeans: "Your results suggest a processing style characterized by a regulation-based nervous system. It is not a deficit of attention, but an inconsistency of engagement based on interest, novelty, and urgency.",
         strengths: ["Hyperfocus on passions", "Creative problem solving", "Resilience in crisis", "Generative thinking"],
-        tips: ["Use 'Body Doubling' (working alongside others) for boring tasks.", "Create a 'Dopamine Menu' of healthy stimulation.", "Externalize time (visible clocks/timers) to combat time blindness."]
+        tips: ["Use 'Body Doubling' (working alongside others) for boring tasks.", "Create a 'Dopamine Menu' of healthy stimulation.", "Externalize time (visible clocks/timers) to combat time blindness."],
+        tools: ["Goblin.tools (AI task breaker)", "Focusmate (Virtual Body Doubling)", "Time Timers (Visual clocks)", "Active Noise Cancelling Headphones", "Fidget Toys / Sensory Stones"],
+        guides: ["Dopamine Menu: Create a menu of stimulating activities (Appetizers, Entrees, Sides) to boost initiation.", "Gamification: Turn tasks into 'Boss Battles' or quests with XP rewards to hack your reward system.", "The '5-Minute' Launch: Commit to just 5 minutes of a task to overcome the wall of initiation."]
       },
       autism: {
         whatItMeans: "This profile suggests a unique neurotype focused on deep information processing, pattern recognition, and a distinct sensory experience. High masking scores suggest you work hard to fit in.",
         strengths: ["Deep expertise/Special interests", "Pattern recognition", "Logical honesty", "Sensory joy"],
-        tips: ["Curate a 'Sensory Diet' to manage overwhelm.", "Identify safe spaces where you can unmask fully.", "Use clear, direct communication boundaries."]
+        tips: ["Curate a 'Sensory Diet' to manage overwhelm.", "Identify safe spaces where you can unmask fully.", "Use clear, direct communication boundaries."],
+        tools: ["Noise-canceling headphones (ANC)", "Weighted blankets (Deep Pressure Therapy)", "Sunglasses / Tinted glasses (TheraSpecs)", "Communication Cards / Pins"],
+        guides: ["Sensory Diet: Curate a daily intake of sensory inputs (calming vs alerting) to manage regulation.", "Energy Accounting: Treat energy like a bank account. Balance withdrawals (socializing, masking) with deposits (solitude, special interests).", "Safe Spaces: Designate physical areas where 'masking' is dropped completely to prevent burnout."]
       },
       dyslexia: {
         whatItMeans: "Dyslexia is a difference in how the brain processes language (phonology) and sequences. It often co-occurs with strong visual-spatial reasoning.",
         strengths: ["3D/Visual thinking", "Narrative reasoning", "Interconnected reasoning", "Big-picture strategy"],
-        tips: ["Leverage Text-to-Speech and Dictation tools.", "Use sans-serif fonts (like OpenDyslexic or Atkinson).", "Focus on your strong narrative strengths."]
+        tips: ["Leverage Text-to-Speech and Dictation tools.", "Use sans-serif fonts (like OpenDyslexic or Atkinson).", "Focus on your strong narrative strengths."],
+        tools: ["Text-to-Speech (Speechify, NaturalReader)", "Dyslexia-friendly fonts (OpenDyslexic)", "Voice Typing / Dictation (Dragon)", "Colored Overlays / Reading Rulers"],
+        guides: ["Mind Mapping: Use visual structures (Miro, Obsidian) instead of linear notes to match your thinking style.", "The 'No Ambiguity' Rule: Request written, concrete instructions to reduce processing load.", "Multi-sensory Learning: Engage auditory and visual channels simultaneously to boost retention."]
       },
       dyspraxia: {
         whatItMeans: "Dyspraxia (DCD) affects the planning of movements and the organization of thoughts. It is often described as a disconnect between 'idea' and 'action'.",
         strengths: ["High verbal ability", "Empathy and determination", "Detailed long-term memory", "Strategic compensation"],
-        tips: ["Break physical tasks into micro-steps.", "Use digital tools for organization to bypass motor load.", "Allow extra time for processing new motor skills."]
+        tips: ["Break physical tasks into micro-steps.", "Use digital tools for organization to bypass motor load.", "Allow extra time for processing new motor skills."],
+        tools: ["Digital Project Managers (Trello, Asana)", "Ergonomic Keyboards/Mouse", "Voice Control / Smart Home devices", "Digital Calendars with multiple reminders"],
+        guides: ["Micro-tasking: Break physical tasks into tiny steps to overcome motor planning fatigue.", "Visual Process Maps: Use diagrams to sequence actions instead of holding them in working memory.", "Physical 'Quiet Cars': Create distraction-free zones to reduce the cognitive load of movement."]
       },
       dyscalculia: {
         whatItMeans: "This profile indicates a difference in 'Number Sense'—the intuitive grasp of quantities. It is distinct from general intelligence or logic.",
         strengths: ["Verbal logic", "Intuitive estimation", "Creative writing/arts", "Strategic concepts"],
-        tips: ["Visualize math problems rather than using symbols.", "Avoid 'mental math' under pressure; use tools unapologetically.", "Link numbers to physical objects or spatial concepts."]
+        tips: ["Visualize math problems rather than using symbols.", "Avoid 'mental math' under pressure; use tools unapologetically.", "Link numbers to physical objects or spatial concepts."],
+        tools: ["Visual Calculators", "Graph Paper (for alignment)", "Manipulatives (Physical objects)", "Spreadsheets (Excel/Sheets) for auto-calc"],
+        guides: ["Visualizing Math: Use diagrams and spatial representations instead of abstract symbols.", "The Calculator Rule: Use tools unapologetically; it's a valid accommodation, not cheating.", "Real-world Anchoring: Link abstract numbers to physical objects or personal contexts."]
       }
     },
     reportLabels: {
       livedExperience: "Lived Experience",
       neuroStrengths: "Neuro-Strengths",
       strategies: "Strategies & Tips",
+      tools: "Recommended Tools",
+      guides: "Deep Dive Guides",
       subscaleBreakdown: "Subscale Breakdown",
       insightPrompt: "Review the insights below for detailed interpretation tailored to this profile.",
       spikyProfile: "Spiky Profile Visualization"
