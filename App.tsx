@@ -5,7 +5,7 @@ import { translations } from './i18n';
 import LikertScale from './components/LikertScale';
 import Report from './components/Report';
 import MethodsPage from './components/MethodsPage';
-import { calculateReport } from './utils/scoring';
+import { calculateReport, getScaleMinMax } from './utils/scoring';
 import { saveProgress, loadProgress, clearProgress } from './utils/persistence';
 import ModuleIcon from './components/ModuleIcon';
 import { ChevronDown, Activity, ArrowRight, Mail, Code, X, ChevronLeft, BrainCircuit } from 'lucide-react';
@@ -269,19 +269,28 @@ const App: React.FC = () => {
   };
 
   const forceReport = () => {
-    const targetAnswers = answers.length > 0 ? answers : QUESTIONS.map(q => ({ questionId: q.id, score: Math.floor(Math.random() * 5) + 1 }));
+    const targetAnswers = answers.length > 0 ? answers : QUESTIONS.map(q => {
+      const { min, max } = getScaleMinMax(q.scale);
+      return { questionId: q.id, score: Math.floor(Math.random() * (max - min + 1)) + min };
+    });
     finishAssessment(targetAnswers);
   };
 
   const generateRandom = () => {
-    setAnswers(QUESTIONS.map(q => ({ questionId: q.id, score: Math.floor(Math.random() * 5) + 1 })));
+    setAnswers(QUESTIONS.map(q => {
+      const { min, max } = getScaleMinMax(q.scale);
+      return { questionId: q.id, score: Math.floor(Math.random() * (max - min + 1)) + min };
+    }));
   };
 
   // Chaos Trigger for debugging
   useEffect(() => {
     (window as any).triggerChaos = () => {
-      // Generate high intensity answers
-      const chaosAnswers = QUESTIONS.map(q => ({ questionId: q.id, score: 5 }));
+      // Generate high intensity answers (Max possible score per question)
+      const chaosAnswers = QUESTIONS.map(q => {
+        const { max } = getScaleMinMax(q.scale);
+        return { questionId: q.id, score: max };
+      });
       setAnswers(chaosAnswers);
 
       // Force a report with every possible flag and clinical urgency

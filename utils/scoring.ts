@@ -2,7 +2,7 @@ import { Phase, UserAnswer, ScreeningReport, DomainScore, Question } from '../ty
 import { QUESTIONS } from '../questions';
 
 // Helper to get scale limits
-function getScaleMinMax(scale: string = 'likert_5'): { min: number, max: number } {
+export function getScaleMinMax(scale: string = 'likert_5'): { min: number, max: number } {
   switch (scale) {
     case 'likert_7': return { min: 1, max: 7 };
     case 'yes_no': return { min: 0, max: 1 };
@@ -17,7 +17,10 @@ function getScaleMinMax(scale: string = 'likert_5'): { min: number, max: number 
 function getNormalizedItemScore(q: Question, rawAnswer: number): { score: number, max: number } {
   const { min, max } = getScaleMinMax(q.scale);
   // Handle missing answer (default to min)
-  const val = rawAnswer !== undefined ? rawAnswer : min;
+  const raw = rawAnswer !== undefined ? rawAnswer : min;
+
+  // Clamp value to valid range [min, max] to prevent >100% scores on bad data
+  const val = Math.min(Math.max(raw, min), max);
 
   // Reverse logic
   const actual = q.isReverse ? (max + min - val) : val;
@@ -201,6 +204,8 @@ export function calculateReport(answers: UserAnswer[]): ScreeningReport {
 
   const adhd = domainScores.find(d => d.name === Phase.ADHD);
   const autism = domainScores.find(d => d.name === Phase.AUTISM);
+  const dyslexia = domainScores.find(d => d.name === Phase.DYSLEXIA);
+  const dyspraxia = domainScores.find(d => d.name === Phase.DYSPRAXIA);
   const dyscalculia = domainScores.find(d => d.name === Phase.DYSCALCULIA);
 
   // Re-calculate ADHD Part A Hits for cross-checking
@@ -243,6 +248,15 @@ export function calculateReport(answers: UserAnswer[]): ScreeningReport {
   // Note: frequency_1_5 (1-5). 4=Often.
   if ((dyscalculia?.score || 0) < 40 && (answerMap.get('NUM_10') || 0) >= 4) {
     flags.push('MathAnxiety');
+  }
+
+  // 5. Dyslexia/Dyspraxia Overlap
+  // Vinegrad Score (High) AND ADC Total (High)
+  // Note: We use the normalized scores which already reflect these thresholds.
+  // Vinegrad > 9 -> High Interpretation
+  // ADC > 90 -> High Interpretation
+  if (dyslexia?.interpretation === 'high' && dyspraxia?.interpretation === 'high') {
+    flags.push('dyslexiaDyspraxiaOverlap');
   }
 
   // Intake Flags
