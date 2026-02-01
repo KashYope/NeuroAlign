@@ -262,13 +262,12 @@ const Report: React.FC<ReportProps> = ({ report, answers, onReset, locale }) => 
       if (radarChartRef.current) {
         try {
           const radarImg = radarChartRef.current.toBase64Image();
-          const imgWidth = 140; // Wider to prevent squash
-          const imgHeight = 100;
-          const xPos = (pageWidth - imgWidth) / 2;
+          const imgSize = 120; // Square aspect ratio to prevent distortion
+          const xPos = (pageWidth - imgSize) / 2;
 
-          checkPageBreak(imgHeight + 20);
-          doc.addImage(radarImg, 'PNG', xPos, currentY, imgWidth, imgHeight);
-          currentY += imgHeight + 10;
+          checkPageBreak(imgSize + 20);
+          doc.addImage(radarImg, 'PNG', xPos, currentY, imgSize, imgSize);
+          currentY += imgSize + 10;
         } catch (e) {
           console.error("Could not capture radar chart", e);
         }
