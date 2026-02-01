@@ -242,6 +242,7 @@ export const translations = {
     SensoryOverload: "Significant Sensory Overload Risk",
     AnxietyMasking: "Potential Anxiety Masking Effect",
     MathAnxiety: "Math Anxiety (vs Dyscalculia)",
+    dyslexiaDyspraxiaOverlap: "Dyslexia & Dyspraxia Co-Occurrence",
     likert: {
       stronglyDisagree: "Strongly Disagree",
       disagree: "Disagree",
@@ -600,6 +601,7 @@ export const translations = {
     SensoryOverload: "Risque de Surcharge Sensorielle Significatif",
     AnxietyMasking: "Effet de Masquage par l'Anxiété Potentiel",
     MathAnxiety: "Anxiété Mathématique (vs Dyscalculie)",
+    dyslexiaDyspraxiaOverlap: "Co-occurrence Dyslexie & Dyspraxie",
     likert: {
       stronglyDisagree: "Pas du tout d'accord",
       disagree: "Pas d'accord",
