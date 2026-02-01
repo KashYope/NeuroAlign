@@ -103,6 +103,8 @@ export interface Translation {
     livedExperience: string;
     neuroStrengths: string;
     strategies: string;
+    practicalSupport: string;
+    quickActions: string;
     tools: string;
     guides: string;
     subscaleBreakdown: string;
