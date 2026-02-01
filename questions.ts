@@ -384,11 +384,10 @@ export const QUESTIONS: Question[] = [
     id: 'CAT_18',
     phase: Phase.AUTISM,
     subscale: 'Masking',
-    isReverse: true,
     scale: 'likert_7',
     text: {
-      en: "How often do you feel free to be your authentic self in social situations?",
-      fr: "À quelle fréquence vous sentez-vous libre d'être authentiquement vous-même dans les situations sociales ?"
+      en: "How often do you feel unable to be your authentic self in social situations?",
+      fr: "À quelle fréquence vous sentez-vous incapable d'être authentiquement vous-même dans les situations sociales ?"
     }
   },
   {
