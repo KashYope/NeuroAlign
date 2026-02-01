@@ -5,7 +5,7 @@ import { QUESTIONS } from '../questions';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import ModuleIcon from './ModuleIcon';
-import { Check, AlertTriangle, Copy } from 'lucide-react';
+import { Check, AlertTriangle, Copy, ArrowRight, Wrench } from 'lucide-react';
 
 import {
   Chart as ChartJS,
@@ -531,13 +531,12 @@ const Report: React.FC<ReportProps> = ({ report, answers, onReset, locale }) => 
     // Only display insights if the score is significant (e.g., > 40%)
     if (domain.score < 40) return null;
 
-    const accentColor = domain.score > 60 ? 'rose' : domain.score > 40 ? 'amber' : 'indigo';
     const bgClass = domain.score > 60 ? 'bg-rose-50 border-rose-100' : domain.score > 40 ? 'bg-amber-50 border-amber-100' : 'bg-indigo-50 border-indigo-100';
     const textClass = domain.score > 60 ? 'text-rose-900' : domain.score > 40 ? 'text-amber-900' : 'text-indigo-900';
 
     return (
       <div className={`mt-8 p-6 sm:p-8 rounded-3xl border ${bgClass}`}>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
           <div>
             <h4 className={`text-xs font-black uppercase tracking-widest ${textClass} mb-4 opacity-70`}>{t.reportLabels.livedExperience}</h4>
             <p className={`text-sm sm:text-base leading-relaxed font-medium ${textClass}`}>
@@ -556,44 +555,56 @@ const Report: React.FC<ReportProps> = ({ report, answers, onReset, locale }) => 
             </ul>
           </div>
         </div>
-        <div className="mt-8 pt-8 border-t border-black/5">
-          <h4 className={`text-xs font-black uppercase tracking-widest ${textClass} mb-4 opacity-70`}>{t.reportLabels.strategies}</h4>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {info.tips.map((tip: string, i: number) => (
-              <div key={i} className="bg-white/60 p-4 rounded-xl text-xs font-medium leading-relaxed backdrop-blur-sm">
-                {tip}
+
+        {/* Unified Practical Support Section */}
+        <div className="bg-white/50 rounded-2xl p-6 sm:p-8 border border-black/5">
+          <h4 className={`text-xs font-black uppercase tracking-widest ${textClass} mb-6 opacity-70`}>{t.reportLabels.practicalSupport}</h4>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+            {/* Quick Actions (Tips) */}
+            <div>
+               <h5 className={`text-[10px] uppercase font-bold opacity-60 mb-4 ${textClass}`}>{t.reportLabels.quickActions}</h5>
+               <ul className="space-y-3">
+                {info.tips.map((tip: string, i: number) => (
+                  <li key={i} className={`flex items-start gap-3 text-sm font-medium ${textClass}`}>
+                    <ArrowRight className="w-4 h-4 mt-1 opacity-50 shrink-0" />
+                    <span className="leading-relaxed">{tip}</span>
+                  </li>
+                ))}
+               </ul>
+            </div>
+
+            {/* Deep Dives (Guides) - if available */}
+            {info.guides && info.guides.length > 0 && (
+              <div>
+                 <h5 className={`text-[10px] uppercase font-bold opacity-60 mb-4 ${textClass}`}>{t.reportLabels.guides}</h5>
+                 <div className="space-y-3">
+                   {info.guides.map((guide: string, i: number) => (
+                     <div key={i} className="bg-white/60 p-4 rounded-xl text-xs font-medium leading-relaxed border border-black/5 shadow-sm">
+                       {guide}
+                     </div>
+                   ))}
+                 </div>
               </div>
-            ))}
+            )}
           </div>
-        </div>
 
-        {/* Tools Section */}
-        {info.tools && info.tools.length > 0 && (
-          <div className="mt-8 pt-8 border-t border-black/5">
-            <h4 className={`text-xs font-black uppercase tracking-widest ${textClass} mb-4 opacity-70`}>{t.reportLabels.tools}</h4>
-            <div className="flex flex-wrap gap-3">
-              {info.tools.map((tool: string, i: number) => (
-                <span key={i} className={`px-3 py-1.5 bg-white/60 rounded-lg text-xs font-bold shadow-sm border border-black/5 ${textClass}`}>
-                  {tool}
-                </span>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Guides Section */}
-        {info.guides && info.guides.length > 0 && (
-          <div className="mt-8 pt-8 border-t border-black/5">
-            <h4 className={`text-xs font-black uppercase tracking-widest ${textClass} mb-4 opacity-70`}>{t.reportLabels.guides}</h4>
-            <div className="space-y-3">
-              {info.guides.map((guide: string, i: number) => (
-                <div key={i} className="bg-white/40 p-4 rounded-xl text-xs font-medium leading-relaxed border border-black/5">
-                  {guide}
+          {/* Toolkit Footer */}
+          {info.tools && info.tools.length > 0 && (
+             <div className="mt-8 pt-6 border-t border-black/5">
+                <h5 className={`text-[10px] uppercase font-bold opacity-60 mb-3 flex items-center gap-2 ${textClass}`}>
+                  <Wrench className="w-3 h-3" /> {t.reportLabels.tools}
+                </h5>
+                <div className="flex flex-wrap gap-2">
+                   {info.tools.map((tool: string, i: number) => (
+                     <span key={i} className={`px-3 py-1.5 bg-white rounded-lg border border-black/10 text-[10px] font-bold uppercase tracking-wide opacity-80 ${textClass}`}>
+                       {tool}
+                     </span>
+                   ))}
                 </div>
-              ))}
-            </div>
-          </div>
-        )}
+             </div>
+          )}
+        </div>
       </div>
     );
   };

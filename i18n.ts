@@ -40,35 +40,35 @@ export const translations = {
       adhd: {
         whatItMeans: "Your results suggest a processing style characterized by a regulation-based nervous system. It is not a deficit of attention, but an inconsistency of engagement based on interest, novelty, and urgency.",
         strengths: ["Hyperfocus on passions", "Creative problem solving", "Resilience in crisis", "Generative thinking"],
-        tips: ["Use 'Body Doubling' (working alongside others) for boring tasks.", "Create a 'Dopamine Menu' of healthy stimulation.", "Externalize time (visible clocks/timers) to combat time blindness."],
+        tips: ["Use 'Body Doubling' (working alongside others) for boring tasks.", "Consult your 'Menu' of engaging activities when you feel stuck.", "Externalize time (visible clocks/timers) to combat time blindness."],
         tools: ["Goblin.tools (AI task breaker)", "Focusmate (Virtual Body Doubling)", "Time Timers (Visual clocks)", "Active Noise Cancelling Headphones", "Fidget Toys / Sensory Stones"],
         guides: ["Dopamine Menu: Create a menu of stimulating activities (Appetizers, Entrees, Sides) to boost initiation.", "Gamification: Turn tasks into 'Boss Battles' or quests with XP rewards to hack your reward system.", "The '5-Minute' Launch: Commit to just 5 minutes of a task to overcome the wall of initiation."]
       },
       autism: {
         whatItMeans: "This profile suggests a unique neurotype focused on deep information processing, pattern recognition, and a distinct sensory experience. High masking scores suggest you work hard to fit in.",
         strengths: ["Deep expertise/Special interests", "Pattern recognition", "Logical honesty", "Sensory joy"],
-        tips: ["Curate a 'Sensory Diet' to manage overwhelm.", "Identify safe spaces where you can unmask fully.", "Use clear, direct communication boundaries."],
+        tips: ["Schedule regular 'sensory breaks' throughout your day before you feel overwhelmed.", "Communicate your need for 'recovery time' to close friends or family.", "Use clear, direct communication boundaries."],
         tools: ["Noise-canceling headphones (ANC)", "Weighted blankets (Deep Pressure Therapy)", "Sunglasses / Tinted glasses (TheraSpecs)", "Communication Cards / Pins"],
         guides: ["Sensory Diet: Curate a daily intake of sensory inputs (calming vs alerting) to manage regulation.", "Energy Accounting: Treat energy like a bank account. Balance withdrawals (socializing, masking) with deposits (solitude, special interests).", "Safe Spaces: Designate physical areas where 'masking' is dropped completely to prevent burnout."]
       },
       dyslexia: {
         whatItMeans: "Dyslexia is a difference in how the brain processes language (phonology) and sequences. It often co-occurs with strong visual-spatial reasoning.",
         strengths: ["3D/Visual thinking", "Narrative reasoning", "Interconnected reasoning", "Big-picture strategy"],
-        tips: ["Leverage Text-to-Speech and Dictation tools.", "Use sans-serif fonts (like OpenDyslexic or Atkinson).", "Focus on your strong narrative strengths."],
+        tips: ["Leverage Text-to-Speech and Dictation tools.", "Use sans-serif fonts (like OpenDyslexic or Atkinson).", "Lean into 'big picture' thinking rather than getting lost in details."],
         tools: ["Text-to-Speech (Speechify, NaturalReader)", "Dyslexia-friendly fonts (OpenDyslexic)", "Voice Typing / Dictation (Dragon)", "Colored Overlays / Reading Rulers"],
         guides: ["Mind Mapping: Use visual structures (Miro, Obsidian) instead of linear notes to match your thinking style.", "The 'No Ambiguity' Rule: Request written, concrete instructions to reduce processing load.", "Multi-sensory Learning: Engage auditory and visual channels simultaneously to boost retention."]
       },
       dyspraxia: {
         whatItMeans: "Dyspraxia (DCD) affects the planning of movements and the organization of thoughts. It is often described as a disconnect between 'idea' and 'action'.",
         strengths: ["High verbal ability", "Empathy and determination", "Detailed long-term memory", "Strategic compensation"],
-        tips: ["Break physical tasks into micro-steps.", "Use digital tools for organization to bypass motor load.", "Allow extra time for processing new motor skills."],
+        tips: ["Focus on one single movement at a time rather than the whole sequence.", "Use digital tools for organization to bypass motor load.", "Allow extra time for processing new motor skills."],
         tools: ["Digital Project Managers (Trello, Asana)", "Ergonomic Keyboards/Mouse", "Voice Control / Smart Home devices", "Digital Calendars with multiple reminders"],
         guides: ["Micro-tasking: Break physical tasks into tiny steps to overcome motor planning fatigue.", "Visual Process Maps: Use diagrams to sequence actions instead of holding them in working memory.", "Physical 'Quiet Cars': Create distraction-free zones to reduce the cognitive load of movement."]
       },
       dyscalculia: {
         whatItMeans: "This profile indicates a difference in 'Number Sense'—the intuitive grasp of quantities. It is distinct from general intelligence or logic.",
         strengths: ["Verbal logic", "Intuitive estimation", "Creative writing/arts", "Strategic concepts"],
-        tips: ["Visualize math problems rather than using symbols.", "Avoid 'mental math' under pressure; use tools unapologetically.", "Link numbers to physical objects or spatial concepts."],
+        tips: ["Draw out problems or use physical counters to make abstract numbers real.", "Politely decline requests for quick mental calculations in public.", "Link numbers to physical objects or spatial concepts."],
         tools: ["Visual Calculators", "Graph Paper (for alignment)", "Manipulatives (Physical objects)", "Spreadsheets (Excel/Sheets) for auto-calc"],
         guides: ["Visualizing Math: Use diagrams and spatial representations instead of abstract symbols.", "The Calculator Rule: Use tools unapologetically; it's a valid accommodation, not cheating.", "Real-world Anchoring: Link abstract numbers to physical objects or personal contexts."]
       }
@@ -77,6 +77,8 @@ export const translations = {
       livedExperience: "Lived Experience",
       neuroStrengths: "Neuro-Strengths",
       strategies: "Strategies & Tips",
+      practicalSupport: "Practical Support",
+      quickActions: "Quick Actions",
       tools: "Recommended Tools",
       guides: "Deep Dive Guides",
       subscaleBreakdown: "Subscale Breakdown",
@@ -410,6 +412,10 @@ export const translations = {
       livedExperience: "Expérience Vécue",
       neuroStrengths: "Neuro-Forces",
       strategies: "Stratégies & Conseils",
+      practicalSupport: "Soutien Pratique",
+      quickActions: "Actions Rapides",
+      tools: "Outils Recommandés",
+      guides: "Guides Approfondis",
       subscaleBreakdown: "Analyse des Sous-échelles",
       insightPrompt: "Consultez les informations ci-dessous pour une interprétation détaillée adaptée à ce profil.",
       spikyProfile: "Visualisation du Profil Hétérogène"
@@ -419,27 +425,37 @@ export const translations = {
       adhd: {
         whatItMeans: "Vos résultats suggèrent un système nerveux basé sur l'intérêt. Ce n'est pas un déficit d'attention, mais une régulation inconstante basée sur la nouveauté et l'urgence.",
         strengths: ["Hyperfocalisation", "Résolution créative", "Résilience en crise", "Pensée générative"],
-        tips: ["Utilisez le 'Body Doubling' (travailler avec quelqu'un) pour les tâches ennuyeuses.", "Créez un 'Menu Dopamine' sain.", "Externalisez le temps (minuteurs visuels) pour combattre la cécité temporelle."]
+        tips: ["Utilisez le 'Body Doubling' (travailler avec quelqu'un) pour les tâches ennuyeuses.", "Consultez votre 'Menu' d'activités stimulantes quand vous êtes bloqué.", "Externalisez le temps (minuteurs visuels) pour combattre la cécité temporelle."],
+        tools: ["Goblin.tools (Découpage de tâches IA)", "Focusmate (Body Doubling Virtuel)", "Time Timers (Minuteurs visuels)", "Casque à réduction de bruit active", "Fidgets / Pierres sensorielles"],
+        guides: ["Menu Dopamine : Créez un menu d'activités stimulantes (Entrées, Plats, Desserts) pour booster l'initiation.", "Gamification : Transformez les tâches en 'Quêtes' ou 'Boss' avec des récompenses d'XP pour pirater votre système de récompense.", "Le Lancement '5-Minutes' : Engagez-vous à faire seulement 5 minutes d'une tâche pour surmonter le mur de l'initiation."]
       },
       autism: {
         whatItMeans: "Ce profil suggère un neurotype axé sur le traitement profond de l'information, la reconnaissance de modèles et une expérience sensorielle distincte.",
         strengths: ["Expertise profonde", "Reconnaissance de motifs", "Honnêteté logique", "Joie sensorielle"],
-        tips: ["Établissez un 'Régime Sensoriel' pour gérer la surcharge.", "Identifiez des lieux sûrs pour 'démasquer'.", "Utilisez une communication directe et claire."]
+        tips: ["Programmez des 'pauses sensorielles' régulières avant de vous sentir submergé.", "Communiquez votre besoin de 'temps de récupération' à vos proches.", "Utilisez une communication directe et claire."],
+        tools: ["Casque à réduction de bruit (ANC)", "Couvertures pondérées (Thérapie par pression)", "Lunettes teintées (TheraSpecs)", "Cartes / Badge de communication"],
+        guides: ["Régime Sensoriel : Élaborez un apport quotidien d'intrants sensoriels (apaisants vs alertants) pour gérer la régulation.", "Comptabilité Énergétique : Traitez l'énergie comme un compte en banque. Équilibrez les retraits (social, masquage) avec les dépôts (solitude, intérêts spécifiques).", "Espaces Sûrs : Désignez des zones physiques où le 'masque' est totalement tombé pour prévenir le burnout."]
       },
       dyslexia: {
         whatItMeans: "La dyslexie est une différence dans le traitement du langage (phonologie) et des séquences. Elle coexiste souvent avec un fort raisonnement visuo-spatial.",
         strengths: ["Pensée 3D/Visuelle", "Raisonnement narratif", "Pensée interconnectée", "Stratégie globale"],
-        tips: ["Utilisez la synthèse vocale et la dictée.", "Privilégiez les polices sans-serif.", "Misez sur vos forces narratives."]
+        tips: ["Utilisez la synthèse vocale et la dictée.", "Privilégiez les polices sans-serif (comme OpenDyslexic).", "Appuyez-vous sur votre pensée globale plutôt que de vous perdre dans les détails."],
+        tools: ["Synthèse vocale (Speechify, NaturalReader)", "Polices pour dyslexie (OpenDyslexic)", "Dictée Vocale (Dragon)", "Règles de lecture / Filtres colorés"],
+        guides: ["Mind Mapping : Utilisez des structures visuelles (Miro, Obsidian) plutôt que des notes linéaires pour correspondre à votre pensée.", "La Règle 'Zéro Ambiguïté' : Demandez des instructions écrites et concrètes pour réduire la charge de traitement.", "Apprentissage Multi-sensoriel : Engagez les canaux auditifs et visuels simultanément pour booster la rétention."]
       },
       dyspraxia: {
         whatItMeans: "La dyspraxie (TDC) affecte la planification des mouvements et l'organisation des pensées. C'est le décalage entre 'l'idée' et 'l'action'.",
         strengths: ["Forte capacité verbale", "Empathie et détermination", "Mémoire à long terme", "Stratégie"],
-        tips: ["Décomposez les tâches physiques en micro-étapes.", "Utilisez le numérique pour contourner la charge motrice.", "Accordez-vous plus de temps pour les nouvelles habiletés."]
+        tips: ["Concentrez-vous sur un seul mouvement à la fois plutôt que sur toute la séquence.", "Utilisez le numérique pour contourner la charge motrice.", "Accordez-vous plus de temps pour les nouvelles habiletés."],
+        tools: ["Gestionnaires de projet (Trello, Asana)", "Claviers/Souris ergonomiques", "Contrôle Vocal / Domotique", "Calendriers numériques avec rappels multiples"],
+        guides: ["Micro-tâches : Décomposez les tâches physiques en étapes minuscules pour surmonter la fatigue de planification.", "Cartes de Processus Visuels : Utilisez des diagrammes pour séquencer les actions au lieu de les garder en mémoire de travail.", "Zones de Calme Physique : Créez des espaces sans distraction pour réduire la charge cognitive du mouvement."]
       },
       dyscalculia: {
         whatItMeans: "Ce profil indique une différence dans le 'Sens du Nombre'. C'est une distinction purement cognitive, sans lien avec l'intelligence générale.",
         strengths: ["Logique verbale", "Estimation intuitive", "Créativité littéraire", "Concepts stratégiques"],
-        tips: ["Visualisez les problèmes plutôt que d'utiliser des symboles.", "Évitez le calcul mental sous pression.", "Liez les chiffres à des objets physiques."]
+        tips: ["Dessinez les problèmes ou utilisez des objets physiques pour rendre les chiffres réels.", "Refusez poliment le calcul mental rapide en public.", "Liez les chiffres à des objets physiques ou des concepts spatiaux."],
+        tools: ["Calculatrices Visuelles", "Papier quadrillé (pour l'alignement)", "Objets de manipulation (Physiques)", "Tableurs (Excel/Sheets) pour le calcul auto"],
+        guides: ["Visualisation des Maths : Utilisez des diagrammes et des représentations spatiales au lieu de symboles abstraits.", "La Règle de la Calculatrice : Utilisez les outils sans honte ; c'est un aménagement valide, pas de la triche.", "Ancrage Réel : Liez les nombres abstraits à des objets physiques ou des contextes personnels."]
       }
     },
     methodology: {
