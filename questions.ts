@@ -10,8 +10,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Mood',
     scale: 'frequency_0_4',
     text: {
-      en: "How often do you experience persistent low mood, lack of energy, or a feeling of 'emptiness' that affects your daily activities?",
-      fr: "À quelle fréquence ressentez-vous une humeur basse persistante, un manque d'énergie ou un sentiment de 'vide' qui affecte vos activités ?"
+      en: "Do you experience persistent low mood, lack of energy, or a feeling of 'emptiness' that affects your daily activities?",
+      fr: "Ressentez-vous une humeur basse persistante, un manque d'énergie ou un sentiment de 'vide' qui affecte vos activités ?"
     }
   },
   {
@@ -40,8 +40,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Crisis',
     scale: 'frequency_0_4',
     text: {
-      en: "How often do you experience 'dark thoughts' or suicidal ideation, or a feeling that you are in a state of crisis?",
-      fr: "À quelle fréquence avez-vous des 'idées noires' ou des pensées suicidaires, ou le sentiment d'être en état de crise ?"
+      en: "Do you experience 'dark thoughts' or suicidal ideation, or a feeling that you are in a state of crisis?",
+      fr: "Avez-vous des 'idées noires' ou des pensées suicidaires, ou le sentiment d'être en état de crise ?"
     }
   },
 
@@ -56,8 +56,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Executive',
     scale: 'frequency_0_4',
     text: {
-      en: "Once you have managed to complete the challenging, stimulating parts of a project, how often do you find yourself physically or mentally unable to wrap up the final, boring details?",
-      fr: "Une fois que vous avez terminé les parties stimulantes d'un projet, à quelle fréquence vous trouvez-vous incapable de boucler les derniers détails ennuyeux ?"
+      en: "Once you have managed to complete the challenging, stimulating parts of a project, do you find yourself physically or mentally unable to wrap up the final, boring details?",
+      fr: "Une fois que vous avez terminé les parties stimulantes d'un projet, vous trouvez-vous incapable de boucler les derniers détails ennuyeux ?"
     }
   },
   {
@@ -66,8 +66,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Sequencing',
     scale: 'frequency_0_4',
     text: {
-      en: "When a task requires you to organize your thoughts or materials in a specific sequence, how often do you feel overwhelmed or unable to get things in order?",
-      fr: "Quand une tâche nécessite d'organiser vos pensées ou votre matériel dans un ordre précis, à quelle fréquence vous sentez-vous dépassé(e) ?"
+      en: "When a task requires you to organize your thoughts or materials in a specific sequence, do you feel overwhelmed or unable to get things in order?",
+      fr: "Quand une tâche nécessite d'organiser vos pensées ou votre matériel dans un ordre précis, vous sentez-vous dépassé(e) ?"
     }
   },
   {
@@ -76,8 +76,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'AdhdMemory',
     scale: 'frequency_0_4',
     text: {
-      en: "How often do you find yourself forgetting appointments or obligations, even those that are important to you or that you genuinely wanted to attend?",
-      fr: "À quelle fréquence oubliez-vous des rendez-vous ou des obligations, même ceux qui sont importants pour vous ?"
+      en: "Do you find yourself forgetting appointments or obligations, even those that are important to you or that you genuinely wanted to attend?",
+      fr: "Oubliez-vous des rendez-vous ou des obligations, même ceux qui sont importants pour vous ?"
     }
   },
   {
@@ -86,8 +86,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Initiation',
     scale: 'frequency_0_4',
     text: {
-      en: "When facing a task that requires a lot of thought, how often do you find yourself avoiding or delaying getting started (task paralysis)?",
-      fr: "Face à une tâche demandant beaucoup de réflexion, à quelle fréquence évitez-vous ou retardez-vous le moment de vous y mettre ?"
+      en: "When facing a task that requires a lot of thought, do you find yourself avoiding or delaying getting started (task paralysis)?",
+      fr: "Face à une tâche demandant beaucoup de réflexion, évitez-vous ou retardez-vous le moment de vous y mettre ?"
     }
   },
   {
@@ -96,8 +96,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'MotorAgitation',
     scale: 'frequency_0_4',
     text: {
-      en: "How often do you find yourself fidgeting, tapping your hands/feet, or squirming when you are required to sit still for a long time?",
-      fr: "À quelle fréquence vous agitez-vous (taper des mains/pieds, bouger) lorsque vous devez rester assis longtemps ?"
+      en: "Do you find yourself fidgeting, tapping your hands/feet, or squirming when you are required to sit still for a long time?",
+      fr: "Vous agitez-vous (taper des mains/pieds, bouger) lorsque vous devez rester assis longtemps ?"
     }
   },
   {
@@ -106,8 +106,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Restlessness',
     scale: 'frequency_0_4',
     text: {
-      en: "How often do you feel an internal sense of being overly active, or compelled to do things as if you were 'driven by a motor'?",
-      fr: "À quelle fréquence ressentez-vous une activité interne excessive, comme si vous étiez 'mû(e) par un moteur' ?"
+      en: "Do you feel an internal sense of being overly active, or compelled to do things as if you were 'driven by a motor'?",
+      fr: "Ressentez-vous une activité interne excessive, comme si vous étiez 'mû(e) par un moteur' ?"
     }
   },
 
@@ -118,8 +118,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Attention',
     scale: 'frequency_0_4',
     text: {
-      en: "How often do you make careless mistakes when you have to work on a boring or difficult project?",
-      fr: "À quelle fréquence faites-vous des fautes d'étourderie lorsque vous travaillez sur un projet ennuyeux ou difficile ?"
+      en: "Do you make careless mistakes when you have to work on a boring or difficult project?",
+      fr: "Faites-vous des fautes d'étourderie lorsque vous travaillez sur un projet ennuyeux ou difficile ?"
     }
   },
   {
@@ -128,8 +128,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Attention',
     scale: 'frequency_0_4',
     text: {
-      en: "How often do you have difficulty keeping your attention focused when you are doing boring or repetitive work?",
-      fr: "À quelle fréquence avez-vous du mal à garder votre attention sur un travail ennuyeux ou répétitif ?"
+      en: "Do you have difficulty keeping your attention focused when you are doing boring or repetitive work?",
+      fr: "Avez-vous du mal à garder votre attention sur un travail ennuyeux ou répétitif ?"
     }
   },
   {
@@ -138,8 +138,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'AuditoryProc',
     scale: 'frequency_0_4',
     text: {
-      en: "How often do you find it difficult to concentrate on what people are saying to you, even when they are speaking to you directly?",
-      fr: "À quelle fréquence avez-vous du mal à vous concentrer sur ce que l'on vous dit, même quand on s'adresse directement à vous ?"
+      en: "Do you find it difficult to concentrate on what people are saying to you, even when they are speaking to you directly?",
+      fr: "Avez-vous du mal à vous concentrer sur ce que l'on vous dit, même quand on s'adresse directement à vous ?"
     }
   },
   {
@@ -148,8 +148,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'AdhdMemory',
     scale: 'frequency_0_4',
     text: {
-      en: "How often do you misplace or have difficulty finding things at home or at work (e.g., keys, phone, wallet)?",
-      fr: "À quelle fréquence égarez-vous ou avez-vous du mal à retrouver vos affaires (clés, téléphone, portefeuille) ?"
+      en: "Do you misplace or have difficulty finding things at home or at work (e.g., keys, phone, wallet)?",
+      fr: "Égarez-vous ou avez-vous du mal à retrouver vos affaires (clés, téléphone, portefeuille) ?"
     }
   },
   {
@@ -158,8 +158,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Distraction',
     scale: 'frequency_0_4',
     text: {
-      en: "How often are you distracted by activity or noise around you?",
-      fr: "À quelle fréquence êtes-vous distrait(e) par l'activité ou le bruit autour de vous ?"
+      en: "Are you distracted by activity or noise around you?",
+      fr: "Êtes-vous distrait(e) par l'activité ou le bruit autour de vous ?"
     }
   },
   {
@@ -168,8 +168,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Inhibition',
     scale: 'frequency_0_4',
     text: {
-      en: "How often do you leave your seat in meetings or other situations in which you are expected to remain seated?",
-      fr: "À quelle fréquence quittez-vous votre siège lors de réunions ou situations où vous devriez rester assis(e) ?"
+      en: "Do you leave your seat in meetings or other situations in which you are expected to remain seated?",
+      fr: "Quittez-vous votre siège lors de réunions ou situations où vous devriez rester assis(e) ?"
     }
   },
   {
@@ -178,8 +178,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Restlessness',
     scale: 'frequency_0_4',
     text: {
-      en: "How often do you feel restless or fidgety?",
-      fr: "À quelle fréquence vous sentez-vous agité(e) ou nerveux(se) ?"
+      en: "Do you feel restless or fidgety?",
+      fr: "Vous sentez-vous agité(e) ou nerveux(se) ?"
     }
   },
   {
@@ -188,8 +188,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Regulation',
     scale: 'frequency_0_4',
     text: {
-      en: "How often do you have difficulty unwinding and relaxing when you have time to yourself?",
-      fr: "À quelle fréquence avez-vous du mal à décompresser et à vous détendre quand vous avez du temps pour vous ?"
+      en: "Do you have difficulty unwinding and relaxing when you have time to yourself?",
+      fr: "Avez-vous du mal à décompresser et à vous détendre quand vous avez du temps pour vous ?"
     }
   },
   {
@@ -198,8 +198,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Verbal',
     scale: 'frequency_0_4',
     text: {
-      en: "How often do you find yourself talking too much when you are in social situations?",
-      fr: "À quelle fréquence vous arrive-t-il de trop parler lors de situations sociales ?"
+      en: "Do you find yourself talking too much when you are in social situations?",
+      fr: "Vous arrive-t-il de trop parler lors de situations sociales ?"
     }
   },
   {
@@ -208,8 +208,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Impulsivity',
     scale: 'frequency_0_4',
     text: {
-      en: "When in a conversation, how often do you find yourself finishing other people's sentences before they can?",
-      fr: "Dans une conversation, à quelle fréquence finissez-vous les phrases des autres avant eux ?"
+      en: "When in a conversation, do you find yourself finishing other people's sentences before they can?",
+      fr: "Dans une conversation, finissez-vous les phrases des autres avant eux ?"
     }
   },
   {
@@ -218,8 +218,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Timing',
     scale: 'frequency_0_4',
     text: {
-      en: "How often do you have difficulty waiting your turn in situations when turn taking is required?",
-      fr: "À quelle fréquence avez-vous du mal à attendre votre tour ?"
+      en: "Do you have difficulty waiting your turn in situations when turn taking is required?",
+      fr: "Avez-vous du mal à attendre votre tour ?"
     }
   },
   {
@@ -228,8 +228,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Impulsivity',
     scale: 'frequency_0_4',
     text: {
-      en: "How often do you interrupt others when they are busy?",
-      fr: "À quelle fréquence interrompez-vous les autres quand ils sont occupés ?"
+      en: "Do you interrupt others when they are busy?",
+      fr: "Interrompez-vous les autres quand ils sont occupés ?"
     }
   },
 
@@ -244,8 +244,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Compensation',
     scale: 'likert_7',
     text: {
-      en: "When interacting with others, how often do you deliberately copy their body language or facial expressions to build rapport?",
-      fr: "À quelle fréquence copiez-vous délibérément le langage corporel ou les expressions faciales de votre interlocuteur pour créer un lien ?"
+      en: "When interacting with others, I deliberately copy their body language or facial expressions to build rapport.",
+      fr: "Lorsque j'interagis avec d'autres, je copie délibérément leur langage corporel ou leurs expressions faciales pour créer un lien."
     }
   },
   {
@@ -254,8 +254,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Compensation',
     scale: 'likert_7',
     text: {
-      en: "How often do you rely on a prepared 'script' or set of phrases to get through social situations?",
-      fr: "À quelle fréquence vous appuyez-vous sur un 'script' ou des phrases préparées pour gérer les situations sociales ?"
+      en: "I rely on a prepared 'script' or set of phrases to get through social situations.",
+      fr: "Je m'appuie sur un 'script' ou des phrases préparées pour gérer les situations sociales."
     }
   },
   {
@@ -264,8 +264,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Compensation',
     scale: 'likert_7',
     text: {
-      en: "How often do you find yourself repeating phrases or distinct wording exactly as you first heard them?",
-      fr: "À quelle fréquence vous surprenez-vous à répéter des phrases ou tournures exactement comme vous les avez entendues ?"
+      en: "I often find myself repeating phrases or distinct wording exactly as I first heard them.",
+      fr: "Je me surprends souvent à répéter des phrases ou des tournures exactement comme je les ai entendues."
     }
   },
   {
@@ -274,8 +274,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Compensation',
     scale: 'likert_7',
     text: {
-      en: "In social interactions, how often do you use specific behaviors that you have learned by watching others?",
-      fr: "Dans les interactions sociales, à quelle fréquence utilisez-vous des comportements appris en observant les autres ?"
+      en: "In social interactions, I use specific behaviors that I have learned by watching others.",
+      fr: "Dans les interactions sociales, j'utilise des comportements spécifiques que j'ai appris en observant les autres."
     }
   },
   {
@@ -284,8 +284,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Compensation',
     scale: 'likert_7',
     text: {
-      en: "How often do you practice your facial expressions and body language in private to ensure they look natural?",
-      fr: "À quelle fréquence exercez-vous vos expressions faciales en privé pour qu'elles paraissent naturelles ?"
+      en: "I practice my facial expressions and body language in private to ensure they look natural.",
+      fr: "J'exerce mes expressions faciales et mon langage corporel en privé pour m'assurer qu'ils paraissent naturels."
     }
   },
   {
@@ -294,8 +294,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Compensation',
     scale: 'likert_7',
     text: {
-      en: "How often do you explicitly research the rules of social interactions to improve your social skills?",
-      fr: "À quelle fréquence faites-vous des recherches explicites sur les règles sociales pour vous améliorer ?"
+      en: "I explicitly research the rules of social interactions to improve my social skills.",
+      fr: "Je fais des recherches explicites sur les règles des interactions sociales pour améliorer mes compétences."
     }
   },
   {
@@ -304,8 +304,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Compensation',
     scale: 'likert_7',
     text: {
-      en: "How often do you learn how to speak or behave from media (TV, films, books) and apply it to your own interactions?",
-      fr: "À quelle fréquence apprenez-vous à parler ou agir via les médias (TV, films, livres) pour l'appliquer ensuite ?"
+      en: "I learn how to speak or behave from media (TV, films, books) and apply it to my own interactions.",
+      fr: "J'apprends à parler ou à me comporter grâce aux médias (télévision, films, livres) et je l'applique à mes propres interactions."
     }
   },
   {
@@ -314,8 +314,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Compensation',
     scale: 'likert_7',
     text: {
-      en: "How often do you think about the impression you make on others more than they likely think about you?",
-      fr: "À quelle fréquence pensez-vous davantage à l'impression que vous donnez aux autres qu'eux ne pensent à vous ?"
+      en: "I think about the impression I make on others more than they likely think about me.",
+      fr: "Je pense davantage à l'impression que je fais sur les autres qu'eux ne pensent probablement à moi."
     }
   },
   {
@@ -324,8 +324,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Compensation',
     scale: 'likert_7',
     text: {
-      en: "How often do you pre-plan conversations in your head before they happen?",
-      fr: "À quelle fréquence planifiez-vous les conversations dans votre tête avant qu'elles n'aient lieu ?"
+      en: "I pre-plan conversations in my head before they happen.",
+      fr: "Je planifie les conversations dans ma tête avant qu'elles n'aient lieu."
     }
   },
 
@@ -336,8 +336,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Masking',
     scale: 'likert_7',
     text: {
-      en: "How often do you monitor your body language or facial expressions to ensure you appear relaxed?",
-      fr: "À quelle fréquence surveillez-vous votre langage corporel pour avoir l'air détendu(e) ?"
+      en: "I monitor my body language or facial expressions to ensure I appear relaxed.",
+      fr: "Je surveille mon langage corporel ou mes expressions faciales pour m'assurer de paraître détendu(e)."
     }
   },
   {
@@ -346,8 +346,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Masking',
     scale: 'likert_7',
     text: {
-      en: "How often do you adjust your body language or face to appear interested, even if you are not?",
-      fr: "À quelle fréquence ajustez-vous votre visage ou corps pour paraître intéressé(e), même si vous ne l'êtes pas ?"
+      en: "I adjust my body language or face to appear interested, even if I am not.",
+      fr: "J'ajuste mon langage corporel ou mon visage pour paraître intéressé(e), même si je ne le suis pas."
     }
   },
   {
@@ -356,8 +356,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Masking',
     scale: 'likert_7',
     text: {
-      en: "How often do you feel like you are 'acting' or playing a role rather than being yourself in social situations?",
-      fr: "À quelle fréquence avez-vous l'impression de jouer un rôle plutôt que d'être vous-même en société ?"
+      en: "I feel like I am 'acting' or playing a role rather than being myself in social situations.",
+      fr: "J'ai l'impression de 'jouer la comédie' ou de tenir un rôle plutôt que d'être moi-même dans les situations sociales."
     }
   },
   {
@@ -366,8 +366,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Masking',
     scale: 'likert_7',
     text: {
-      en: "How often do you feel the need to put on an act to get through a social situation?",
-      fr: "À quelle fréquence ressentez-vous le besoin de jouer la comédie pour traverser une situation sociale ?"
+      en: "I feel the need to put on an act to get through social situations.",
+      fr: "Je ressens le besoin de jouer un rôle pour traverser les situations sociales."
     }
   },
   {
@@ -376,8 +376,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Masking',
     scale: 'likert_7',
     text: {
-      en: "How often do you consciously monitor your face and body to ensure you look interested in the person you are interacting with?",
-      fr: "À quelle fréquence surveillez-vous consciemment votre visage pour avoir l'air intéressé(e) ?"
+      en: "I consciously monitor my face and body to ensure I look interested in the person I am interacting with.",
+      fr: "Je surveille consciemment mon visage et mon corps pour m'assurer d'avoir l'air intéressé(e) par la personne avec qui j'interagis."
     }
   },
   {
@@ -386,8 +386,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Masking',
     scale: 'likert_7',
     text: {
-      en: "How often do you feel unable to be your authentic self in social situations?",
-      fr: "À quelle fréquence vous sentez-vous incapable d'être authentiquement vous-même dans les situations sociales ?"
+      en: "I feel unable to be my authentic self in social situations.",
+      fr: "Je me sens incapable d'être authentiquement moi-même dans les situations sociales."
     }
   },
   {
@@ -396,8 +396,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Masking',
     scale: 'likert_7',
     text: {
-      en: "How often are you acutely aware of the impression you are making on others?",
-      fr: "À quelle fréquence êtes-vous extrêmement conscient(e) de l'impression que vous faites sur les autres ?"
+      en: "I am acutely aware of the impression I am making on others.",
+      fr: "Je suis extrêmement conscient(e) de l'impression que je fais sur les autres."
     }
   },
   {
@@ -406,8 +406,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Masking',
     scale: 'likert_7',
     text: {
-      en: "How often do you have to force yourself to make eye contact with others?",
-      fr: "À quelle fréquence devez-vous vous forcer pour établir un contact visuel avec les autres ?"
+      en: "I have to force myself to make eye contact with others.",
+      fr: "Je dois me forcer à établir un contact visuel avec les autres."
     }
   },
 
@@ -418,8 +418,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Assimilation',
     scale: 'likert_7',
     text: {
-      en: "How often do you feel the need to put on an act in order to get through a social situation?",
-      fr: "À quelle fréquence ressentez-vous le besoin de jouer un rôle pour gérer une situation sociale ?"
+      en: "I feel the need to put on an act in order to get through a social situation.",
+      fr: "Je ressens le besoin de jouer un rôle pour réussir à traverser une situation sociale."
     }
   },
   {
@@ -428,8 +428,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Assimilation',
     scale: 'likert_7',
     text: {
-      en: "In social situations, how often do you feel like you are 'performing' rather than being yourself?",
-      fr: "En société, à quelle fréquence avez-vous l'impression de jouer un rôle plutôt que d'être vous-même ?"
+      en: "In social situations, I feel like I am 'performing' rather than being myself.",
+      fr: "Dans les situations sociales, j'ai l'impression de faire une 'performance' plutôt que d'être moi-même."
     }
   },
   {
@@ -438,8 +438,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Assimilation',
     scale: 'likert_7',
     text: {
-      en: "How often do you have to force yourself to interact with people when you are in social situations?",
-      fr: "À quelle fréquence devez-vous vous forcer à interagir avec les gens dans les situations sociales ?"
+      en: "I have to force myself to interact with people when I am in social situations.",
+      fr: "Je dois me forcer à interagir avec les gens lorsque je suis dans des situations sociales."
     }
   },
   {
@@ -448,8 +448,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Assimilation',
     scale: 'likert_7',
     text: {
-      en: "How often do you spend a lot of time thinking about what you are going to say before you say it?",
-      fr: "À quelle fréquence passez-vous beaucoup de temps à penser à ce que vous allez dire avant de le dire ?"
+      en: "I spend a lot of time thinking about what I am going to say before I say it.",
+      fr: "Je passe beaucoup de temps à réfléchir à ce que je vais dire avant de le dire."
     }
   },
   {
@@ -458,8 +458,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Assimilation',
     scale: 'likert_7',
     text: {
-      en: "How often do you avoid interacting with people unless you absolutely have to?",
-      fr: "À quelle fréquence évitez-vous d'interagir avec les gens à moins que ce ne soit absolument nécessaire ?"
+      en: "I avoid interacting with people unless I absolutely have to.",
+      fr: "J'évite d'interagir avec les gens à moins d'y être absolument obligé(e)."
     }
   },
   {
@@ -468,8 +468,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Assimilation',
     scale: 'likert_7',
     text: {
-      en: "How often do you find it difficult to interact with people you don't know well?",
-      fr: "À quelle fréquence trouvez-vous difficile d'interagir avec des gens que vous ne connaissez pas bien ?"
+      en: "I find it difficult to interact with people I don't know well.",
+      fr: "Je trouve difficile d'interagir avec des gens que je ne connais pas bien."
     }
   },
   {
@@ -478,8 +478,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Assimilation',
     scale: 'likert_7',
     text: {
-      en: "How important is appearing 'normal' or 'socially competent' to you? (Frequency of concern)",
-      fr: "À quel point est-ce important pour vous de paraître 'normal' ou socialement compétent ? (Fréquence de la préoccupation)"
+      en: "Appearing 'normal' or 'socially competent' is important to me.",
+      fr: "Paraître 'normal(e)' ou socialement compétent(e) est important pour moi."
     }
   },
   {
@@ -488,8 +488,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Assimilation',
     scale: 'likert_7',
     text: {
-      en: "How often do you avoid social situations where you might have to interact with others?",
-      fr: "À quelle fréquence évitez-vous les situations sociales où vous pourriez avoir à interagir avec d'autres ?"
+      en: "I avoid social situations where I might have to interact with others.",
+      fr: "J'évite les situations sociales où je pourrais avoir à interagir avec d'autres."
     }
   },
 
@@ -502,8 +502,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Sensory',
     scale: 'frequency_0_4',
     text: {
-      en: "How often do background noises (typing, conversations, traffic) make it hard for you to focus or think clearly?",
-      fr: "À quelle fréquence les bruits de fond (clavier, conversations, circulation) vous empêchent-ils de vous concentrer ou de penser clairement ?"
+      en: "Do background noises (typing, conversations, traffic) make it hard for you to focus or think clearly?",
+      fr: "Les bruits de fond (clavier, conversations, circulation) vous empêchent-ils de vous concentrer ou de penser clairement ?"
     }
   },
   {
@@ -512,8 +512,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Sensory',
     scale: 'frequency_0_4',
     text: {
-      en: "How often do you feel physically uncomfortable because of lighting (brightness, flickering, neon lights)?",
-      fr: "À quelle fréquence vous sentez-vous physiquement mal à l'aise à cause de l'éclairage (luminosité, scintillement, néons) ?"
+      en: "Do you feel physically uncomfortable because of lighting (brightness, flickering, neon lights)?",
+      fr: "Vous sentez-vous physiquement mal à l'aise à cause de l'éclairage (luminosité, scintillement, néons) ?"
     }
   },
   {
@@ -522,8 +522,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Sensory',
     scale: 'frequency_0_4',
     text: {
-      en: "How often do certain sounds feel physically painful or overwhelming?",
-      fr: "À quelle fréquence certains sons sont-ils physiquement douloureux ou accablants ?"
+      en: "Do certain sounds feel physically painful or overwhelming?",
+      fr: "Certains sons sont-ils physiquement douloureux ou accablants ?"
     }
   },
   {
@@ -532,8 +532,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Sensory',
     scale: 'frequency_0_4',
     text: {
-      en: "How often do you feel drained after spending time in noisy or crowded environments?",
-      fr: "À quelle fréquence vous sentez-vous vidé(e) après avoir passé du temps dans des environnements bruyants ou bondés ?"
+      en: "Do you feel drained after spending time in noisy or crowded environments?",
+      fr: "Vous sentez-vous vidé(e) après avoir passé du temps dans des environnements bruyants ou bondés ?"
     }
   },
   {
@@ -542,8 +542,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Sensory',
     scale: 'frequency_0_4',
     text: {
-      en: "How often do you avoid places or situations mainly because of sensory discomfort?",
-      fr: "À quelle fréquence évitez-vous des lieux ou situations principalement à cause d'un inconfort sensoriel ?"
+      en: "Do you avoid places or situations mainly because of sensory discomfort?",
+      fr: "Évitez-vous des lieux ou situations principalement à cause d'un inconfort sensoriel ?"
     }
   },
   {
@@ -552,8 +552,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Sensory',
     scale: 'frequency_0_4',
     text: {
-      en: "How often do you need silence or darkness to recover after a stimulating day?",
-      fr: "À quelle fréquence avez-vous besoin de silence ou d'obscurité pour récupérer après une journée stimulante ?"
+      en: "Do you need silence or darkness to recover after a stimulating day?",
+      fr: "Avez-vous besoin de silence ou d'obscurité pour récupérer après une journée stimulante ?"
     }
   },
   {
@@ -562,8 +562,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Sensory',
     scale: 'frequency_0_4',
     text: {
-      en: "How often do clothing textures, temperatures, or smells distract or irritate you?",
-      fr: "À quelle fréquence les textures de vêtements, températures ou odeurs vous distraient-elles ou vous irritent-elles ?"
+      en: "Do clothing textures, temperatures, or smells distract or irritate you?",
+      fr: "Les textures de vêtements, températures ou odeurs vous distraient-elles ou vous irritent-elles ?"
     }
   },
   {
@@ -572,8 +572,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Sensory',
     scale: 'frequency_0_4',
     text: {
-      en: "How often do you feel overloaded when multiple sensory inputs happen at the same time?",
-      fr: "À quelle fréquence vous sentez-vous surchargé(e) lorsque plusieurs stimuli sensoriels surviennent en même temps ?"
+      en: "Do you feel overloaded when multiple sensory inputs happen at the same time?",
+      fr: "Vous sentez-vous surchargé(e) lorsque plusieurs stimuli sensoriels surviennent en même temps ?"
     }
   },
   {
@@ -582,8 +582,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Predictability',
     scale: 'frequency_0_4',
     text: {
-      en: "How often do unexpected changes disrupt your ability to function or think clearly?",
-      fr: "À quelle fréquence les changements imprévus perturbent-ils votre capacité à fonctionner ou penser clairement ?"
+      en: "Do unexpected changes disrupt your ability to function or think clearly?",
+      fr: "Les changements imprévus perturbent-ils votre capacité à fonctionner ou penser clairement ?"
     }
   },
   {
@@ -592,8 +592,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Predictability',
     scale: 'frequency_0_4',
     text: {
-      en: "How often do you need clear structure or advance notice to feel comfortable starting a task?",
-      fr: "À quelle fréquence avez-vous besoin d'une structure claire ou d'un préavis pour vous sentir à l'aise de commencer une tâche ?"
+      en: "Do you need clear structure or advance notice to feel comfortable starting a task?",
+      fr: "Avez-vous besoin d'une structure claire ou d'un préavis pour vous sentir à l'aise de commencer une tâche ?"
     }
   },
   {
@@ -602,8 +602,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Predictability',
     scale: 'frequency_0_4',
     text: {
-      en: "How often do vague instructions leave you feeling anxious or blocked?",
-      fr: "À quelle fréquence des instructions vagues vous laissent-elles anxieux(se) ou bloqué(e) ?"
+      en: "Do vague instructions leave you feeling anxious or blocked?",
+      fr: "Des instructions vagues vous laissent-elles anxieux(se) ou bloqué(e) ?"
     }
   },
   {
@@ -612,8 +612,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Predictability',
     scale: 'frequency_0_4',
     text: {
-      en: "How often do you prefer clear rules over implicit expectations?",
-      fr: "À quelle fréquence préférez-vous des règles claires aux attentes implicites ?"
+      en: "Do you prefer clear rules over implicit expectations?",
+      fr: "Préférez-vous des règles claires aux attentes implicites ?"
     }
   },
   {
@@ -622,8 +622,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Predictability',
     scale: 'frequency_0_4',
     text: {
-      en: "How often do you replay conversations or events to understand what went wrong?",
-      fr: "À quelle fréquence rejouez-vous des conversations ou événements pour comprendre ce qui n'a pas été ?"
+      en: "Do you replay conversations or events to understand what went wrong?",
+      fr: "Rejouez-vous des conversations ou événements pour comprendre ce qui n'a pas été ?"
     }
   },
   {
@@ -632,8 +632,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Predictability',
     scale: 'frequency_0_4',
     text: {
-      en: "How often do you feel stressed when priorities change without explanation?",
-      fr: "À quelle fréquence vous sentez-vous stressé(e) quand les priorités changent sans explication ?"
+      en: "Do you feel stressed when priorities change without explanation?",
+      fr: "Vous sentez-vous stressé(e) quand les priorités changent sans explication ?"
     }
   },
   {
@@ -642,8 +642,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Predictability',
     scale: 'frequency_0_4',
     text: {
-      en: "How often do you need extra time to mentally prepare for transitions?",
-      fr: "À quelle fréquence avez-vous besoin de temps supplémentaire pour vous préparer mentalement aux transitions ?"
+      en: "Do you need extra time to mentally prepare for transitions?",
+      fr: "Avez-vous besoin de temps supplémentaire pour vous préparer mentalement aux transitions ?"
     }
   },
   {
@@ -652,8 +652,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Energy',
     scale: 'frequency_0_4',
     text: {
-      en: "How often do social interactions leave you mentally exhausted, even if they went well?",
-      fr: "À quelle fréquence les interactions sociales vous laissent-elles mentalement épuisé(e), même si elles se sont bien passées ?"
+      en: "Do social interactions leave you mentally exhausted, even if they went well?",
+      fr: "Les interactions sociales vous laissent-elles mentalement épuisé(e), même si elles se sont bien passées ?"
     }
   },
   {
@@ -662,8 +662,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Energy',
     scale: 'frequency_0_4',
     text: {
-      en: "How often do you feel you need to recover alone after meetings or group work?",
-      fr: "À quelle fréquence ressentez-vous le besoin de récupérer seul(e) après des réunions ou travaux de groupe ?"
+      en: "Do you feel you need to recover alone after meetings or group work?",
+      fr: "Ressentez-vous le besoin de récupérer seul(e) après des réunions ou travaux de groupe ?"
     }
   },
   {
@@ -672,8 +672,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Energy',
     scale: 'frequency_0_4',
     text: {
-      en: "How often do you feel functional at work but completely depleted afterwards?",
-      fr: "À quelle fréquence vous sentez-vous fonctionnel(le) au travail mais complètement vidé(e) après ?"
+      en: "Do you feel functional at work but completely depleted afterwards?",
+      fr: "Vous sentez-vous fonctionnel(le) au travail mais complètement vidé(e) après ?"
     }
   },
   {
@@ -682,8 +682,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Energy',
     scale: 'frequency_0_4',
     text: {
-      en: "How often do you suppress your natural reactions to fit expectations?",
-      fr: "À quelle fréquence réprimez-vous vos réactions naturelles pour correspondre aux attentes ?"
+      en: "Do you suppress your natural reactions to fit expectations?",
+      fr: "Réprimez-vous vos réactions naturelles pour correspondre aux attentes ?"
     }
   },
   {
@@ -692,8 +692,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Energy',
     scale: 'frequency_0_4',
     text: {
-      en: "How often do you feel your productivity drops sharply after social exposure?",
-      fr: "À quelle fréquence sentez-vous que votre productivité chute brutalement après une exposition sociale ?"
+      en: "Do you feel your productivity drops sharply after social exposure?",
+      fr: "Sentez-vous que votre productivité chute brutalement après une exposition sociale ?"
     }
   },
   {
@@ -702,8 +702,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Energy',
     scale: 'frequency_0_4',
     text: {
-      en: "How often do you need solitude to regain mental clarity?",
-      fr: "À quelle fréquence avez-vous besoin de solitude pour retrouver votre clarté mentale ?"
+      en: "Do you need solitude to regain mental clarity?",
+      fr: "Avez-vous besoin de solitude pour retrouver votre clarté mentale ?"
     }
   },
 
@@ -716,8 +716,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Laterality',
     scale: 'yes_no',
     text: {
-      en: "How often do you have difficulty in telling left from right instantly?",
-      fr: "À quelle fréquence avez-vous des difficultés à distinguer instantanément la gauche de la droite ?"
+      en: "Do you have difficulty telling left from right instantly?",
+      fr: "Avez-vous des difficultés à distinguer instantanément la gauche de la droite ?"
     }
   },
   {
@@ -726,8 +726,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Visuospatial',
     scale: 'yes_no',
     text: {
-      en: "How often do you find map reading or finding your way in a strange place confusing?",
-      fr: "À quelle fréquence trouvez-vous la lecture de carte ou l'orientation confuse ?"
+      en: "Do you find map reading or finding your way in a strange place confusing?",
+      fr: "Trouvez-vous la lecture de carte ou l'orientation dans un lieu inconnu confuse ?"
     }
   },
   {
@@ -736,8 +736,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Phonological',
     scale: 'yes_no',
     text: {
-      en: "How often do you dislike reading aloud?",
-      fr: "À quelle fréquence n'aimez-vous pas lire à haute voix ?"
+      en: "Do you dislike reading aloud?",
+      fr: "N'aimez-vous pas lire à haute voix ?"
     }
   },
   {
@@ -746,8 +746,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'VisualProc',
     scale: 'yes_no',
     text: {
-      en: "How often do you take longer than expected to read a page of a book?",
-      fr: "À quelle fréquence mettez-vous plus de temps que prévu pour lire une page d'un livre ?"
+      en: "Do you take longer than expected to read a page of a book?",
+      fr: "Mettez-vous plus de temps que prévu pour lire une page d'un livre ?"
     }
   },
   {
@@ -756,8 +756,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'DysMemory',
     scale: 'yes_no',
     text: {
-      en: "How often do you find it difficult to remember the sense (meaning) of what you have just read?",
-      fr: "À quelle fréquence trouvez-vous difficile de retenir le sens de ce que vous venez de lire ?"
+      en: "Do you find it difficult to remember the meaning of what you have just read?",
+      fr: "Trouvez-vous difficile de retenir le sens de ce que vous venez de lire ?"
     }
   },
   {
@@ -766,8 +766,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Effort',
     scale: 'yes_no',
     text: {
-      en: "How often do you find reading long books tedious or difficult?",
-      fr: "À quelle fréquence trouvez-vous la lecture de longs livres fastidieuse ou difficile ?"
+      en: "Do you find reading long books tedious or difficult?",
+      fr: "Trouvez-vous la lecture de longs livres fastidieuse ou difficile ?"
     }
   },
   {
@@ -776,8 +776,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Spelling',
     scale: 'yes_no',
     text: {
-      en: "How often do you rely on spell-checkers because of spelling difficulties?",
-      fr: "À quelle fréquence dépendez-vous des correcteurs orthographiques à cause de difficultés ?"
+      en: "Do you rely on spell-checkers because of spelling difficulties?",
+      fr: "Dépendez-vous des correcteurs orthographiques à cause de difficultés d'orthographe ?"
     }
   },
   {
@@ -786,8 +786,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Graphomotor',
     scale: 'yes_no',
     text: {
-      en: "How often is your handwriting difficult to read?",
-      fr: "À quelle fréquence votre écriture manuelle est-elle difficile à lire ?"
+      en: "Is your handwriting difficult to read?",
+      fr: "Votre écriture manuelle est-elle difficile à lire ?"
     }
   },
   {
@@ -796,8 +796,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Sequencing',
     scale: 'yes_no',
     text: {
-      en: "How often do you get confused if you have to speak in public?",
-      fr: "À quelle fréquence vous embrouillez-vous si vous devez parler en public ?"
+      en: "Do you get confused if you have to speak in public?",
+      fr: "Vous embrouillez-vous si vous devez parler en public ?"
     }
   },
   {
@@ -806,8 +806,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'DysMemory',
     scale: 'yes_no',
     text: {
-      en: "How often do you find it difficult to take messages on the telephone and pass them on correctly?",
-      fr: "À quelle fréquence trouvez-vous difficile de prendre des messages et de les transmettre ?"
+      en: "Do you find it difficult to take messages on the telephone and pass them on correctly?",
+      fr: "Trouvez-vous difficile de prendre des messages au téléphone et de les transmettre correctement ?"
     }
   },
   {
@@ -816,8 +816,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Phonological',
     scale: 'yes_no',
     text: {
-      en: "When saying a long word, how often do you find it difficult to get all the sounds in the right order?",
-      fr: "En prononçant un mot long, à quelle fréquence avez-vous du mal à mettre les sons dans l'ordre ?"
+      en: "When saying a long word, do you find it difficult to get all the sounds in the right order?",
+      fr: "En prononçant un mot long, avez-vous du mal à mettre tous les sons dans l'ordre ?"
     }
   },
   {
@@ -826,8 +826,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'DysMemory',
     scale: 'yes_no',
     text: {
-      en: "How often do you find it difficult to do sums in your head without using your fingers or paper?",
-      fr: "À quelle fréquence trouvez-vous difficile de faire des calculs de tête sans aide ?"
+      en: "Do you find it difficult to do sums in your head without using your fingers or paper?",
+      fr: "Trouvez-vous difficile de faire des calculs de tête sans utiliser vos doigts ou du papier ?"
     }
   },
   {
@@ -836,8 +836,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'DysMemory',
     scale: 'yes_no',
     text: {
-      en: "When using the telephone, how often do you get the numbers mixed up when you dial?",
-      fr: "Au téléphone, à quelle fréquence mélangez-vous les chiffres en composant le numéro ?"
+      en: "When using the telephone, do you get the numbers mixed up when you dial?",
+      fr: "Au téléphone, mélangez-vous les chiffres en composant le numéro ?"
     }
   },
   {
@@ -846,8 +846,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Sequencing',
     scale: 'yes_no',
     text: {
-      en: "How often do you find it difficult to say the months of the year forwards in a fluent manner?",
-      fr: "À quelle fréquence trouvez-vous difficile de dire les mois de l'année dans l'ordre ?"
+      en: "Do you find it difficult to say the months of the year forwards in a fluent manner?",
+      fr: "Trouvez-vous difficile de réciter les mois de l'année dans l'ordre de manière fluide ?"
     }
   },
   {
@@ -856,8 +856,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Sequencing',
     scale: 'yes_no',
     text: {
-      en: "How often do you find it difficult to say the months of the year backwards?",
-      fr: "À quelle fréquence trouvez-vous difficile de dire les mois de l'année à l'envers ?"
+      en: "Do you find it difficult to say the months of the year backwards?",
+      fr: "Trouvez-vous difficile de réciter les mois de l'année à l'envers ?"
     }
   },
   {
@@ -866,8 +866,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Organization',
     scale: 'yes_no',
     text: {
-      en: "How often do you mix up dates and times and miss appointments?",
-      fr: "À quelle fréquence confondez-vous les dates et heures, manquant ainsi des rendez-vous ?"
+      en: "Do you mix up dates and times and miss appointments?",
+      fr: "Confondez-vous les dates et heures, manquant ainsi des rendez-vous ?"
     }
   },
   {
@@ -876,8 +876,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Accuracy',
     scale: 'yes_no',
     text: {
-      en: "When writing cheques or filling forms, how frequently do you find yourself making mistakes?",
-      fr: "En remplissant des chèques ou formulaires, à quelle fréquence faites-vous des erreurs ?"
+      en: "When writing cheques or filling forms, do you frequently make mistakes?",
+      fr: "En remplissant des chèques ou des formulaires, faites-vous fréquemment des erreurs ?"
     }
   },
   {
@@ -886,8 +886,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'VisualProc',
     scale: 'yes_no',
     text: {
-      en: "How often do you find forms difficult and confusing?",
-      fr: "À quelle fréquence trouvez-vous les formulaires administratifs difficiles et confus ?"
+      en: "Do you find forms difficult and confusing?",
+      fr: "Trouvez-vous les formulaires administratifs difficiles et confus ?"
     }
   },
   {
@@ -896,8 +896,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Visuospatial',
     scale: 'yes_no',
     text: {
-      en: "How often do you mix up bus numbers like 95 and 59?",
-      fr: "À quelle fréquence confondez-vous des numéros inversés (ex: 95 et 59) ?"
+      en: "Do you mix up bus numbers like 95 and 59?",
+      fr: "Confondez-vous les numéros inversés (ex: 95 et 59) ?"
     }
   },
   {
@@ -906,8 +906,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'DysMemory',
     scale: 'yes_no',
     text: {
-      en: "How often did you find it difficult to learn your multiplication tables at school?",
-      fr: "À quelle fréquence aviez-vous du mal à apprendre vos tables de multiplication à l'école ?"
+      en: "Did you find it difficult to learn your multiplication tables at school?",
+      fr: "Avez-vous eu du mal à apprendre vos tables de multiplication à l'école ?"
     }
   },
 
@@ -920,8 +920,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'WrittenLoad',
     scale: 'frequency_0_4',
     text: {
-      en: "How often do written instructions take much longer to process than spoken explanations?",
-      fr: "À quelle fréquence les instructions écrites prennent-elles beaucoup plus de temps à traiter que les explications orales ?"
+      en: "Do written instructions take much longer to process than spoken explanations?",
+      fr: "Les instructions écrites prennent-elles beaucoup plus de temps à traiter que les explications orales ?"
     }
   },
   {
@@ -930,8 +930,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'WrittenLoad',
     scale: 'frequency_0_4',
     text: {
-      en: "How often do long emails or documents feel overwhelming?",
-      fr: "À quelle fréquence les longs emails ou documents vous semblent-ils écrasants ?"
+      en: "Do long emails or documents feel overwhelming?",
+      fr: "Les longs emails ou documents vous semblent-ils écrasants ?"
     }
   },
   {
@@ -940,8 +940,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'WrittenLoad',
     scale: 'frequency_0_4',
     text: {
-      en: "How often do you reread the same text multiple times without retaining it?",
-      fr: "À quelle fréquence relisez-vous le même texte plusieurs fois sans le retenir ?"
+      en: "Do you reread the same text multiple times without retaining it?",
+      fr: "Relisez-vous le même texte plusieurs fois sans le retenir ?"
     }
   },
   {
@@ -950,8 +950,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'AdminFriction',
     scale: 'frequency_0_4',
     text: {
-      en: "How often do forms or administrative documents cause stress or avoidance?",
-      fr: "À quelle fréquence les formulaires ou documents administratifs provoquent-ils stress ou évitement ?"
+      en: "Do forms or administrative documents cause stress or avoidance?",
+      fr: "Les formulaires ou documents administratifs provoquent-ils stress ou évitement ?"
     }
   },
   {
@@ -960,8 +960,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'AdminFriction',
     scale: 'frequency_0_4',
     text: {
-      en: "How often do you avoid tasks mainly because they involve a lot of reading or writing?",
-      fr: "À quelle fréquence évitez-vous des tâches principalement car elles impliquent beaucoup de lecture ou d'écriture ?"
+      en: "Do you avoid tasks mainly because they involve a lot of reading or writing?",
+      fr: "Évitez-vous des tâches principalement car elles impliquent beaucoup de lecture ou d'écriture ?"
     }
   },
   {
@@ -970,8 +970,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'WrittenLoad',
     scale: 'frequency_0_4',
     text: {
-      en: "How often do spelling or wording issues make you doubt your competence?",
-      fr: "À quelle fréquence les problèmes d'orthographe ou de formulation vous font-ils douter de votre compétence ?"
+      en: "Do spelling or wording issues make you doubt your competence?",
+      fr: "Les problèmes d'orthographe ou de formulation vous font-ils douter de votre compétence ?"
     }
   },
   {
@@ -980,8 +980,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'VerbalPref',
     scale: 'frequency_0_4',
     text: {
-      en: "How often do you feel more capable explaining ideas verbally than in writing?",
-      fr: "À quelle fréquence vous sentez-vous plus capable d'expliquer des idées verbalement que par écrit ?"
+      en: "Do you feel more capable explaining ideas verbally than in writing?",
+      fr: "Vous sentez-vous plus capable d'expliquer des idées verbalement que par écrit ?"
     }
   },
 
@@ -996,8 +996,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'child_FineMotor',
     scale: 'frequency_0_3',
     text: {
-      en: "As a child, how often did you have difficulties with self-care tasks such as tying shoelaces, fastening buttons, or zips?",
-      fr: "Enfant, à quelle fréquence aviez-vous du mal à faire vos lacets, boutonner ou utiliser des fermetures éclair ?"
+      en: "As a child, did you find self-care tasks (tying shoelaces, fastening buttons, zips) difficult?",
+      fr: "Enfant, aviez-vous du mal avec les tâches quotidiennes comme faire vos lacets, boutonner ou utiliser des fermetures éclair ?"
     }
   },
   {
@@ -1006,8 +1006,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'child_FineMotor',
     scale: 'frequency_0_3',
     text: {
-      en: "As a child, how often did you have difficulty eating without getting dirty or spilling things?",
-      fr: "Enfant, à quelle fréquence aviez-vous du mal à manger sans vous salir ou renverser des choses ?"
+      en: "As a child, did you tend to get dirty or spill things while eating?",
+      fr: "Enfant, aviez-vous tendance à vous salir ou à renverser des choses en mangeant ?"
     }
   },
   {
@@ -1016,8 +1016,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'child_GrossMotor',
     scale: 'frequency_0_3',
     text: {
-      en: "How much did you struggle to learn to ride a bike compared to your peers?",
-      fr: "À quel point avez-vous eu plus de mal que les autres à apprendre à faire du vélo ?"
+      en: "As a child, did you frequently struggle with balance-based activities like riding a bike?",
+      fr: "Enfant, aviez-vous souvent du mal avec les activités d'équilibre comme le vélo ?"
     }
   },
   {
@@ -1026,8 +1026,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'child_Main',
     scale: 'frequency_0_3',
     text: {
-      en: "How often did you have difficulties playing team games (e.g., catching a ball, football)?",
-      fr: "À quelle fréquence aviez-vous des difficultés dans les jeux d'équipe (attraper une balle, football) ?"
+      en: "Did you struggle with team games involving coordination (e.g., catching a ball, football)?",
+      fr: "Aviez-vous du mal avec les jeux d'équipe nécessitant de la coordination (attraper une balle, football) ?"
     }
   },
   {
@@ -1036,8 +1036,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'child_FineMotor',
     scale: 'frequency_0_3',
     text: {
-      en: "How often was your handwriting untidy, illegible, or painful to produce?",
-      fr: "À quelle fréquence votre écriture était-elle désordonnée, illisible ou douloureuse à produire ?"
+      en: "Was your handwriting typically untidy, illegible, or painful to produce?",
+      fr: "Votre écriture était-elle souvent désordonnée, illisible ou douloureuse à produire ?"
     }
   },
   {
@@ -1046,8 +1046,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'child_GrossMotor',
     scale: 'frequency_0_3',
     text: {
-      en: "How often were you considered clumsy, or did you bump into objects/people?",
-      fr: "À quelle fréquence étiez-vous considéré(e) comme maladroit(e), ou vous cogniez-vous ?"
+      en: "Were you considered clumsy, or did you frequently bump into objects/people?",
+      fr: "Étiez-vous considéré(e) comme maladroit(e), ou vous cogniez-vous souvent ?"
     }
   },
   {
@@ -1056,8 +1056,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'child_Main',
     scale: 'frequency_0_3',
     text: {
-      en: "How often did you actively avoid sports or physical activities?",
-      fr: "À quelle fréquence évitiez-vous activement le sport ou les activités physiques ?"
+      en: "Did you actively avoid sports or physical activities?",
+      fr: "Évitiez-vous activement le sport ou les activités physiques ?"
     }
   },
   {
@@ -1066,8 +1066,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'child_FineMotor',
     scale: 'frequency_0_3',
     text: {
-      en: "How often did you have trouble using scissors or other tools?",
-      fr: "À quelle fréquence aviez-vous du mal à utiliser des ciseaux ou d'autres outils ?"
+      en: "Did you have trouble using scissors or other tools?",
+      fr: "Aviez-vous du mal à utiliser des ciseaux ou d'autres outils ?"
     }
   },
   {
@@ -1076,8 +1076,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'child_Main',
     scale: 'frequency_0_3',
     text: {
-      en: "How often did you take longer to learn new motor skills than others?",
-      fr: "À quelle fréquence mettiez-vous plus de temps à apprendre de nouvelles habiletés motrices que les autres ?"
+      en: "Did you take longer to learn new motor skills than others?",
+      fr: "Mettiez-vous plus de temps à apprendre de nouvelles habiletés motrices que les autres ?"
     }
   },
   {
@@ -1086,8 +1086,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'child_Main',
     scale: 'frequency_0_3',
     text: {
-      en: "How often did you feel different from your peers due to coordination issues?",
-      fr: "À quelle fréquence vous sentiez-vous différent(e) des autres à cause de problèmes de coordination ?"
+      en: "Did you feel different from your peers due to coordination issues?",
+      fr: "Vous sentiez-vous différent(e) des autres à cause de problèmes de coordination ?"
     }
   },
 
@@ -1098,8 +1098,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'adult_GrossMotor',
     scale: 'frequency_0_3',
     text: {
-      en: "How often do you tend to drop objects (e.g., keys, phone, dishes)?",
-      fr: "À quelle fréquence avez-vous tendance à faire tomber des objets (clés, téléphone, vaisselle) ?"
+      en: "Do you tend to drop objects (e.g., keys, phone, dishes)?",
+      fr: "Avez-vous tendance à faire tomber des objets (clés, téléphone, vaisselle) ?"
     }
   },
   {
@@ -1108,8 +1108,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'adult_GrossMotor',
     scale: 'frequency_0_3',
     text: {
-      en: "How often do you bump into door frames, furniture, or other people?",
-      fr: "À quelle fréquence vous cognez-vous dans les cadres de porte, les meubles ou les gens ?"
+      en: "Do you frequently bump into door frames, furniture, or other people?",
+      fr: "Vous cognez-vous souvent dans les cadres de porte, les meubles ou les gens ?"
     }
   },
   {
@@ -1118,8 +1118,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'adult_Planning',
     scale: 'frequency_0_3',
     text: {
-      en: "How often do you find it difficult to organize your workspace or pack a suitcase efficiently?",
-      fr: "À quelle fréquence trouvez-vous difficile d'organiser votre espace de travail ou de faire une valise efficacement ?"
+      en: "Do you find it difficult to organize your workspace or pack a suitcase efficiently?",
+      fr: "Trouvez-vous difficile d'organiser votre espace de travail ou de faire une valise efficacement ?"
     }
   },
   {
@@ -1128,8 +1128,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'adult_Planning',
     scale: 'frequency_0_3',
     text: {
-      en: "How often do you avoid driving, or find parking and judging distances difficult?",
-      fr: "À quelle fréquence évitez-vous de conduire, ou trouvez-vous difficile de vous garer et de juger les distances ?"
+      en: "Do you avoid driving, or find parking and judging distances difficult?",
+      fr: "Évitez-vous de conduire, ou trouvez-vous difficile de vous garer et de juger les distances ?"
     }
   },
   {
@@ -1138,8 +1138,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'adult_FineMotor',
     scale: 'frequency_0_3',
     text: {
-      en: "How often is your handwriting difficult to read or painful to produce for long periods?",
-      fr: "À quelle fréquence votre écriture est-elle difficile à lire ou douloureuse sur de longues périodes ?"
+      en: "Is your handwriting difficult to read or painful to produce for long periods?",
+      fr: "Votre écriture est-elle difficile à lire ou douloureuse sur de longues périodes ?"
     }
   },
   {
@@ -1148,8 +1148,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'adult_FineMotor',
     scale: 'frequency_0_3',
     text: {
-      en: "How often do you find tasks requiring precision (e.g., shaving, makeup, DIY) difficult?",
-      fr: "À quelle fréquence trouvez-vous les tâches de précision (rasage, maquillage, bricolage) difficiles ?"
+      en: "Do you find tasks requiring precision (e.g., shaving, makeup, DIY) difficult?",
+      fr: "Trouvez-vous les tâches de précision (rasage, maquillage, bricolage) difficiles ?"
     }
   },
   {
@@ -1158,8 +1158,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'adult_FineMotor',
     scale: 'frequency_0_3',
     text: {
-      en: "How often do you spill drinks or food when eating?",
-      fr: "À quelle fréquence renversez-vous des boissons ou de la nourriture en mangeant ?"
+      en: "Do you spill drinks or food when eating?",
+      fr: "Renversez-vous des boissons ou de la nourriture en mangeant ?"
     }
   },
   {
@@ -1168,8 +1168,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'adult_GrossMotor',
     scale: 'frequency_0_3',
     text: {
-      en: "How often do you feel you lack energy or fatigue easily due to the effort of physical tasks?",
-      fr: "À quelle fréquence ressentez-vous un manque d'énergie ou une fatigue rapide due à l'effort physique ?"
+      en: "Do you feel you lack energy or fatigue easily due to the effort of physical tasks?",
+      fr: "Ressentez-vous un manque d'énergie ou une fatigue rapide due à l'effort physique ?"
     }
   },
   {
@@ -1178,8 +1178,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'adult_Planning',
     scale: 'frequency_0_3',
     text: {
-      en: "How often do you have trouble planning the sequence of steps needed to complete a practical task?",
-      fr: "À quelle fréquence avez-vous du mal à planifier les étapes pour une tâche pratique (ex: cuisiner) ?"
+      en: "Do you have trouble planning the sequence of steps needed to complete a practical task?",
+      fr: "Avez-vous du mal à planifier les étapes pour une tâche pratique (ex: cuisiner) ?"
     }
   },
   {
@@ -1188,8 +1188,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'adult_Planning',
     scale: 'frequency_0_3',
     text: {
-      en: "How often do you choose hobbies or jobs that require little physical coordination?",
-      fr: "À quelle fréquence choisissez-vous des loisirs ou emplois demandant peu de coordination physique ?"
+      en: "Do you choose hobbies or jobs that require little physical coordination?",
+      fr: "Choisissez-vous des loisirs ou emplois demandant peu de coordination physique ?"
     }
   },
   // --- DCD Additional ---
@@ -1199,8 +1199,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'ExecutionGap',
     scale: 'frequency_0_3',
     text: {
-      en: "How often do tasks feel clear in your head but fall apart when you try to execute them physically?",
-      fr: "À quelle fréquence les tâches semblent-elles claires dans votre tête mais s'effondrent quand vous essayez de les exécuter physiquement ?"
+      en: "Do tasks feel clear in your head but fall apart when you try to execute them physically?",
+      fr: "Les tâches semblent-elles claires dans votre tête mais s'effondrent quand vous essayez de les exécuter physiquement ?"
     }
   },
   {
@@ -1209,8 +1209,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'PhysicalFatigue',
     scale: 'frequency_0_3',
     text: {
-      en: "How often does physical effort drain your mental energy faster than expected?",
-      fr: "À quelle fréquence l'effort physique draine-t-il votre énergie mentale plus vite que prévu ?"
+      en: "Does physical effort drain your mental energy faster than expected?",
+      fr: "L'effort physique draine-t-il votre énergie mentale plus vite que prévu ?"
     }
   },
 
@@ -1225,8 +1225,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'NumberSense',
     scale: 'frequency_1_5',
     text: {
-      en: "How often do you have difficulty counting objects accurately (e.g., losing track)?",
-      fr: "À quelle fréquence avez-vous du mal à compter des objets avec précision (perdre le fil) ?"
+      en: "Do you have difficulty counting objects accurately (e.g., losing track)?",
+      fr: "Avez-vous du mal à compter des objets avec précision (perdre le fil) ?"
     }
   },
   {
@@ -1235,8 +1235,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Subitizing',
     scale: 'frequency_1_5',
     text: {
-      en: "How often do you have to count items one-by-one rather than just 'seeing' how many there are?",
-      fr: "À quelle fréquence devez-vous compter les objets un par un plutôt que de voir instantanément le nombre ?"
+      en: "Do you have to count items one-by-one rather than just 'seeing' how many there are?",
+      fr: "Devez-vous compter les objets un par un plutôt que de voir instantanément le nombre ?"
     }
   },
   {
@@ -1245,8 +1245,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'WorkingMemory',
     scale: 'frequency_1_5',
     text: {
-      en: "How often do you find it much harder to count backwards than forwards?",
-      fr: "À quelle fréquence trouvez-vous beaucoup plus dur de compter à rebours qu'à l'endroit ?"
+      en: "Do you find it much harder to count backwards than forwards?",
+      fr: "Trouvez-vous beaucoup plus dur de compter à rebours qu'à l'endroit ?"
     }
   },
   {
@@ -1255,8 +1255,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Estimation',
     scale: 'frequency_1_5',
     text: {
-      en: "How often do you find it difficult to estimate costs (e.g., shopping total)?",
-      fr: "À quelle fréquence trouvez-vous difficile d'estimer des coûts (ex: paner de courses) ?"
+      en: "Do you find it difficult to estimate costs (e.g., shopping total)?",
+      fr: "Trouvez-vous difficile d'estimer des coûts (ex: paner de courses) ?"
     }
   },
 
@@ -1267,8 +1267,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Retrieval',
     scale: 'frequency_1_5',
     text: {
-      en: "How often do you have difficulty remembering basic math facts (e.g., tables)?",
-      fr: "À quelle fréquence avez-vous du mal à retenir les faits mathématiques de base ?"
+      en: "Do you have difficulty remembering basic math facts (e.g., tables)?",
+      fr: "Avez-vous du mal à retenir les faits mathématiques de base ?"
     }
   },
   {
@@ -1277,8 +1277,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Arithmetic',
     scale: 'frequency_1_5',
     text: {
-      en: "How often do you rely on your fingers to do simple calculations?",
-      fr: "À quelle fréquence comptez-vous sur vos doigts pour faire des calculs simples ?"
+      en: "Do you rely on your fingers to do simple calculations?",
+      fr: "Comptez-vous sur vos doigts pour faire des calculs simples ?"
     }
   },
   {
@@ -1287,8 +1287,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Symbols',
     scale: 'frequency_1_5',
     text: {
-      en: "How often do you confuse mathematical symbols (e.g., + and x)?",
-      fr: "À quelle fréquence confondez-vous les symboles mathématiques (ex: + et x) ?"
+      en: "Do you confuse mathematical symbols (e.g., + and x)?",
+      fr: "Confondez-vous les symboles mathématiques (ex: + et x) ?"
     }
   },
   {
@@ -1297,8 +1297,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Arithmetic',
     scale: 'frequency_1_5',
     text: {
-      en: "When adding, how often do you count 1, 2, 3... rather than counting on from the larger number?",
-      fr: "Pour additionner, à quelle fréquence comptez-vous unité par unité au lieu de partir du grand nombre ?"
+      en: "When adding, do you count 1, 2, 3... rather than counting on from the larger number?",
+      fr: "Pour additionner, comptez-vous unité par unité au lieu de partir du grand nombre ?"
     }
   },
 
@@ -1309,8 +1309,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Functional',
     scale: 'frequency_1_5',
     text: {
-      en: "How often do you struggle to tell the time on an analog clock?",
-      fr: "À quelle fréquence avez-vous du mal à lire l'heure sur une horloge analogique ?"
+      en: "Do you struggle to tell the time on an analog clock?",
+      fr: "Avez-vous du mal à lire l'heure sur une horloge analogique ?"
     }
   },
   {
@@ -1319,8 +1319,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Anxiety',
     scale: 'frequency_1_5',
     text: {
-      en: "How often do you get anxiety immediately when asked to do a math problem?",
-      fr: "À quelle fréquence ressentez-vous de l'anxiété immédiate face à un problème de maths ?"
+      en: "Do you get anxiety immediately when asked to do a math problem?",
+      fr: "Ressentez-vous de l'anxiété immédiate face à un problème de maths ?"
     }
   },
   {
@@ -1329,8 +1329,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Functional',
     scale: 'frequency_1_5',
     text: {
-      en: "How often do you misread numbers (e.g., reading 51 as 15)?",
-      fr: "À quelle fréquence lisez-vous les nombres de travers (ex: 51 lu 15) ?"
+      en: "Do you misread numbers (e.g., reading 51 as 15)?",
+      fr: "Lisez-vous les nombres de travers (ex: 51 lu 15) ?"
     }
   },
   {
@@ -1339,8 +1339,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'MentalMath',
     scale: 'frequency_1_5',
     text: {
-      en: "How often do you find mental math (e.g., calculating change) difficult or impossible?",
-      fr: "À quelle fréquence trouvez-vous le calcul mental (ex: rendre la monnaie) difficile ?"
+      en: "Do you find mental math (e.g., calculating change) difficult or impossible?",
+      fr: "Trouvez-vous le calcul mental (ex: rendre la monnaie) difficile ?"
     }
   },
   {
@@ -1349,8 +1349,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'MathMemory',
     scale: 'frequency_1_5',
     text: {
-      en: "How often do you forget PIN numbers or phone numbers?",
-      fr: "À quelle fréquence oubliez-vous vos codes PIN ou numéros de téléphone ?"
+      en: "Do you forget PIN numbers or phone numbers?",
+      fr: "Oubliez-vous vos codes PIN ou numéros de téléphone ?"
     }
   },
   {
@@ -1359,8 +1359,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Estimation',
     scale: 'frequency_1_5',
     text: {
-      en: "How often do you drive too fast or slow because you misjudge speed/distance?",
-      fr: "À quelle fréquence conduisez-vous mal (vitesse) car vous jugez mal la distance ?"
+      en: "Do you drive too fast or slow because you misjudge speed/distance?",
+      fr: "Conduisez-vous mal (vitesse) car vous jugez mal la distance ?"
     }
   },
   {
@@ -1369,8 +1369,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Functional',
     scale: 'frequency_1_5',
     text: {
-      en: "How often do you find financial planning or budgeting impossible to understand?",
-      fr: "À quelle fréquence trouvez-vous la planification financière impossible à comprendre ?"
+      en: "Do you find financial planning or budgeting impossible to understand?",
+      fr: "Trouvez-vous la planification financière impossible à comprendre ?"
     }
   },
 
@@ -1383,8 +1383,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'TimeMoney',
     scale: 'frequency_1_5',
     text: {
-      en: "How often do deadlines or time estimates feel abstract or confusing?",
-      fr: "À quelle fréquence les délais ou estimations de temps vous semblent-ils abstraits ou confus ?"
+      en: "Do deadlines or time estimates feel abstract or confusing?",
+      fr: "Les délais ou estimations de temps vous semblent-ils abstraits ou confus ?"
     }
   },
   {
@@ -1393,8 +1393,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'TimeMoney',
     scale: 'frequency_1_5',
     text: {
-      en: "How often do schedules or timelines fail to make intuitive sense to you?",
-      fr: "À quelle fréquence les plannings ou chronologies manquent-ils de sens intuitif pour vous ?"
+      en: "Do schedules or timelines fail to make intuitive sense to you?",
+      fr: "Les plannings ou chronologies manquent-ils de sens intuitif pour vous ?"
     }
   },
   {
@@ -1403,8 +1403,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'TimeMoney',
     scale: 'frequency_1_5',
     text: {
-      en: "How often do numbers lose meaning unless they are visualized?",
-      fr: "À quelle fréquence les chiffres perdent-ils leur sens à moins d'être visualisés ?"
+      en: "Do numbers lose meaning unless they are visualized?",
+      fr: "Les chiffres perdent-ils leur sens à moins d'être visualisés ?"
     }
   },
   {
@@ -1413,8 +1413,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Financial',
     scale: 'frequency_1_5',
     text: {
-      en: "How often does budgeting or financial planning feel impossible to grasp?",
-      fr: "À quelle fréquence la budgétisation ou la planification financière vous semblent-elles impossibles à saisir ?"
+      en: "Does budgeting or financial planning feel impossible to grasp?",
+      fr: "La budgétisation ou la planification financière vous semblent-elles impossibles à saisir ?"
     }
   },
   {
@@ -1423,8 +1423,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'TimeMoney',
     scale: 'frequency_1_5',
     text: {
-      en: "How often do you avoid tasks involving numbers, even simple ones?",
-      fr: "À quelle fréquence évitez-vous les tâches impliquant des chiffres, même simples ?"
+      en: "Do you avoid tasks involving numbers, even simple ones?",
+      fr: "Évitez-vous les tâches impliquant des chiffres, même simples ?"
     }
   },
   {
@@ -1433,8 +1433,8 @@ export const QUESTIONS: Question[] = [
     subscale: 'Financial',
     scale: 'frequency_1_5',
     text: {
-      en: "How often do you feel anxious when dealing with quantities, prices, or time pressure?",
-      fr: "À quelle fréquence vous sentez-vous anxieux(se) face à des quantités, prix ou pression temporelle ?"
+      en: "Do you feel anxious when dealing with quantities, prices, or time pressure?",
+      fr: "Vous sentez-vous anxieux(se) face à des quantités, prix ou pression temporelle ?"
     }
   }
 ];
