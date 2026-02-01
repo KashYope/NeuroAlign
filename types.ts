@@ -95,12 +95,16 @@ export interface Translation {
     whatItMeans: string;
     strengths: string[];
     tips: string[];
+    tools: string[];
+    guides: string[];
   }>;
 
   reportLabels: {
     livedExperience: string;
     neuroStrengths: string;
     strategies: string;
+    tools: string;
+    guides: string;
     subscaleBreakdown: string;
     insightPrompt: string;
     spikyProfile: string;

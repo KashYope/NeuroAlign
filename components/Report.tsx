@@ -374,6 +374,44 @@ const Report: React.FC<ReportProps> = ({ report, answers, onReset, locale }) => 
           });
           currentY += 5;
 
+          // Tools
+          if (info.tools && info.tools.length > 0) {
+            checkPageBreak(40);
+            doc.setFont('helvetica', 'bold');
+            doc.setTextColor(79, 70, 229);
+            doc.text(t.reportLabels.tools.toUpperCase(), margin, currentY);
+            currentY += 6;
+
+            doc.setTextColor(51, 65, 85);
+            doc.setFont('helvetica', 'normal');
+            info.tools.forEach((tool: string) => {
+              const toolLines = doc.splitTextToSize(`• ${tool}`, pageWidth - (margin * 2) - 5);
+              checkPageBreak(toolLines.length * 6 + 4);
+              doc.text(toolLines, margin + 5, currentY);
+              currentY += (toolLines.length * 6) + 2;
+            });
+            currentY += 5;
+          }
+
+          // Guides
+          if (info.guides && info.guides.length > 0) {
+            checkPageBreak(40);
+            doc.setFont('helvetica', 'bold');
+            doc.setTextColor(79, 70, 229);
+            doc.text(t.reportLabels.guides.toUpperCase(), margin, currentY);
+            currentY += 6;
+
+            doc.setTextColor(51, 65, 85);
+            doc.setFont('helvetica', 'normal');
+            info.guides.forEach((guide: string) => {
+              const guideLines = doc.splitTextToSize(`• ${guide}`, pageWidth - (margin * 2) - 5);
+              checkPageBreak(guideLines.length * 6 + 4);
+              doc.text(guideLines, margin + 5, currentY);
+              currentY += (guideLines.length * 6) + 2;
+            });
+            currentY += 5;
+          }
+
           // Subscale Breakdown
           checkPageBreak(30);
           doc.setFont('helvetica', 'bold');
@@ -528,6 +566,34 @@ const Report: React.FC<ReportProps> = ({ report, answers, onReset, locale }) => 
             ))}
           </div>
         </div>
+
+        {/* Tools Section */}
+        {info.tools && info.tools.length > 0 && (
+          <div className="mt-8 pt-8 border-t border-black/5">
+            <h4 className={`text-xs font-black uppercase tracking-widest ${textClass} mb-4 opacity-70`}>{t.reportLabels.tools}</h4>
+            <div className="flex flex-wrap gap-3">
+              {info.tools.map((tool: string, i: number) => (
+                <span key={i} className={`px-3 py-1.5 bg-white/60 rounded-lg text-xs font-bold shadow-sm border border-black/5 ${textClass}`}>
+                  {tool}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Guides Section */}
+        {info.guides && info.guides.length > 0 && (
+          <div className="mt-8 pt-8 border-t border-black/5">
+            <h4 className={`text-xs font-black uppercase tracking-widest ${textClass} mb-4 opacity-70`}>{t.reportLabels.guides}</h4>
+            <div className="space-y-3">
+              {info.guides.map((guide: string, i: number) => (
+                <div key={i} className="bg-white/40 p-4 rounded-xl text-xs font-medium leading-relaxed border border-black/5">
+                  {guide}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     );
   };
