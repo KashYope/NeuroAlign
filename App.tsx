@@ -329,7 +329,7 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col antialiased overflow-x-hidden">
-      <FeedbackBanner locale={locale} />
+      {!showMethods && <FeedbackBanner locale={locale} />}
       <LanguageSwitcher locale={locale} setLocale={setLocale} />
       <DebugToggle isDebug={isDebug} setIsDebug={setIsDebug} />
       <DebugOverlay isDebug={isDebug} liveReport={liveReport} generateRandom={generateRandom} forceFinish={forceReport} close={() => setIsDebug(false)} t={t} />
