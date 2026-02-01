@@ -153,7 +153,7 @@ const FeedbackBanner: React.FC<{ locale: Locale }> = ({ locale }) => {
       >
         <Mail className="w-4 h-4" />
         <span className="text-[10px] sm:text-xs font-black uppercase tracking-wider">
-          {locale === 'fr' ? 'Retour' : 'Feedback'}
+          {locale === 'fr' ? 'Avis' : 'Feedback'}
         </span>
       </button>
     </div>
