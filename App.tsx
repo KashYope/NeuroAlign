@@ -240,6 +240,7 @@ const App: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(-1);
   const [answers, setAnswers] = useState<UserAnswer[]>([]);
   const [report, setReport] = useState<ScreeningReport | null>(null);
+  const [hasCompletedReport, setHasCompletedReport] = useState(false);
   const [isDebug, setIsDebug] = useState(false);
   const [isAdvancing, setIsAdvancing] = useState(false);
   const [showDisclaimer, setShowDisclaimer] = useState(false);
@@ -324,6 +325,7 @@ const App: React.FC = () => {
       if (saved.answers) setAnswers(saved.answers);
       if (saved.locale) setLocale(saved.locale);
       if (saved.seed) setSeed(saved.seed);
+      if (saved.isComplete) setHasCompletedReport(true);
     }
   }, []);
 
@@ -371,7 +373,7 @@ const App: React.FC = () => {
     try {
       const calculatedReport = calculateReport(finalAnswers);
       setReport(calculatedReport);
-      clearProgress();
+      saveProgress({ answers: finalAnswers, locale, seed, isComplete: true });
     } catch (e) {
       alert(t.errors.scoring);
     }
@@ -423,6 +425,7 @@ const App: React.FC = () => {
     clearProgress();
     setReport(null);
     setAnswers([]);
+    setHasCompletedReport(false);
     setCurrentIndex(-1);
     setShowDisclaimer(false);
     setDisclaimerChecked(false);
@@ -436,6 +439,15 @@ const App: React.FC = () => {
       setShowBreak(saved.showBreak ?? false);
     } else {
       setShowDisclaimer(true); // Show mandatory disclaimer for new starts
+    }
+  };
+
+  const handleViewResults = () => {
+    try {
+      const calculatedReport = calculateReport(answers);
+      setReport(calculatedReport);
+    } catch (e) {
+      alert(t.errors.scoring);
     }
   };
 
@@ -512,9 +524,9 @@ const App: React.FC = () => {
 
               <DomainsOverview t={t} />
 
-              <button onClick={handleStartRequest} className="w-full max-w-sm py-4 sm:py-5 bg-indigo-600 text-white rounded-2xl font-black text-base sm:text-lg uppercase tracking-widest hover:bg-indigo-700 shadow-xl shadow-indigo-100 transition-all active:scale-[0.98] outline-none">{answers.length > 0 ? t.continueBtn : t.startBtn}</button>
+              <button onClick={hasCompletedReport ? handleViewResults : handleStartRequest} className="w-full max-w-sm py-4 sm:py-5 bg-indigo-600 text-white rounded-2xl font-black text-base sm:text-lg uppercase tracking-widest hover:bg-indigo-700 shadow-xl shadow-indigo-100 transition-all active:scale-[0.98] outline-none">{hasCompletedReport ? t.viewResults : (answers.length > 0 ? t.continueBtn : t.startBtn)}</button>
 
-              {answers.length > 0 && (
+              {(hasCompletedReport || answers.length > 0) && (
                 <button
                   onClick={() => {
                     if (window.confirm("Are you sure? This will clear your current progress.")) {
