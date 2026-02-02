@@ -7,6 +7,7 @@ import Report from './components/Report';
 import MethodsPage from './components/MethodsPage';
 import { calculateReport, getScaleMinMax } from './utils/scoring';
 import { saveProgress, loadProgress, clearProgress } from './utils/persistence';
+import { shuffle } from './utils/random';
 import ModuleIcon from './components/ModuleIcon';
 import BreakMoment from './components/BreakMoment';
 import DopamineRewards from './components/DopamineRewards';
@@ -246,11 +247,15 @@ const App: React.FC = () => {
   const [showMethods, setShowMethods] = useState(false);
   const [showBreak, setShowBreak] = useState(false);
   const [isDopamineMode, setIsDopamineMode] = useState(false);
+  const [seed, setSeed] = useState<number>(Date.now());
 
   const t: Translation = translations[locale];
 
   const isNavigatingViaHistory = useRef(false);
   const isFirstRender = useRef(true);
+
+  // Memoize shuffled questions based on seed
+  const shuffledQuestions = useMemo(() => shuffle(QUESTIONS, seed), [seed]);
 
   useEffect(() => {
     if (isFirstRender.current) {
@@ -318,14 +323,15 @@ const App: React.FC = () => {
     if (saved) {
       if (saved.answers) setAnswers(saved.answers);
       if (saved.locale) setLocale(saved.locale);
+      if (saved.seed) setSeed(saved.seed);
     }
   }, []);
 
   useEffect(() => {
     if (currentIndex >= 0 && !report) {
-      saveProgress({ index: currentIndex, answers, locale, showBreak });
+      saveProgress({ index: currentIndex, answers, locale, showBreak, seed });
     }
-  }, [currentIndex, answers, report, locale, showBreak]);
+  }, [currentIndex, answers, report, locale, showBreak, seed]);
 
   // Scroll to top on view change
   useEffect(() => {
@@ -340,16 +346,15 @@ const App: React.FC = () => {
   const handleAnswer = (score: number) => {
     if (isAdvancing) return;
     setIsAdvancing(true);
-    const questionId = QUESTIONS[currentIndex].id;
+    const questionId = shuffledQuestions[currentIndex].id;
     const newAnswers = [...answers.filter(a => a.questionId !== questionId), { questionId, score }];
     setAnswers(newAnswers);
     setTimeout(() => {
-      const currentPhase = QUESTIONS[currentIndex].phase;
       const nextIndex = currentIndex + 1;
 
-      if (nextIndex < QUESTIONS.length) {
-        const nextPhase = QUESTIONS[nextIndex].phase;
-        if (nextPhase !== currentPhase) {
+      if (nextIndex < shuffledQuestions.length) {
+        // Break every 25 questions
+        if ((currentIndex + 1) % 25 === 0) {
           setShowBreak(true);
         } else {
           setCurrentIndex(nextIndex);
@@ -373,7 +378,7 @@ const App: React.FC = () => {
   };
 
   const forceReport = () => {
-    const targetAnswers = answers.length > 0 ? answers : QUESTIONS.map(q => {
+    const targetAnswers = answers.length > 0 ? answers : shuffledQuestions.map(q => {
       const { min, max } = getScaleMinMax(q.scale);
       return { questionId: q.id, score: Math.floor(Math.random() * (max - min + 1)) + min };
     });
@@ -381,7 +386,7 @@ const App: React.FC = () => {
   };
 
   const generateRandom = () => {
-    setAnswers(QUESTIONS.map(q => {
+    setAnswers(shuffledQuestions.map(q => {
       const { min, max } = getScaleMinMax(q.scale);
       return { questionId: q.id, score: Math.floor(Math.random() * (max - min + 1)) + min };
     }));
@@ -421,6 +426,7 @@ const App: React.FC = () => {
     setCurrentIndex(-1);
     setShowDisclaimer(false);
     setDisclaimerChecked(false);
+    setSeed(Date.now()); // Generate new seed for next attempt
   };
 
   const handleStartRequest = () => {
@@ -538,20 +544,20 @@ const App: React.FC = () => {
         ) : (
           <main className="flex-1 flex flex-col items-center pt-24 p-4 sm:p-12 pb-24">
             <nav className="w-full max-w-4xl flex items-center justify-between mb-8 sm:mb-12">
-              <button onClick={() => setCurrentIndex(-1)} className="p-2 text-slate-400 hover:text-slate-800 transition-colors"><ChevronLeft className="w-6 h-6" /></button>
-              <span className="text-[9px] sm:text-xs font-black text-slate-400 uppercase tracking-[0.2em] sm:tracking-[0.3em] truncate px-4">{(t.phases as any)[QUESTIONS[currentIndex].phase]}</span>
-              <div className="text-[10px] sm:text-xs font-black text-indigo-600 bg-indigo-50 px-3 sm:px-4 py-1.5 rounded-full shrink-0">{currentIndex + 1} / {QUESTIONS.length}</div>
+              <button onClick={() => window.history.back()} className="p-2 text-slate-400 hover:text-slate-800 transition-colors"><ChevronLeft className="w-6 h-6" /></button>
+              {/* REMOVED PHASE LABEL HERE */}
+              <div className="text-[10px] sm:text-xs font-black text-indigo-600 bg-indigo-50 px-3 sm:px-4 py-1.5 rounded-full shrink-0">{currentIndex + 1} / {shuffledQuestions.length}</div>
             </nav>
-            <div className="w-full max-w-4xl h-2 bg-slate-200 rounded-full mb-12 sm:mb-16 overflow-hidden"><div className="h-full bg-indigo-500 transition-all duration-500" style={{ width: `${((currentIndex + 1) / QUESTIONS.length) * 100}%` }} /></div>
+            <div className="w-full max-w-4xl h-2 bg-slate-200 rounded-full mb-12 sm:mb-16 overflow-hidden"><div className="h-full bg-indigo-500 transition-all duration-500" style={{ width: `${((currentIndex + 1) / shuffledQuestions.length) * 100}%` }} /></div>
             <article className={`w-full max-w-4xl bg-white p-4 sm:p-24 rounded-[3rem] sm:rounded-[4rem] shadow-xl shadow-slate-200/50 transition-all duration-500 ${isAdvancing ? 'opacity-40 scale-[0.98]' : 'opacity-100 scale-100'}`}>
-              <span className="inline-block px-3 py-1 bg-slate-50 text-slate-500 rounded-full text-[9px] font-black uppercase tracking-widest mb-6 sm:mb-8">{(t.subscales as any)[QUESTIONS[currentIndex].subscale] || QUESTIONS[currentIndex].subscale}</span>
-              <h2 className="text-xl sm:text-4xl font-black text-slate-900 leading-[1.3] mb-12 sm:mb-20 tracking-tight min-h-[5rem] sm:min-h-[6rem]">{QUESTIONS[currentIndex].text[locale]}</h2>
+              <span className="inline-block px-3 py-1 bg-slate-50 text-slate-500 rounded-full text-[9px] font-black uppercase tracking-widest mb-6 sm:mb-8">{(t.subscales as any)[shuffledQuestions[currentIndex].subscale] || shuffledQuestions[currentIndex].subscale}</span>
+              <h2 className="text-xl sm:text-4xl font-black text-slate-900 leading-[1.3] mb-12 sm:mb-20 tracking-tight min-h-[5rem] sm:min-h-[6rem]">{shuffledQuestions[currentIndex].text[locale]}</h2>
               <LikertScale
-                key={QUESTIONS[currentIndex].id}
-                value={answers.find(a => a.questionId === QUESTIONS[currentIndex].id)?.score ?? -1}
+                key={shuffledQuestions[currentIndex].id}
+                value={answers.find(a => a.questionId === shuffledQuestions[currentIndex].id)?.score ?? -1}
                 onChange={handleAnswer}
                 locale={locale}
-                type={QUESTIONS[currentIndex].scale}
+                type={shuffledQuestions[currentIndex].scale}
               />
               <div className="mt-16 sm:mt-20 flex justify-between items-center">
                 <button
