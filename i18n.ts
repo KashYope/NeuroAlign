@@ -36,6 +36,19 @@ export const translations = {
     specializedProfiles: "Specialized Cognitive Profiles",
     reportFooter: "NeuroAlign Summary Report • Diagnostic context required",
     faqTitle: "Frequently Asked Questions",
+    breakMoments: {
+      title: "Break Moment",
+      congrats: "Well done for taking this time for yourself!",
+      continue: "Continue Assessment",
+      messages: [
+        "Take a sip of water 💧",
+        "Stretch your arms and legs 🧘",
+        "Take a deep breath... and let it out 🌬️",
+        "How about a quick 2-minute walk? 🚶",
+        "Rest your eyes for a moment 👁️",
+        "You're doing great, one step at a time! ✨"
+      ]
+    },
     insights: {
       adhd: {
         whatItMeans: "Your results suggest a processing style characterized by a regulation-based nervous system. It is not a deficit of attention, but an inconsistency of engagement based on interest, novelty, and urgency.",
@@ -421,6 +434,19 @@ export const translations = {
       spikyProfile: "Visualisation du Profil Hétérogène"
     },
     faqTitle: "Questions Fréquemment Posées",
+    breakMoments: {
+      title: "Pause Bien-être",
+      congrats: "Bravo de prendre ce temps pour vous !",
+      continue: "Reprendre l'évaluation",
+      messages: [
+        "Prenez une petite gorgée d'eau 💧",
+        "Étirez vos bras et vos jambes 🧘",
+        "Prenez une grande inspiration... et soufflez 🌬️",
+        "Et si vous faisiez quelques pas ? 🚶",
+        "Reposez vos yeux un instant 👁️",
+        "Vous avancez bien, une étape à la fois ! ✨"
+      ]
+    },
     insights: {
       adhd: {
         whatItMeans: "Vos résultats suggèrent un système nerveux basé sur l'intérêt. Ce n'est pas un déficit d'attention, mais une régulation inconstante basée sur la nouveauté et l'urgence.",

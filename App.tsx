@@ -8,6 +8,7 @@ import MethodsPage from './components/MethodsPage';
 import { calculateReport, getScaleMinMax } from './utils/scoring';
 import { saveProgress, loadProgress, clearProgress } from './utils/persistence';
 import ModuleIcon from './components/ModuleIcon';
+import BreakMoment from './components/BreakMoment';
 import { ChevronDown, Activity, ArrowRight, Mail, Code, X, ChevronLeft, BrainCircuit } from 'lucide-react';
 
 
@@ -110,7 +111,7 @@ const MethodologySection: React.FC<{ t: Translation; onShowMethods: () => void }
       <div className="bg-indigo-600 p-8 sm:p-10 rounded-[2.5rem] shadow-2xl shadow-indigo-200 text-white md:col-span-1">
         <h3 className="text-2xl font-black mb-8 px-2">{t.methodology.sourcesTitle}</h3>
         <div className="space-y-6">
-        {Object.entries(t.methodology.modules).map(([key, mod]: [string, any]) => (
+          {Object.entries(t.methodology.modules).map(([key, mod]: [string, any]) => (
             <div key={key} className="flex items-start gap-5 group">
               <div className="w-10 h-10 rounded-2xl bg-indigo-500/50 flex items-center justify-center shrink-0 border border-indigo-400/30 group-hover:bg-white group-hover:text-indigo-600 transition-colors duration-300">
                 <ModuleIcon name={key} className="w-5 h-5" />
@@ -214,6 +215,7 @@ const App: React.FC = () => {
   const [showDisclaimer, setShowDisclaimer] = useState(false);
   const [disclaimerChecked, setDisclaimerChecked] = useState(false);
   const [showMethods, setShowMethods] = useState(false);
+  const [showBreak, setShowBreak] = useState(false);
 
   const t: Translation = translations[locale];
 
@@ -227,9 +229,9 @@ const App: React.FC = () => {
 
   useEffect(() => {
     if (currentIndex >= 0 && !report) {
-      saveProgress({ index: currentIndex, answers, locale });
+      saveProgress({ index: currentIndex, answers, locale, showBreak });
     }
-  }, [currentIndex, answers, report, locale]);
+  }, [currentIndex, answers, report, locale, showBreak]);
 
   // Scroll to top on view change
   useEffect(() => {
@@ -248,8 +250,16 @@ const App: React.FC = () => {
     const newAnswers = [...answers.filter(a => a.questionId !== questionId), { questionId, score }];
     setAnswers(newAnswers);
     setTimeout(() => {
-      if (currentIndex < QUESTIONS.length - 1) {
-        setCurrentIndex(prev => prev + 1);
+      const currentPhase = QUESTIONS[currentIndex].phase;
+      const nextIndex = currentIndex + 1;
+
+      if (nextIndex < QUESTIONS.length) {
+        const nextPhase = QUESTIONS[nextIndex].phase;
+        if (nextPhase !== currentPhase) {
+          setShowBreak(true);
+        } else {
+          setCurrentIndex(nextIndex);
+        }
         setIsAdvancing(false);
       } else {
         finishAssessment(newAnswers);
@@ -320,8 +330,10 @@ const App: React.FC = () => {
   };
 
   const handleStartRequest = () => {
-    if (answers.length > 0) {
-      setCurrentIndex(0); // Resume existing
+    const saved = loadProgress();
+    if (saved && saved.answers && saved.answers.length > 0) {
+      setCurrentIndex(saved.index ?? 0);
+      setShowBreak(saved.showBreak ?? false);
     } else {
       setShowDisclaimer(true); // Show mandatory disclaimer for new starts
     }
@@ -411,6 +423,14 @@ const App: React.FC = () => {
               <FAQAccordion items={t.faq} title={t.faqTitle} />
             </div>
           </main>
+        ) : showBreak ? (
+          <BreakMoment
+            t={t}
+            onContinue={() => {
+              setShowBreak(false);
+              setCurrentIndex(prev => prev + 1);
+            }}
+          />
         ) : (
           <main className="flex-1 flex flex-col items-center pt-24 p-4 sm:p-12 pb-24">
             <nav className="w-full max-w-4xl flex items-center justify-between mb-8 sm:mb-12">

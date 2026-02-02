@@ -116,7 +116,8 @@ const Report: React.FC<ReportProps> = ({ report, answers, onReset, locale }) => 
         cornerRadius: 12
       }
     },
-    maintainAspectRatio: false
+    maintainAspectRatio: true,
+    responsive: true
   };
 
   const impactEntries = Object.entries(report.functionalImpact) as [string, number][];
@@ -563,46 +564,46 @@ const Report: React.FC<ReportProps> = ({ report, answers, onReset, locale }) => 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
             {/* Quick Actions (Tips) */}
             <div>
-               <h5 className={`text-[10px] uppercase font-bold opacity-60 mb-4 ${textClass}`}>{t.reportLabels.quickActions}</h5>
-               <ul className="space-y-3">
+              <h5 className={`text-[10px] uppercase font-bold opacity-60 mb-4 ${textClass}`}>{t.reportLabels.quickActions}</h5>
+              <ul className="space-y-3">
                 {info.tips.map((tip: string, i: number) => (
                   <li key={i} className={`flex items-start gap-3 text-sm font-medium ${textClass}`}>
                     <ArrowRight className="w-4 h-4 mt-1 opacity-50 shrink-0" />
                     <span className="leading-relaxed">{tip}</span>
                   </li>
                 ))}
-               </ul>
+              </ul>
             </div>
 
             {/* Deep Dives (Guides) - if available */}
             {info.guides && info.guides.length > 0 && (
               <div>
-                 <h5 className={`text-[10px] uppercase font-bold opacity-60 mb-4 ${textClass}`}>{t.reportLabels.guides}</h5>
-                 <div className="space-y-3">
-                   {info.guides.map((guide: string, i: number) => (
-                     <div key={i} className="bg-white/60 p-4 rounded-xl text-xs font-medium leading-relaxed border border-black/5 shadow-sm">
-                       {guide}
-                     </div>
-                   ))}
-                 </div>
+                <h5 className={`text-[10px] uppercase font-bold opacity-60 mb-4 ${textClass}`}>{t.reportLabels.guides}</h5>
+                <div className="space-y-3">
+                  {info.guides.map((guide: string, i: number) => (
+                    <div key={i} className="bg-white/60 p-4 rounded-xl text-xs font-medium leading-relaxed border border-black/5 shadow-sm">
+                      {guide}
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
           </div>
 
           {/* Toolkit Footer */}
           {info.tools && info.tools.length > 0 && (
-             <div className="mt-8 pt-6 border-t border-black/5">
-                <h5 className={`text-[10px] uppercase font-bold opacity-60 mb-3 flex items-center gap-2 ${textClass}`}>
-                  <Wrench className="w-3 h-3" /> {t.reportLabels.tools}
-                </h5>
-                <div className="flex flex-wrap gap-2">
-                   {info.tools.map((tool: string, i: number) => (
-                     <span key={i} className={`px-3 py-1.5 bg-white rounded-lg border border-black/10 text-[10px] font-bold uppercase tracking-wide opacity-80 ${textClass}`}>
-                       {tool}
-                     </span>
-                   ))}
-                </div>
-             </div>
+            <div className="mt-8 pt-6 border-t border-black/5">
+              <h5 className={`text-[10px] uppercase font-bold opacity-60 mb-3 flex items-center gap-2 ${textClass}`}>
+                <Wrench className="w-3 h-3" /> {t.reportLabels.tools}
+              </h5>
+              <div className="flex flex-wrap gap-2">
+                {info.tools.map((tool: string, i: number) => (
+                  <span key={i} className={`px-3 py-1.5 bg-white rounded-lg border border-black/10 text-[10px] font-bold uppercase tracking-wide opacity-80 ${textClass}`}>
+                    {tool}
+                  </span>
+                ))}
+              </div>
+            </div>
           )}
         </div>
       </div>
@@ -710,7 +711,7 @@ const Report: React.FC<ReportProps> = ({ report, answers, onReset, locale }) => 
 
       {/* CORE VISUALIZATION */}
       <section className="mb-16 sm:mb-24 flex flex-col items-center">
-        <div className="w-full max-w-2xl aspect-square sm:aspect-video relative bg-white p-4 sm:p-8 rounded-[3rem] shadow-xl shadow-slate-200/50 border border-slate-100 flex items-center justify-center">
+        <div className="w-full max-w-xl aspect-square relative bg-white p-4 sm:p-8 rounded-[3rem] shadow-xl shadow-slate-200/50 border border-slate-100 flex items-center justify-center">
           <div className="relative w-full h-full min-h-[300px]">
             <Radar ref={radarChartRef} data={radarData} options={radarOptions} />
           </div>
