@@ -67,6 +67,7 @@ export interface Translation {
   domainsTitle: string;
   startBtn: string;
   continueBtn: string;
+  viewResults: string;
   startNewBtn: string;
   saveAndExit: string;
   saveNotice: string;
