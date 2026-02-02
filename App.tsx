@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { Phase, UserAnswer, ScreeningReport, DomainScore, Translation, Locale } from './types';
 import { QUESTIONS } from './questions';
 import { translations } from './i18n';
@@ -249,6 +249,70 @@ const App: React.FC = () => {
 
   const t: Translation = translations[locale];
 
+  const isNavigatingViaHistory = useRef(false);
+  const isFirstRender = useRef(true);
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      if (!window.history.state) {
+        window.history.replaceState({ type: 'home' }, '');
+      }
+      isFirstRender.current = false;
+    }
+
+    const handlePopState = (event: PopStateEvent) => {
+      isNavigatingViaHistory.current = true;
+      const state = event.state;
+
+      if (report) {
+        window.history.pushState({ type: 'report' }, '');
+        isNavigatingViaHistory.current = false;
+        return;
+      }
+
+      if (!state || state.type === 'home') {
+        setShowMethods(false);
+        setCurrentIndex(-1);
+      } else if (state.type === 'methods') {
+        setShowMethods(true);
+      } else if (state.type === 'question') {
+        setShowMethods(false);
+        setCurrentIndex(state.index);
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, [report]);
+
+  useEffect(() => {
+    if (isNavigatingViaHistory.current) return;
+    if (showMethods) {
+      window.history.pushState({ type: 'methods' }, '');
+    }
+  }, [showMethods]);
+
+  useEffect(() => {
+    if (isNavigatingViaHistory.current) return;
+    if (currentIndex >= 0) {
+      window.history.pushState({ type: 'question', index: currentIndex }, '');
+    } else if (currentIndex === -1 && !showMethods && !report && !isFirstRender.current) {
+      window.history.pushState({ type: 'home' }, '');
+    }
+  }, [currentIndex, showMethods, report]);
+
+  useEffect(() => {
+    if (report) {
+      window.history.pushState({ type: 'report' }, '');
+    }
+  }, [report]);
+
+  useEffect(() => {
+    if (isNavigatingViaHistory.current) {
+      isNavigatingViaHistory.current = false;
+    }
+  });
+
   useEffect(() => {
     const saved = loadProgress();
     if (saved) {
@@ -428,7 +492,7 @@ const App: React.FC = () => {
 
       <div className="flex-1 flex flex-col">
         {showMethods ? (
-          <MethodsPage onBack={() => setShowMethods(false)} onStart={() => { setShowMethods(false); handleStartRequest(); }} t={t} />
+          <MethodsPage onBack={() => window.history.back()} onStart={() => { setShowMethods(false); handleStartRequest(); }} t={t} />
         ) : report ? (
           <Report report={report} answers={answers} onReset={restart} locale={locale} />
         ) : currentIndex === -1 ? (
@@ -492,7 +556,7 @@ const App: React.FC = () => {
               <div className="mt-16 sm:mt-20 flex justify-between items-center">
                 <button
                   disabled={currentIndex === 0 || isAdvancing}
-                  onClick={() => setCurrentIndex(prev => prev - 1)}
+                  onClick={() => window.history.back()}
                   className="text-[10px] font-black text-slate-400 uppercase tracking-widest hover:text-slate-900 disabled:opacity-0 transition-all"
                 >
                   ← {t.back}
