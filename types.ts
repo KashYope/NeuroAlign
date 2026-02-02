@@ -142,6 +142,22 @@ export interface Translation {
       citations: { text: string; url: string }[];
     }>;
     scoring: { title: string; text: string };
+    assessmentBreakdown: {
+      title: string;
+      text: string;
+      questions: string;
+      subscales: string;
+    };
+    whatToExpect: {
+      title: string;
+      text: string;
+      items: {
+        spikyProfile: string;
+        insights: string;
+        medical: string;
+        impact: string;
+      };
+    };
   };
 
   faq: { q: string; a: string }[];

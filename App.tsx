@@ -492,7 +492,7 @@ const App: React.FC = () => {
 
       <div className="flex-1 flex flex-col">
         {showMethods ? (
-          <MethodsPage onBack={() => window.history.back()} onStart={() => { setShowMethods(false); handleStartRequest(); }} t={t} />
+          <MethodsPage onBack={() => window.history.back()} onStart={() => { setShowMethods(false); handleStartRequest(); }} t={t} locale={locale} />
         ) : report ? (
           <Report report={report} answers={answers} onReset={restart} locale={locale} />
         ) : currentIndex === -1 ? (

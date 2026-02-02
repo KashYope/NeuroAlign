@@ -380,6 +380,22 @@ export const translations = {
       scoring: {
         title: "Scoring Mechanism",
         text: "All items use a frequency-based Likert scale (Never to Very Often) or binary checks. The algorithm normalizes these raw scores into a percentage intensity for each domain. Scores > 70% indicate a high clinical probability ('Red Zone'), while scores 30-70% suggest sub-clinical traits."
+      },
+      assessmentBreakdown: {
+        title: "Assessment Structure",
+        text: "Our protocol is weighted to balance clinical depth with user fatigue. We prioritize questions that identify functional impairments in adult life rather than purely behavioral observations.",
+        questions: "Questions",
+        subscales: "Sub-categories"
+      },
+      whatToExpect: {
+        title: "What to Expect in Your Report",
+        text: "After completing the assessment, you will receive a comprehensive, personalized report designed to help you understand your unique cognitive profile.",
+        items: {
+          spikyProfile: "Visual Spiky Profile",
+          insights: "Detailed Neuro-Insights",
+          medical: "Clinical Appendix",
+          impact: "Daily Functional Impact"
+        }
       }
     },
     errors: {
@@ -766,6 +782,22 @@ export const translations = {
       scoring: {
         title: "Mécanisme de Notation",
         text: "Tous les items utilisent une échelle de fréquence (Jamais à Très Souvent). L'algorithme normalise ces scores en pourcentage d'intensité. > 70% indique une forte probabilité clinique, tandis que 30-70% suggère des traits sub-cliniques."
+      },
+      assessmentBreakdown: {
+        title: "Structure de l'Évaluation",
+        text: "Notre protocole est pondéré pour équilibrer la profondeur clinique et la fatigue de l'utilisateur. Nous privilégions les questions identifiant les déficiences fonctionnelles de la vie adulte.",
+        questions: "Questions",
+        subscales: "Sous-catégories"
+      },
+      whatToExpect: {
+        title: "Ce que contient votre rapport",
+        text: "Après avoir terminé l'évaluation, vous recevrez un rapport complet et personnalisé conçu pour vous aider à comprendre votre profil cognitif unique.",
+        items: {
+          spikyProfile: "Profil Visuel Hétérogène",
+          insights: "Neuro-Insights Détaillés",
+          medical: "Annexe Clinique",
+          impact: "Impact Fonctionnel Quotidien"
+        }
       }
     },
     errors: {
