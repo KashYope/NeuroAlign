@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { Phase, UserAnswer, ScreeningReport, Locale, Translation } from './types';
+import { Phase, UserAnswer, ScreeningReport, DomainScore, Translation, Locale } from './types';
 import { QUESTIONS } from './questions';
 import { translations } from './i18n';
 import LikertScale from './components/LikertScale';
@@ -9,7 +9,8 @@ import { calculateReport, getScaleMinMax } from './utils/scoring';
 import { saveProgress, loadProgress, clearProgress } from './utils/persistence';
 import ModuleIcon from './components/ModuleIcon';
 import BreakMoment from './components/BreakMoment';
-import { ChevronDown, Activity, ArrowRight, Mail, Code, X, ChevronLeft, BrainCircuit } from 'lucide-react';
+import DopamineRewards from './components/DopamineRewards';
+import { ChevronDown, Activity, ArrowRight, Mail, Code, X, ChevronLeft, BrainCircuit, Sparkles } from 'lucide-react';
 
 
 const FAQAccordion: React.FC<{ items: { q: string, a: string }[], title: string }> = ({ items, title }) => {
@@ -176,7 +177,16 @@ const DebugToggle: React.FC<{ isDebug: boolean, setIsDebug: (d: boolean) => void
   </div>
 );
 
-const DebugOverlay: React.FC<{ isDebug: boolean, liveReport: any, generateRandom: () => void, forceFinish: () => void, close: () => void, t: Translation }> = ({ isDebug, liveReport, generateRandom, forceFinish, close, t }) => {
+const DebugOverlay: React.FC<{
+  isDebug: boolean,
+  isDopamine: boolean,
+  setDopamine: (v: boolean) => void,
+  liveReport: any,
+  generateRandom: () => void,
+  forceFinish: () => void,
+  close: () => void,
+  t: Translation
+}> = ({ isDebug, isDopamine, setDopamine, liveReport, generateRandom, forceFinish, close, t }) => {
   if (!isDebug) return null;
   return (
     <aside className="fixed bottom-4 sm:bottom-6 left-4 right-4 sm:left-6 sm:right-6 bg-slate-900/95 text-white p-5 sm:p-6 rounded-[2rem] sm:rounded-[2.5rem] shadow-2xl z-[110] backdrop-blur-md border border-slate-800 animate-in slide-in-from-bottom-6 max-h-[50vh] overflow-y-auto">
@@ -186,6 +196,12 @@ const DebugOverlay: React.FC<{ isDebug: boolean, liveReport: any, generateRandom
           <div className="flex gap-2">
             <button onClick={generateRandom} className="px-2 py-1 bg-slate-800 rounded text-[7px] font-black uppercase hover:bg-slate-700">Rand</button>
             <button onClick={forceFinish} className="px-2 py-1 bg-indigo-600 rounded text-[7px] font-black uppercase hover:bg-indigo-500">End</button>
+            <button
+              onClick={() => setDopamine(!isDopamine)}
+              className={`px-2 py-1 ${isDopamine ? 'bg-yellow-500 text-slate-900' : 'bg-slate-700'} rounded text-[7px] font-black uppercase hover:bg-yellow-400 flex items-center gap-1 transition-all`}
+            >
+              <Sparkles size={8} /> ADHD
+            </button>
             <button onClick={() => {
               (window as any).triggerChaos();
             }} className="px-2 py-1 bg-rose-600 rounded text-[7px] font-black uppercase hover:bg-rose-500 animate-pulse">Chaos</button>
@@ -193,7 +209,7 @@ const DebugOverlay: React.FC<{ isDebug: boolean, liveReport: any, generateRandom
         </div>
         <button onClick={close} className="text-slate-500 hover:text-white"><X className="w-5 h-5" /></button>
       </div>
-      <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-3">
+      <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-3 mb-4">
         {liveReport ? liveReport.domainScores.map((d: any) => (
           <div key={d.name} className="bg-slate-800/50 p-3 rounded-xl border border-slate-700/50">
             <p className="text-[7px] font-black uppercase tracking-widest text-slate-500 mb-1 truncate">{t.phases[d.name] || d.name}</p>
@@ -201,6 +217,19 @@ const DebugOverlay: React.FC<{ isDebug: boolean, liveReport: any, generateRandom
           </div>
         )) : <div className="col-span-full py-4 text-center text-slate-500 text-[9px] font-black uppercase tracking-widest">Awaiting context...</div>}
       </div>
+
+      {liveReport && liveReport.flags.length > 0 && (
+        <div className="pt-4 border-t border-slate-800">
+          <p className="text-[8px] font-black uppercase tracking-widest text-rose-400 mb-2">Active Flags</p>
+          <div className="flex flex-wrap gap-2">
+            {liveReport.flags.map((flag: string) => (
+              <span key={flag} className="px-2 py-1 bg-rose-500/10 border border-rose-500/30 rounded text-[8px] font-bold text-rose-300 uppercase tracking-wide">
+                {flag}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
     </aside>
   );
 };
@@ -216,6 +245,7 @@ const App: React.FC = () => {
   const [disclaimerChecked, setDisclaimerChecked] = useState(false);
   const [showMethods, setShowMethods] = useState(false);
   const [showBreak, setShowBreak] = useState(false);
+  const [isDopamineMode, setIsDopamineMode] = useState(false);
 
   const t: Translation = translations[locale];
 
@@ -344,7 +374,17 @@ const App: React.FC = () => {
       {!showMethods && <FeedbackBanner locale={locale} />}
       <LanguageSwitcher locale={locale} setLocale={setLocale} />
       <DebugToggle isDebug={isDebug} setIsDebug={setIsDebug} />
-      <DebugOverlay isDebug={isDebug} liveReport={liveReport} generateRandom={generateRandom} forceFinish={forceReport} close={() => setIsDebug(false)} t={t} />
+      <DebugOverlay
+        isDebug={isDebug}
+        isDopamine={isDopamineMode}
+        setDopamine={setIsDopamineMode}
+        liveReport={liveReport}
+        generateRandom={generateRandom}
+        forceFinish={forceReport}
+        close={() => setIsDebug(false)}
+        t={t}
+      />
+      <DopamineRewards active={isDopamineMode} />
 
       {showDisclaimer && (
         <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-md z-[200] flex items-center justify-center p-4 animate-in fade-in duration-300">

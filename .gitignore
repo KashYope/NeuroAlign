@@ -15,6 +15,9 @@ node_modules
 # Testing
 coverage
 
+# Sources
+sources
+
 # Production
 dist
 build
