@@ -546,7 +546,7 @@ const Report: React.FC<ReportProps> = ({ report, answers, onReset, onReview, loc
     if (domain.score < 40) return null;
 
     const bgClass = domain.score > 60 ? 'bg-rose-50 border-rose-100' : domain.score > 40 ? 'bg-amber-50 border-amber-100' : 'bg-indigo-50 dark:bg-indigo-900/50 border-indigo-100 dark:border-indigo-900';
-    const textClass = domain.score > 60 ? 'text-rose-900' : domain.score > 40 ? 'text-amber-900' : 'text-indigo-900';
+    const textClass = domain.score > 60 ? 'text-rose-900 dark:text-rose-100' : domain.score > 40 ? 'text-amber-900 dark:text-amber-100' : 'text-indigo-900 dark:text-indigo-100';
 
     return (
       <div className={`mt-8 p-6 sm:p-8 rounded-3xl border ${bgClass}`}>
@@ -594,7 +594,7 @@ const Report: React.FC<ReportProps> = ({ report, answers, onReset, onReview, loc
                 <h5 className={`text-[10px] uppercase font-bold opacity-60 mb-4 ${textClass}`}>{t.reportLabels.guides}</h5>
                 <div className="space-y-3">
                   {info.guides.map((guide: string, i: number) => (
-                    <div key={i} className="bg-white dark:bg-slate-800/60 p-4 rounded-xl text-xs font-medium leading-relaxed border border-black/5 shadow-sm">
+                    <div key={i} className="bg-white dark:bg-slate-800/60 p-4 rounded-xl text-xs font-medium leading-relaxed text-slate-700 dark:text-slate-300 border border-black/5 shadow-sm">
                       {guide}
                     </div>
                   ))}
@@ -773,7 +773,7 @@ const Report: React.FC<ReportProps> = ({ report, answers, onReset, onReview, loc
         {onReview && (
           <button
             onClick={onReview}
-            className="mb-8 text-[10px] sm:text-xs font-bold text-slate-400 hover:text-indigo-600 dark:text-indigo-400 uppercase tracking-widest transition-colors"
+            className="mb-8 text-[10px] sm:text-xs font-bold text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 uppercase tracking-widest transition-colors"
           >
             {locale === 'fr' ? 'Revoir et modifier les réponses' : 'Review & Edit Answers'}
           </button>
@@ -799,7 +799,7 @@ const Report: React.FC<ReportProps> = ({ report, answers, onReset, onReview, loc
       <section className="mb-16 bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-indigo-950 dark:to-purple-950 p-8 sm:p-12 rounded-[2.5rem] sm:rounded-[3rem] border border-indigo-100 dark:border-indigo-900">
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-8">
-            <div className="inline-block px-4 py-1.5 bg-indigo-100 text-indigo-700 rounded-full text-[9px] font-black uppercase tracking-[0.3em] mb-4">
+            <div className="inline-block px-4 py-1.5 bg-indigo-100 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-300 rounded-full text-[9px] font-black uppercase tracking-[0.3em] mb-4">
               {locale === 'en' ? 'Need Professional Support?' : 'Besoin d\'aide professionnelle?'}
             </div>
             <h3 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white mb-3 tracking-tight">
