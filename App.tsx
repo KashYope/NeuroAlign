@@ -13,6 +13,8 @@ import ModuleIcon from './components/ModuleIcon';
 import BreakMoment from './components/BreakMoment';
 import DopamineRewards from './components/DopamineRewards';
 import { ChevronDown, Activity, ArrowRight, Mail, Code, X, ChevronLeft, BrainCircuit, Sparkles } from 'lucide-react';
+import EffectCanvas, { EffectCanvasHandle } from './sources/effects';
+import { EffectType } from './types';
 
 
 const FAQAccordion: React.FC<{ items: { q: string, a: string }[], title: string }> = ({ items, title }) => {
@@ -251,6 +253,36 @@ const App: React.FC = () => {
   const [showBreak, setShowBreak] = useState(false);
   const [isDopamineMode, setIsDopamineMode] = useState(false);
   const [seed, setSeed] = useState<number>(Date.now());
+  const [activeMouseEffect, setActiveMouseEffect] = useState<EffectType | null>(null);
+  const effectCanvasRef = useRef<EffectCanvasHandle>(null);
+
+  const ALL_EFFECTS: EffectType[] = [
+    'hearts', 'sparkles', 'confetti', 'starburst', 'bubbles',
+    'firework', 'pixels', 'electric', 'snow', 'fire',
+    'plasma', 'geometric', 'shockwave', 'emoji', 'matrix',
+    'ghost', 'rings', 'leaves', 'orbs', 'ai_magic', 'ripple'
+  ];
+
+  const handleUnicornClick = () => {
+    if (!activeMouseEffect) {
+      setActiveMouseEffect('hearts');
+    } else {
+      const currentIndex = ALL_EFFECTS.indexOf(activeMouseEffect);
+      const nextIndex = (currentIndex + 1) % ALL_EFFECTS.length;
+      setActiveMouseEffect(ALL_EFFECTS[nextIndex]);
+    }
+  };
+
+  useEffect(() => {
+    if (!activeMouseEffect) return;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      effectCanvasRef.current?.spawnParticles(e.clientX, e.clientY);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, [activeMouseEffect]);
 
   const t: Translation = translations[locale];
 
@@ -481,6 +513,13 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col antialiased overflow-x-hidden">
+      {activeMouseEffect && (
+        <EffectCanvas
+          ref={effectCanvasRef}
+          activeEffect={activeMouseEffect}
+          aiConfig={null}
+        />
+      )}
       {!showMethods && <FeedbackBanner locale={locale} />}
       <LanguageSwitcher locale={locale} setLocale={setLocale} />
       <DebugToggle isDebug={isDebug} setIsDebug={setIsDebug} />
@@ -623,7 +662,9 @@ const App: React.FC = () => {
 
       <footer className="w-full py-10 sm:py-12 bg-white text-center flex flex-col items-center gap-2 mt-auto border-t border-slate-100 shadow-[0_-1px_3px_rgba(0,0,0,0.02)]">
         <p className="px-6 text-[9px] font-black text-slate-400 uppercase tracking-[0.4em] leading-relaxed max-w-2xl">{t.footer}</p>
-        <p className="text-[10px] font-medium text-slate-400">Vibe coded by Kash 🦄 - 2026 - Open Source - Sharing is caring ❤️</p>
+        <p className="text-[10px] font-medium text-slate-400">
+          Vibe coded by Kash <span className="cursor-pointer hover:scale-125 inline-block transition-transform" onClick={handleUnicornClick}>🦄</span> - 2026 - Open Source - Sharing is caring ❤️
+        </p>
       </footer>
     </div>
   );

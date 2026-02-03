@@ -49,7 +49,7 @@ export interface DomainScore {
 
 export interface ScreeningReport {
   domainScores: DomainScore[];
-  flags: string[]; 
+  flags: string[];
   functionalImpact: Record<string, number>;
   mentalHealthMarkers: Record<string, number>;
   isClinicalUrgent: boolean;
@@ -235,4 +235,41 @@ export interface Translation {
     scoring: string;
     pdf: string;
   };
+}
+
+export type EffectType =
+  | 'ripple'
+  | 'firework'
+  | 'starburst'
+  | 'hearts'
+  | 'bubbles'
+  | 'confetti'
+  | 'pixels'
+  | 'electric'
+  | 'snow'
+  | 'fire'
+  | 'plasma'
+  | 'geometric'
+  | 'shockwave'
+  | 'sparkles'
+  | 'emoji'
+  | 'matrix'
+  | 'ghost'
+  | 'rings'
+  | 'leaves'
+  | 'orbs'
+  | 'ai_magic';
+
+export interface Particle {
+  id: number;
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  size: number;
+  color: string;
+  life: number;
+  maxLife: number;
+  type: EffectType;
+  metadata?: any;
 }
