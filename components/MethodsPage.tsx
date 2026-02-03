@@ -41,27 +41,27 @@ const MethodModuleCard: React.FC<{
     stats: { q: number; s: number };
     labels: { questions: string; subscales: string };
 }> = ({ title, subtitle, tool, desc, icon, color, citations, stats, labels }) => (
-    <div className="bg-white p-8 rounded-[2rem] border border-slate-100 shadow-xl shadow-slate-200/50 hover:shadow-2xl hover:scale-[1.01] transition-all duration-300 flex flex-col h-full">
+    <div className="bg-white dark:bg-slate-800 p-8 rounded-[2rem] border border-slate-100 dark:border-slate-700 shadow-xl shadow-slate-200/50 dark:shadow-none hover:shadow-2xl hover:scale-[1.01] transition-all duration-300 flex flex-col h-full">
         <div className={`w-14 h-14 ${color} rounded-2xl flex items-center justify-center mb-6`}>
             {icon}
         </div>
         <div className="mb-4">
-            <h3 className="text-xl font-black text-slate-900 leading-tight">{title}</h3>
+            <h3 className="text-xl font-black text-slate-900 dark:text-white leading-tight">{title}</h3>
             <p className="text-sm font-bold text-indigo-600 uppercase tracking-widest mt-1">{subtitle}</p>
         </div>
 
         <div className="flex flex-wrap gap-3 mb-6">
-            <div className="px-3 py-1 bg-slate-100 rounded-lg text-[10px] font-black uppercase text-slate-500 tracking-wider">
+            <div className="px-3 py-1 bg-slate-100 rounded-lg text-[10px] font-black uppercase text-slate-500 dark:text-slate-400 tracking-wider">
                 {tool}
             </div>
-            <div className="px-3 py-1 bg-slate-50 border border-slate-100 rounded-lg text-[10px] font-bold uppercase text-slate-400 tracking-wider flex items-center gap-2">
+            <div className="px-3 py-1 bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-700 rounded-lg text-[10px] font-bold uppercase text-slate-400 tracking-wider flex items-center gap-2">
                 <span>{stats.q} {labels.questions}</span>
                 <span className="opacity-50">•</span>
                 <span>{stats.s} {labels.subscales}</span>
             </div>
         </div>
 
-        <p className="text-slate-600 leading-relaxed font-medium mb-8 flex-grow">
+        <p className="text-slate-600 dark:text-slate-400 leading-relaxed font-medium mb-8 flex-grow">
             {desc}
         </p>
 
@@ -157,11 +157,11 @@ const MethodsPage: React.FC<MethodsPageProps> = ({ onBack, onStart, t, locale })
     };
 
     return (
-        <div className="min-h-screen bg-slate-50 text-slate-900 pb-24">
+        <div className="min-h-screen bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white pb-24">
             {/* Fixed Back Button */}
             <button
                 onClick={onBack}
-                className="fixed top-4 sm:top-6 left-4 sm:left-6 z-50 flex items-center gap-2 bg-white/80 backdrop-blur-md border border-slate-200 px-4 py-2 rounded-full shadow-lg shadow-slate-200/50 text-slate-500 hover:text-indigo-600 transition-all font-bold text-xs sm:text-sm"
+                className="fixed top-4 sm:top-6 left-4 sm:left-6 z-50 flex items-center gap-2 bg-white dark:bg-slate-800/80 backdrop-blur-md border border-slate-200 px-4 py-2 rounded-full shadow-lg shadow-slate-200/50 dark:shadow-none text-slate-500 dark:text-slate-400 hover:text-indigo-600 transition-all font-bold text-xs sm:text-sm"
             >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M15 19l-7-7 7-7" /></svg>
                 {content.backBtn}
@@ -174,19 +174,19 @@ const MethodsPage: React.FC<MethodsPageProps> = ({ onBack, onStart, t, locale })
                     <span className="inline-block px-4 py-1.5 bg-indigo-50 text-indigo-600 rounded-full text-[10px] font-black uppercase tracking-[0.3em] mb-6">
                         {content.title}
                     </span>
-                    <h1 className="text-4xl sm:text-6xl font-black text-slate-900 mb-6 tracking-tight">
+                    <h1 className="text-4xl sm:text-6xl font-black text-slate-900 dark:text-white mb-6 tracking-tight">
                         {content.subtitle}
                     </h1>
                 </div>
 
                 {/* Paradigm Shift & Spiky Profile */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
-                    <div className="bg-white p-10 rounded-[2.5rem] shadow-xl shadow-slate-200/50 border border-slate-100 animate-in slide-in-from-bottom-8 delay-100 duration-700">
+                    <div className="bg-white dark:bg-slate-800 p-10 rounded-[2.5rem] shadow-xl shadow-slate-200/50 dark:shadow-none border border-slate-100 dark:border-slate-700 animate-in slide-in-from-bottom-8 delay-100 duration-700">
                         <h2 className="text-2xl font-black mb-6 flex items-center gap-3">
                             <span className="w-2 h-8 bg-indigo-500 rounded-full" />
                             {content.intro.title}
                         </h2>
-                        <p className="text-slate-600 leading-relaxed font-medium text-lg">
+                        <p className="text-slate-600 dark:text-slate-400 leading-relaxed font-medium text-lg">
                             {content.intro.text}
                         </p>
                     </div>
@@ -214,7 +214,7 @@ const MethodsPage: React.FC<MethodsPageProps> = ({ onBack, onStart, t, locale })
                 {/* Modules Grid */}
                 <div className="space-y-16 mb-24">
                     <div className="text-center mb-10">
-                        <h2 className="text-3xl font-black text-slate-900">{content.modulesTitle}</h2>
+                        <h2 className="text-3xl font-black text-slate-900 dark:text-white">{content.modulesTitle}</h2>
                         <div className="w-24 h-1.5 bg-indigo-600 rounded-full mx-auto mt-4" />
                     </div>
 
@@ -282,17 +282,17 @@ const MethodsPage: React.FC<MethodsPageProps> = ({ onBack, onStart, t, locale })
                 </div>
 
                 {/* NEW: Assessment Breakdown Chart */}
-                <div className="bg-white p-10 rounded-[2.5rem] shadow-xl shadow-slate-200/50 border border-slate-100 mb-20">
+                <div className="bg-white dark:bg-slate-800 p-10 rounded-[2.5rem] shadow-xl shadow-slate-200/50 dark:shadow-none border border-slate-100 dark:border-slate-700 mb-20">
                     <div className="flex flex-col md:flex-row items-center justify-between gap-10">
                         <div className="md:w-1/3">
-                            <h2 className="text-2xl font-black text-slate-900 mb-4">{content.assessmentBreakdown.title}</h2>
-                            <p className="text-slate-600 font-medium leading-relaxed">
+                            <h2 className="text-2xl font-black text-slate-900 dark:text-white mb-4">{content.assessmentBreakdown.title}</h2>
+                            <p className="text-slate-600 dark:text-slate-400 font-medium leading-relaxed">
                                 {content.assessmentBreakdown.text}
                             </p>
                             <div className="mt-6 flex flex-col gap-2">
                                 <div className="flex items-center gap-3">
                                     <span className="w-3 h-3 rounded-full bg-slate-900"></span>
-                                    <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
+                                    <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                                         {Object.values(stats).reduce((acc, curr) => acc + curr.q, 0) + 4} {content.assessmentBreakdown.questions} Total
                                         {/* +4 for Intake questions which are not in modules */}
                                     </span>
@@ -311,21 +311,21 @@ const MethodsPage: React.FC<MethodsPageProps> = ({ onBack, onStart, t, locale })
                         <span className="inline-block px-4 py-1.5 bg-emerald-50 text-emerald-600 rounded-full text-[10px] font-black uppercase tracking-[0.3em] mb-4">
                             {content.whatToExpect.title}
                         </span>
-                        <h2 className="text-3xl font-black text-slate-900 max-w-2xl mx-auto">{content.whatToExpect.text}</h2>
+                        <h2 className="text-3xl font-black text-slate-900 dark:text-white max-w-2xl mx-auto">{content.whatToExpect.text}</h2>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                         {[
-                            { icon: <Activity className="w-6 h-6" />, title: content.whatToExpect.items.spikyProfile, color: "text-rose-500 bg-rose-50" },
-                            { icon: <Brain className="w-6 h-6" />, title: content.whatToExpect.items.insights, color: "text-purple-500 bg-purple-50" },
-                            { icon: <FileText className="w-6 h-6" />, title: content.whatToExpect.items.medical, color: "text-blue-500 bg-blue-50" },
-                            { icon: <Layout className="w-6 h-6" />, title: content.whatToExpect.items.impact, color: "text-emerald-500 bg-emerald-50" },
+                            { icon: <Activity className="w-6 h-6" />, title: content.whatToExpect.items.spikyProfile, color: "text-rose-500 bg-rose-50 dark:bg-rose-900/30" },
+                            { icon: <Brain className="w-6 h-6" />, title: content.whatToExpect.items.insights, color: "text-purple-500 bg-purple-50 dark:bg-purple-900/30" },
+                            { icon: <FileText className="w-6 h-6" />, title: content.whatToExpect.items.medical, color: "text-blue-500 bg-blue-50 dark:bg-blue-900/30" },
+                            { icon: <Layout className="w-6 h-6" />, title: content.whatToExpect.items.impact, color: "text-emerald-500 bg-emerald-50 dark:bg-emerald-900/30" },
                         ].map((item, idx) => (
-                            <div key={idx} className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm flex flex-col items-center text-center">
+                            <div key={idx} className="bg-white dark:bg-slate-800 p-6 rounded-3xl border border-slate-100 dark:border-slate-700 shadow-sm flex flex-col items-center text-center">
                                 <div className={`w-12 h-12 rounded-2xl ${item.color} flex items-center justify-center mb-4`}>
                                     {item.icon}
                                 </div>
-                                <h3 className="text-sm font-bold text-slate-700">{item.title}</h3>
+                                <h3 className="text-sm font-bold text-slate-700 dark:text-slate-300">{item.title}</h3>
                             </div>
                         ))}
                     </div>
