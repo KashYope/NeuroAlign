@@ -5,6 +5,7 @@ import { translations } from './i18n';
 import LikertScale from './components/LikertScale';
 import Report from './components/Report';
 import MethodsPage from './components/MethodsPage';
+import ReviewPage from './components/ReviewPage';
 import { calculateReport, getScaleMinMax } from './utils/scoring';
 import { saveProgress, loadProgress, clearProgress } from './utils/persistence';
 import { shuffle } from './utils/random';
@@ -246,6 +247,7 @@ const App: React.FC = () => {
   const [showDisclaimer, setShowDisclaimer] = useState(false);
   const [disclaimerChecked, setDisclaimerChecked] = useState(false);
   const [showMethods, setShowMethods] = useState(false);
+  const [showReview, setShowReview] = useState(false);
   const [showBreak, setShowBreak] = useState(false);
   const [isDopamineMode, setIsDopamineMode] = useState(false);
   const [seed, setSeed] = useState<number>(Date.now());
@@ -271,7 +273,14 @@ const App: React.FC = () => {
       const state = event.state;
 
       if (report) {
-        window.history.pushState({ type: 'report' }, '');
+        if (state?.type === 'review') {
+          setShowReview(true);
+        } else {
+          setShowReview(false);
+          if (state?.type !== 'report') {
+            window.history.pushState({ type: 'report' }, '');
+          }
+        }
         isNavigatingViaHistory.current = false;
         return;
       }
@@ -300,12 +309,19 @@ const App: React.FC = () => {
 
   useEffect(() => {
     if (isNavigatingViaHistory.current) return;
+    if (showReview) {
+      window.history.pushState({ type: 'review' }, '');
+    }
+  }, [showReview]);
+
+  useEffect(() => {
+    if (isNavigatingViaHistory.current) return;
     if (currentIndex >= 0) {
       window.history.pushState({ type: 'question', index: currentIndex }, '');
-    } else if (currentIndex === -1 && !showMethods && !report && !isFirstRender.current) {
+    } else if (currentIndex === -1 && !showMethods && !report && !showReview && !isFirstRender.current) {
       window.history.pushState({ type: 'home' }, '');
     }
-  }, [currentIndex, showMethods, report]);
+  }, [currentIndex, showMethods, report, showReview]);
 
   useEffect(() => {
     if (report) {
@@ -338,7 +354,7 @@ const App: React.FC = () => {
   // Scroll to top on view change
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [showMethods, report, currentIndex]);
+  }, [showMethods, report, currentIndex, showReview]);
 
   const liveReport = useMemo(() => {
     if (answers.length === 0) return null;
@@ -451,6 +467,18 @@ const App: React.FC = () => {
     }
   };
 
+  const handleReviewSave = (newAnswers: UserAnswer[]) => {
+    setAnswers(newAnswers);
+    const newReport = calculateReport(newAnswers);
+    setReport(newReport);
+    saveProgress({ answers: newAnswers, locale, seed, isComplete: true });
+    setShowReview(false);
+    // Explicitly push report state to ensure we are back in report mode
+    if (!isNavigatingViaHistory.current) {
+      window.history.pushState({ type: 'report' }, '');
+    }
+  };
+
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col antialiased overflow-x-hidden">
       {!showMethods && <FeedbackBanner locale={locale} />}
@@ -511,8 +539,10 @@ const App: React.FC = () => {
       <div className="flex-1 flex flex-col">
         {showMethods ? (
           <MethodsPage onBack={() => window.history.back()} onStart={() => { setShowMethods(false); handleStartRequest(); }} t={t} locale={locale} />
+        ) : showReview ? (
+          <ReviewPage answers={answers} onSave={handleReviewSave} onBack={() => window.history.back()} locale={locale} />
         ) : report ? (
-          <Report report={report} answers={answers} onReset={restart} locale={locale} />
+          <Report report={report} answers={answers} onReset={restart} locale={locale} onReview={() => setShowReview(true)} />
         ) : currentIndex === -1 ? (
           <main className="flex-1 py-16 sm:py-24 px-4 sm:px-6 flex flex-col items-center">
             <div className="max-w-4xl w-full flex flex-col items-center">

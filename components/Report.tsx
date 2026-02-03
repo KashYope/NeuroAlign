@@ -40,10 +40,11 @@ interface ReportProps {
   report: ScreeningReport;
   answers: UserAnswer[];
   onReset: () => void;
+  onReview?: () => void;
   locale: Locale;
 }
 
-const Report: React.FC<ReportProps> = ({ report, answers, onReset, locale }) => {
+const Report: React.FC<ReportProps> = ({ report, answers, onReset, onReview, locale }) => {
   const t: Translation = translations[locale];
   const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
   const [city, setCity] = useState('');
@@ -756,20 +757,30 @@ const Report: React.FC<ReportProps> = ({ report, answers, onReset, locale }) => 
       )}
 
       {/* ACTIONS */}
-      <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 py-12 border-t border-slate-100 mb-12">
-        <button
-          onClick={generateDetailedPdf}
-          disabled={isGeneratingPdf}
-          className="w-full sm:w-auto px-10 py-4 bg-indigo-600 text-white rounded-2xl sm:rounded-[2rem] font-black text-[10px] sm:text-xs uppercase tracking-[0.2em] hover:bg-indigo-700 shadow-xl shadow-indigo-100 transition-all active:scale-95 disabled:opacity-50"
-        >
-          {isGeneratingPdf ? '...' : t.downloadPdf}
-        </button>
-        <button
-          onClick={onReset}
-          className="w-full sm:w-auto px-10 py-4 bg-white border-2 border-slate-200 text-slate-900 rounded-2xl sm:rounded-[2rem] font-black text-[10px] sm:text-xs uppercase tracking-[0.2em] hover:bg-slate-50 transition-all shadow-sm"
-        >
-          {t.retake}
-        </button>
+      <div className="flex flex-col items-center justify-center py-12 border-t border-slate-100 mb-12">
+        {onReview && (
+          <button
+            onClick={onReview}
+            className="mb-8 text-[10px] sm:text-xs font-bold text-slate-400 hover:text-indigo-600 uppercase tracking-widest transition-colors"
+          >
+            {locale === 'fr' ? 'Revoir et modifier les réponses' : 'Review & Edit Answers'}
+          </button>
+        )}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 w-full">
+          <button
+            onClick={generateDetailedPdf}
+            disabled={isGeneratingPdf}
+            className="w-full sm:w-auto px-10 py-4 bg-indigo-600 text-white rounded-2xl sm:rounded-[2rem] font-black text-[10px] sm:text-xs uppercase tracking-[0.2em] hover:bg-indigo-700 shadow-xl shadow-indigo-100 transition-all active:scale-95 disabled:opacity-50"
+          >
+            {isGeneratingPdf ? '...' : t.downloadPdf}
+          </button>
+          <button
+            onClick={onReset}
+            className="w-full sm:w-auto px-10 py-4 bg-white border-2 border-slate-200 text-slate-900 rounded-2xl sm:rounded-[2rem] font-black text-[10px] sm:text-xs uppercase tracking-[0.2em] hover:bg-slate-50 transition-all shadow-sm"
+          >
+            {t.retake}
+          </button>
+        </div>
       </div>
 
       {/* MEDICAL SEARCH SECTION */}
