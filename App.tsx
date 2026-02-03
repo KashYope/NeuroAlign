@@ -276,12 +276,12 @@ const App: React.FC = () => {
   useEffect(() => {
     if (!activeMouseEffect) return;
 
-    const handleMouseMove = (e: MouseEvent) => {
+    const handleMouseDown = (e: MouseEvent) => {
       effectCanvasRef.current?.spawnParticles(e.clientX, e.clientY);
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousedown', handleMouseDown);
+    return () => window.removeEventListener('mousedown', handleMouseDown);
   }, [activeMouseEffect]);
 
   const t: Translation = translations[locale];
