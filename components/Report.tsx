@@ -6,6 +6,8 @@ import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import ModuleIcon from './ModuleIcon';
 import { Check, AlertTriangle, Copy, ArrowRight, Wrench } from 'lucide-react';
+import QRCode from 'qrcode';
+import { encodeAnswers } from '../utils/sharing';
 
 import {
   Chart as ChartJS,
@@ -197,6 +199,10 @@ const Report: React.FC<ReportProps> = ({ report, answers, onReset, onReview, loc
   const generateDetailedPdf = async () => {
     setIsGeneratingPdf(true);
     try {
+      // 1. Generate QR Code
+      const encodedAnswers = encodeAnswers(answers);
+      const qrDataUrl = await QRCode.toDataURL(encodedAnswers, { margin: 1, width: 100, errorCorrectionLevel: 'L' });
+
       const doc = new jsPDF();
       const pageWidth = doc.internal.pageSize.getWidth();
       const pageHeight = doc.internal.pageSize.getHeight();
@@ -215,7 +221,13 @@ const Report: React.FC<ReportProps> = ({ report, answers, onReset, onReview, loc
         doc.setFontSize(9);
         doc.setFont('helvetica', 'normal');
         const dateStr = new Date().toLocaleDateString(locale === 'en' ? 'en-US' : 'fr-FR');
-        doc.text(dateStr, pageWidth - margin - 30, yPos);
+        // Position date to the left of the QR code
+        doc.text(dateStr, pageWidth - margin - 50, yPos);
+
+        // Add QR Code
+        doc.setFillColor(255, 255, 255);
+        doc.rect(pageWidth - margin - 25, 8, 24, 24, 'F');
+        doc.addImage(qrDataUrl, 'PNG', pageWidth - margin - 24, 9, 22, 22);
       };
 
       // --- HELPER: PAGE BREAK CHECK ---

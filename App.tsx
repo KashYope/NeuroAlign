@@ -6,13 +6,15 @@ import LikertScale from './components/LikertScale';
 import Report from './components/Report';
 import MethodsPage from './components/MethodsPage';
 import ReviewPage from './components/ReviewPage';
+import QRScanner from './components/QRScanner';
 import { calculateReport, getScaleMinMax } from './utils/scoring';
 import { saveProgress, loadProgress, clearProgress } from './utils/persistence';
+import { decodeAnswers } from './utils/sharing';
 import { shuffle } from './utils/random';
 import ModuleIcon from './components/ModuleIcon';
 import BreakMoment from './components/BreakMoment';
 import DopamineRewards from './components/DopamineRewards';
-import { ChevronDown, Activity, ArrowRight, Mail, Code, X, ChevronLeft, BrainCircuit, Sparkles } from 'lucide-react';
+import { ChevronDown, Activity, ArrowRight, Mail, Code, X, ChevronLeft, BrainCircuit, Sparkles, Camera } from 'lucide-react';
 import EffectCanvas, { EffectCanvasHandle } from './sources/effects';
 import { EffectType } from './types';
 
@@ -251,6 +253,7 @@ const App: React.FC = () => {
   const [showMethods, setShowMethods] = useState(false);
   const [showReview, setShowReview] = useState(false);
   const [showBreak, setShowBreak] = useState(false);
+  const [showScanner, setShowScanner] = useState(false);
   const [isDopamineMode, setIsDopamineMode] = useState(false);
   const [seed, setSeed] = useState<number>(Date.now());
   const [activeMouseEffect, setActiveMouseEffect] = useState<EffectType | null>(null);
@@ -499,6 +502,28 @@ const App: React.FC = () => {
     }
   };
 
+  const handleScanSuccess = (decodedText: string) => {
+    try {
+      const restoredAnswers = decodeAnswers(decodedText);
+      setAnswers(restoredAnswers);
+      // Ensure seed is set to something valid, or just keep current
+      // The report calculation doesn't depend on seed, only randomization of questions.
+      // But we are restoring answers which are ID-based, so randomization doesn't matter for the report.
+
+      const restoredReport = calculateReport(restoredAnswers);
+      setReport(restoredReport);
+      setHasCompletedReport(true);
+      saveProgress({ answers: restoredAnswers, locale, seed, isComplete: true });
+      setShowScanner(false);
+      // Force report view
+      window.history.pushState({ type: 'report' }, '');
+    } catch (e) {
+      console.error("Scan Error", e);
+      alert(locale === 'fr' ? 'Erreur: QR code invalide ou version incompatible.' : 'Error: Invalid QR code or version mismatch.');
+      setShowScanner(false);
+    }
+  };
+
   const handleReviewSave = (newAnswers: UserAnswer[]) => {
     setAnswers(newAnswers);
     const newReport = calculateReport(newAnswers);
@@ -534,6 +559,15 @@ const App: React.FC = () => {
         t={t}
       />
       <DopamineRewards active={isDopamineMode} />
+
+      {/* QR Scanner Modal */}
+      {showScanner && (
+        <QRScanner
+          onScanSuccess={handleScanSuccess}
+          onClose={() => setShowScanner(false)}
+          locale={locale}
+        />
+      )}
 
       {showDisclaimer && (
         <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-md z-[200] flex items-center justify-center p-4 animate-in fade-in duration-300">
@@ -594,6 +628,14 @@ const App: React.FC = () => {
               <DomainsOverview t={t} />
 
               <button onClick={hasCompletedReport ? handleViewResults : handleStartRequest} className="w-full max-w-sm py-4 sm:py-5 bg-indigo-600 text-white rounded-2xl font-black text-base sm:text-lg uppercase tracking-widest hover:bg-indigo-700 shadow-xl shadow-indigo-100 transition-all active:scale-[0.98] outline-none">{hasCompletedReport ? t.viewResults : (answers.length > 0 ? t.continueBtn : t.startBtn)}</button>
+
+              <button
+                onClick={() => setShowScanner(true)}
+                className="mt-4 flex items-center gap-2 px-6 py-3 bg-white border border-slate-200 text-indigo-600 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-indigo-50 hover:border-indigo-100 transition-all shadow-sm hover:shadow-md"
+              >
+                <Camera className="w-4 h-4" />
+                {locale === 'fr' ? 'Importer depuis un rapport PDF' : 'Import from PDF Report'}
+              </button>
 
               {(hasCompletedReport || answers.length > 0) && (
                 <button
