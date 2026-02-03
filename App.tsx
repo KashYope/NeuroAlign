@@ -169,7 +169,7 @@ const FeedbackBanner: React.FC<{ locale: Locale }> = ({ locale }) => {
 };
 
 const LanguageSwitcher: React.FC<{ locale: Locale, setLocale: (l: Locale) => void, isDark: boolean, toggleTheme: () => void }> = ({ locale, setLocale, isDark, toggleTheme }) => (
-  <nav aria-label="Language selection" className="fixed top-4 sm:top-6 right-4 sm:right-6 flex bg-white/80 dark:bg-slate-800/80 backdrop-blur-md rounded-full p-1 border border-slate-200 dark:border-slate-700 z-[101] shadow-lg shadow-slate-200/50 dark:shadow-slate-900/50 scale-90 sm:scale-100 origin-right transition-colors">
+  <nav aria-label="Language selection" className="fixed top-4 sm:top-6 right-4 sm:right-6 flex bg-white/80 dark:bg-slate-800/80 backdrop-blur-md rounded-full p-1 border border-slate-200 dark:border-slate-700 z-[101] shadow-lg shadow-slate-200/50 dark:shadow-none scale-90 sm:scale-100 origin-right transition-colors">
     <button
       onClick={toggleTheme}
       className="p-1.5 rounded-full text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200 transition-colors mr-1"
@@ -184,7 +184,7 @@ const LanguageSwitcher: React.FC<{ locale: Locale, setLocale: (l: Locale) => voi
 
 const DebugToggle: React.FC<{ isDebug: boolean, setIsDebug: (d: boolean) => void }> = ({ isDebug, setIsDebug }) => (
   <div className="fixed bottom-4 left-4 z-[101] scale-90 sm:scale-100 origin-bottom-left opacity-50 hover:opacity-100 transition-opacity">
-    <button onClick={() => setIsDebug(!isDebug)} aria-label="Toggle debug view" className={`p-2 sm:p-2.5 rounded-full border transition-all shadow-lg ${isDebug ? 'bg-red-600 border-red-600 text-white shadow-red-200' : 'bg-white/80 backdrop-blur-md border-slate-200 text-slate-400 hover:text-slate-800 shadow-slate-200/50'}`}>
+    <button onClick={() => setIsDebug(!isDebug)} aria-label="Toggle debug view" className={`p-2 sm:p-2.5 rounded-full border transition-all shadow-lg ${isDebug ? 'bg-red-600 border-red-600 text-white shadow-red-200' : 'bg-white/80 dark:bg-slate-800/80 backdrop-blur-md border-slate-200 dark:border-slate-700 text-slate-400 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 shadow-slate-200/50 dark:shadow-none'}`}>
       <Code className="w-5 h-5" />
     </button>
   </div>
@@ -557,7 +557,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col antialiased overflow-x-hidden">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex flex-col antialiased overflow-x-hidden">
       {activeMouseEffect && (
         <EffectCanvas
           ref={effectCanvasRef}
@@ -591,9 +591,9 @@ const App: React.FC = () => {
 
       {showDisclaimer && (
         <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-md z-[200] flex items-center justify-center p-4 animate-in fade-in duration-300">
-          <div className="bg-white max-w-lg w-full p-8 sm:p-10 rounded-[2.5rem] shadow-2xl animate-in zoom-in slide-in-from-bottom-8 duration-500 border border-slate-100">
+          <div className="bg-white dark:bg-slate-800 max-w-lg w-full p-8 sm:p-10 rounded-[2.5rem] shadow-2xl animate-in zoom-in slide-in-from-bottom-8 duration-500 border border-slate-100">
             <h2 className="text-2xl font-black text-slate-900 dark:text-white mb-4">{t.disclaimerTitle}</h2>
-            <p className="text-slate-500 text-sm sm:text-base leading-relaxed mb-8 font-medium">
+            <p className="text-slate-500 dark:text-slate-400 text-sm sm:text-base leading-relaxed mb-8 font-medium">
               {t.disclaimerText}
             </p>
             <label className="flex items-start gap-4 mb-8 cursor-pointer group">
@@ -651,7 +651,7 @@ const App: React.FC = () => {
 
               <button
                 onClick={() => setShowScanner(true)}
-                className="mt-4 flex items-center gap-2 px-6 py-3 bg-white border border-slate-200 text-indigo-600 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-indigo-50 hover:border-indigo-100 transition-all shadow-sm hover:shadow-md"
+                className="mt-4 flex items-center gap-2 px-6 py-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-indigo-600 dark:text-indigo-400 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-indigo-50 hover:border-indigo-100 transition-all shadow-sm hover:shadow-md"
               >
                 <Camera className="w-4 h-4" />
                 {locale === 'fr' ? 'Importer depuis un rapport PDF' : 'Import from PDF Report'}
@@ -692,7 +692,7 @@ const App: React.FC = () => {
               <div className="text-[10px] sm:text-xs font-black text-indigo-600 bg-indigo-50 px-3 sm:px-4 py-1.5 rounded-full shrink-0">{currentIndex + 1} / {shuffledQuestions.length}</div>
             </nav>
             <div className="w-full max-w-4xl h-2 bg-slate-200 rounded-full mb-12 sm:mb-16 overflow-hidden"><div className="h-full bg-indigo-500 transition-all duration-500" style={{ width: `${((currentIndex + 1) / shuffledQuestions.length) * 100}%` }} /></div>
-            <article className={`w-full max-w-4xl bg-white dark:bg-slate-800 p-4 sm:p-24 rounded-[3rem] sm:rounded-[4rem] shadow-xl shadow-slate-200/50 dark:shadow-slate-900/50 transition-all duration-500 ${isAdvancing ? 'opacity-40 scale-[0.98]' : 'opacity-100 scale-100'}`}>
+            <article className={`w-full max-w-4xl bg-white dark:bg-slate-800 p-4 sm:p-24 rounded-[3rem] sm:rounded-[4rem] shadow-xl shadow-slate-200/50 dark:shadow-none transition-all duration-500 ${isAdvancing ? 'opacity-40 scale-[0.98]' : 'opacity-100 scale-100'}`}>
               <span className="inline-block px-3 py-1 bg-slate-50 dark:bg-slate-700 text-slate-500 dark:text-slate-300 rounded-full text-[9px] font-black uppercase tracking-widest mb-6 sm:mb-8">{(t.subscales as any)[shuffledQuestions[currentIndex].subscale] || shuffledQuestions[currentIndex].subscale}</span>
               <h2 className="text-xl sm:text-4xl font-black text-slate-900 dark:text-white leading-[1.3] mb-12 sm:mb-20 tracking-tight min-h-[5rem] sm:min-h-[6rem]">{shuffledQuestions[currentIndex].text[locale]}</h2>
               <LikertScale
@@ -712,7 +712,7 @@ const App: React.FC = () => {
                 </button>
                 <button
                   onClick={() => setCurrentIndex(-1)}
-                  className="flex items-center gap-2 px-5 py-2.5 bg-slate-50 rounded-xl text-[9px] font-black uppercase tracking-widest text-slate-500 hover:bg-slate-100 transition-colors"
+                  className="flex items-center gap-2 px-5 py-2.5 bg-slate-50 dark:bg-slate-800 rounded-xl text-[9px] font-black uppercase tracking-widest text-slate-500 hover:bg-slate-100 transition-colors"
                 >
                   {t.saveAndExit}
                 </button>
