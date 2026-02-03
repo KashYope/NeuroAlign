@@ -143,7 +143,7 @@ const LikertScale: React.FC<LikertScaleProps> = ({ value, onChange, locale, type
             {/* The Circle Container */}
             <div className={`${circleSize} rounded-full border-[2.5px] mb-2 sm:mb-6 flex items-center justify-center transition-all duration-300 ${isActive
               ? `${opt.activeBg} ${opt.activeBorder} scale-110 shadow-lg shadow-current/20`
-              : 'border-slate-200 bg-white hover:border-slate-400 group-focus-visible:border-indigo-600'
+              : 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:border-slate-400 dark:hover:border-slate-500 group-focus-visible:border-indigo-600'
               }`}>
               {isActive && (
                 <div className={`${isSeven ? 'w-2 h-2 sm:w-3 sm:h-3' : 'w-3 h-3 sm:w-5 sm:h-5'} bg-white rounded-full shadow-inner animate-in zoom-in duration-300`} />
@@ -151,7 +151,7 @@ const LikertScale: React.FC<LikertScaleProps> = ({ value, onChange, locale, type
             </div>
 
             {/* The Label */}
-            <span className={`${fontSize} font-black text-center uppercase tracking-normal sm:tracking-[0.2em] leading-tight transition-colors duration-300 w-full sm:w-[110px] min-h-[3rem] flex items-start justify-center text-balance px-1 ${isActive ? opt.activeText : 'text-slate-500 group-hover:text-slate-800'
+            <span className={`${fontSize} font-black text-center uppercase tracking-normal sm:tracking-[0.2em] leading-tight transition-colors duration-300 w-full sm:w-[110px] min-h-[3rem] flex items-start justify-center text-balance px-1 ${isActive ? opt.activeText : 'text-slate-500 dark:text-slate-400 group-hover:text-slate-800 dark:group-hover:text-slate-200'
               }`}>
               {label}
             </span>

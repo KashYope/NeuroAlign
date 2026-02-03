@@ -14,7 +14,7 @@ import { shuffle } from './utils/random';
 import ModuleIcon from './components/ModuleIcon';
 import BreakMoment from './components/BreakMoment';
 import DopamineRewards from './components/DopamineRewards';
-import { ChevronDown, Activity, ArrowRight, Mail, Code, X, ChevronLeft, BrainCircuit, Sparkles, Camera } from 'lucide-react';
+import { ChevronDown, Activity, ArrowRight, Mail, Code, Sun, Moon, X, ChevronLeft, BrainCircuit, Sparkles, Camera } from 'lucide-react';
 import EffectCanvas, { EffectCanvasHandle } from './sources/effects';
 import { EffectType } from './types';
 
@@ -26,15 +26,15 @@ const FAQAccordion: React.FC<{ items: { q: string, a: string }[], title: string 
       <h2 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.4em] mb-10 text-center">{title}</h2>
       <div className="space-y-3 sm:space-y-4">
         {items.map((item, idx) => (
-          <div key={idx} className="bg-white border border-slate-100 rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden transition-all duration-300">
+          <div key={idx} className="bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden transition-all duration-300">
             <button
               onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
               className="w-full px-6 sm:px-8 py-5 sm:py-6 text-left flex justify-between items-center group focus:outline-none focus:bg-slate-50"
             >
-              <span className="font-bold text-sm sm:text-base text-slate-800 group-hover:text-indigo-600 transition-colors pr-4">{item.q}</span>
+              <span className="font-bold text-sm sm:text-base text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 transition-colors pr-4">{item.q}</span>
               <ChevronDown className={`w-4 h-4 sm:w-5 h-5 text-slate-400 transition-transform duration-300 shrink-0 ${openIndex === idx ? 'rotate-180 text-indigo-500' : ''}`} />
             </button>
-            <div className={`transition-all duration-300 ease-in-out ${openIndex === idx ? 'max-h-[500px] opacity-100 pb-6 sm:pb-8 px-6 sm:px-8' : 'max-h-0 opacity-0 overflow-hidden'}`}><p className="text-slate-500 leading-relaxed text-sm">{item.a}</p></div>
+            <div className={`transition-all duration-300 ease-in-out ${openIndex === idx ? 'max-h-[500px] opacity-100 pb-6 sm:pb-8 px-6 sm:px-8' : 'max-h-0 opacity-0 overflow-hidden'}`}><p className="text-slate-500 dark:text-slate-400 leading-relaxed text-sm">{item.a}</p></div>
           </div>
         ))}
       </div>
@@ -52,12 +52,12 @@ const DomainsOverview: React.FC<{ t: Translation }> = ({ t }) => {
         {domains.map((key) => {
           const title = t.methodology.modules[key]?.title.replace(/Module\s*|\s*Module/gi, '').trim();
           return (
-            <div key={key} className="bg-white p-4 rounded-2xl border border-slate-100 shadow-[0_2px_10px_rgba(0,0,0,0.02)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center h-full">
+            <div key={key} className="bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-100 dark:border-slate-700 shadow-[0_2px_10px_rgba(0,0,0,0.02)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center h-full">
               <div className="w-8 h-8 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-3 shrink-0">
                 <ModuleIcon name={key} className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
-              <span className="text-[10px] font-black text-slate-800 uppercase tracking-widest mb-2">{title}</span>
-              <p className="text-[9px] text-slate-500 font-medium leading-relaxed">{t.domainIntros[key]}</p>
+              <span className="text-[10px] font-black text-slate-800 dark:text-slate-200 uppercase tracking-widest mb-2">{title}</span>
+              <p className="text-[9px] text-slate-500 dark:text-slate-400 font-medium leading-relaxed">{t.domainIntros[key]}</p>
             </div>
           )
         })}
@@ -73,22 +73,22 @@ const MethodologySection: React.FC<{ t: Translation; onShowMethods: () => void }
       <div className="inline-block px-4 py-1.5 bg-indigo-50 text-indigo-600 rounded-full text-[9px] font-black uppercase tracking-[0.3em] mb-6">
         {t.methodology.title}
       </div>
-      <p className="text-xl sm:text-2xl text-slate-800 max-w-3xl mx-auto leading-relaxed font-bold tracking-tight">
+      <p className="text-xl sm:text-2xl text-slate-800 dark:text-slate-200 max-w-3xl mx-auto leading-relaxed font-bold tracking-tight">
         {t.methodology.description}
       </p>
     </div>
 
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
       {/* Spiky Profile Card */}
-      <div className="bg-white p-8 sm:p-10 rounded-[2.5rem] shadow-xl shadow-slate-200/50 border border-slate-100 md:col-span-1 flex flex-col">
+      <div className="bg-white dark:bg-slate-800 p-8 sm:p-10 rounded-[2.5rem] shadow-xl shadow-slate-200/50 dark:shadow-none border border-slate-100 dark:border-slate-700 md:col-span-1 flex flex-col">
         <div className="w-12 h-12 bg-rose-50 text-rose-500 rounded-2xl flex items-center justify-center mb-6">
           <Activity className="w-6 h-6" />
         </div>
-        <h3 className="text-2xl font-black text-slate-900 mb-4">{t.methodology.spikyProfileTitle}</h3>
-        <p className="text-slate-500 leading-relaxed font-medium mb-8 flex-1">
+        <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-4">{t.methodology.spikyProfileTitle}</h3>
+        <p className="text-slate-500 dark:text-slate-400 leading-relaxed font-medium mb-8 flex-1">
           {t.methodology.spikyProfileDesc}
         </p>
-        <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100 flex flex-col items-center">
+        <div className="bg-slate-50 dark:bg-slate-900 rounded-2xl p-6 border border-slate-100 dark:border-slate-700 flex flex-col items-center">
           <div className="w-full max-w-[200px] aspect-square relative mb-4">
             <svg viewBox="0 0 100 100" className="w-full h-full text-indigo-500" fill="none" stroke="currentColor" strokeWidth="1.5">
               {/* Grid */}
@@ -168,10 +168,17 @@ const FeedbackBanner: React.FC<{ locale: Locale }> = ({ locale }) => {
   );
 };
 
-const LanguageSwitcher: React.FC<{ locale: Locale, setLocale: (l: Locale) => void }> = ({ locale, setLocale }) => (
-  <nav aria-label="Language selection" className="fixed top-4 sm:top-6 right-4 sm:right-6 flex bg-white/80 backdrop-blur-md rounded-full p-1 border border-slate-200 z-[101] shadow-lg shadow-slate-200/50 scale-90 sm:scale-100 origin-right">
-    <button onClick={() => setLocale('en')} className={`px-3 sm:px-4 py-1.5 rounded-full text-[10px] sm:text-xs font-black transition-all outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 ${locale === 'en' ? 'bg-indigo-600 text-white shadow-md' : 'text-slate-500 hover:text-slate-800'}`}>EN</button>
-    <button onClick={() => setLocale('fr')} className={`px-3 sm:px-4 py-1.5 rounded-full text-[10px] sm:text-xs font-black transition-all outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 ${locale === 'fr' ? 'bg-indigo-600 text-white shadow-md' : 'text-slate-500 hover:text-slate-800'}`}>FR</button>
+const LanguageSwitcher: React.FC<{ locale: Locale, setLocale: (l: Locale) => void, isDark: boolean, toggleTheme: () => void }> = ({ locale, setLocale, isDark, toggleTheme }) => (
+  <nav aria-label="Language selection" className="fixed top-4 sm:top-6 right-4 sm:right-6 flex bg-white/80 dark:bg-slate-800/80 backdrop-blur-md rounded-full p-1 border border-slate-200 dark:border-slate-700 z-[101] shadow-lg shadow-slate-200/50 dark:shadow-slate-900/50 scale-90 sm:scale-100 origin-right transition-colors">
+    <button
+      onClick={toggleTheme}
+      className="p-1.5 rounded-full text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200 transition-colors mr-1"
+      aria-label="Toggle Dark Mode"
+    >
+      {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+    </button>
+    <button onClick={() => setLocale('en')} className={`px-3 sm:px-4 py-1.5 rounded-full text-[10px] sm:text-xs font-black transition-all outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 ${locale === 'en' ? 'bg-indigo-600 text-white shadow-md' : 'text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200'}`}>EN</button>
+    <button onClick={() => setLocale('fr')} className={`px-3 sm:px-4 py-1.5 rounded-full text-[10px] sm:text-xs font-black transition-all outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 ${locale === 'fr' ? 'bg-indigo-600 text-white shadow-md' : 'text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200'}`}>FR</button>
   </nav>
 );
 
@@ -241,6 +248,19 @@ const DebugOverlay: React.FC<{
 };
 
 const App: React.FC = () => {
+  const [isDark, setIsDark] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+    return false;
+  });
+
+  useEffect(() => {
+    document.documentElement.classList.toggle('dark', isDark);
+  }, [isDark]);
+
+  const toggleTheme = () => setIsDark(!isDark);
+
   const [locale, setLocale] = useState<Locale>('en');
   const [currentIndex, setCurrentIndex] = useState(-1);
   const [answers, setAnswers] = useState<UserAnswer[]>([]);
@@ -546,7 +566,7 @@ const App: React.FC = () => {
         />
       )}
       {!showMethods && <FeedbackBanner locale={locale} />}
-      <LanguageSwitcher locale={locale} setLocale={setLocale} />
+      <LanguageSwitcher locale={locale} setLocale={setLocale} isDark={isDark} toggleTheme={toggleTheme} />
       <DebugToggle isDebug={isDebug} setIsDebug={setIsDebug} />
       <DebugOverlay
         isDebug={isDebug}
@@ -572,7 +592,7 @@ const App: React.FC = () => {
       {showDisclaimer && (
         <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-md z-[200] flex items-center justify-center p-4 animate-in fade-in duration-300">
           <div className="bg-white max-w-lg w-full p-8 sm:p-10 rounded-[2.5rem] shadow-2xl animate-in zoom-in slide-in-from-bottom-8 duration-500 border border-slate-100">
-            <h2 className="text-2xl font-black text-slate-900 mb-4">{t.disclaimerTitle}</h2>
+            <h2 className="text-2xl font-black text-slate-900 dark:text-white mb-4">{t.disclaimerTitle}</h2>
             <p className="text-slate-500 text-sm sm:text-base leading-relaxed mb-8 font-medium">
               {t.disclaimerText}
             </p>
@@ -622,8 +642,8 @@ const App: React.FC = () => {
               <div className="w-16 h-16 sm:w-20 sm:h-20 bg-indigo-600 text-white rounded-2xl sm:rounded-3xl flex items-center justify-center mb-8 sm:mb-10 shadow-xl shadow-indigo-100 animate-in zoom-in duration-700">
                 <BrainCircuit className="w-8 h-8 sm:w-10 sm:h-10" />
               </div>
-              <h1 className="text-4xl sm:text-6xl font-black text-slate-900 mb-6 tracking-tight text-center">{t.introTitle}</h1>
-              <p className="text-lg sm:text-xl text-slate-600 max-w-2xl text-center leading-relaxed font-medium mb-8 sm:mb-10 px-2">{t.introDesc}</p>
+              <h1 className="text-4xl sm:text-6xl font-black text-slate-900 dark:text-white mb-6 tracking-tight text-center">{t.introTitle}</h1>
+              <p className="text-lg sm:text-xl text-slate-600 dark:text-slate-300 max-w-2xl text-center leading-relaxed font-medium mb-8 sm:mb-10 px-2">{t.introDesc}</p>
 
               <DomainsOverview t={t} />
 
@@ -672,9 +692,9 @@ const App: React.FC = () => {
               <div className="text-[10px] sm:text-xs font-black text-indigo-600 bg-indigo-50 px-3 sm:px-4 py-1.5 rounded-full shrink-0">{currentIndex + 1} / {shuffledQuestions.length}</div>
             </nav>
             <div className="w-full max-w-4xl h-2 bg-slate-200 rounded-full mb-12 sm:mb-16 overflow-hidden"><div className="h-full bg-indigo-500 transition-all duration-500" style={{ width: `${((currentIndex + 1) / shuffledQuestions.length) * 100}%` }} /></div>
-            <article className={`w-full max-w-4xl bg-white p-4 sm:p-24 rounded-[3rem] sm:rounded-[4rem] shadow-xl shadow-slate-200/50 transition-all duration-500 ${isAdvancing ? 'opacity-40 scale-[0.98]' : 'opacity-100 scale-100'}`}>
-              <span className="inline-block px-3 py-1 bg-slate-50 text-slate-500 rounded-full text-[9px] font-black uppercase tracking-widest mb-6 sm:mb-8">{(t.subscales as any)[shuffledQuestions[currentIndex].subscale] || shuffledQuestions[currentIndex].subscale}</span>
-              <h2 className="text-xl sm:text-4xl font-black text-slate-900 leading-[1.3] mb-12 sm:mb-20 tracking-tight min-h-[5rem] sm:min-h-[6rem]">{shuffledQuestions[currentIndex].text[locale]}</h2>
+            <article className={`w-full max-w-4xl bg-white dark:bg-slate-800 p-4 sm:p-24 rounded-[3rem] sm:rounded-[4rem] shadow-xl shadow-slate-200/50 dark:shadow-slate-900/50 transition-all duration-500 ${isAdvancing ? 'opacity-40 scale-[0.98]' : 'opacity-100 scale-100'}`}>
+              <span className="inline-block px-3 py-1 bg-slate-50 dark:bg-slate-700 text-slate-500 dark:text-slate-300 rounded-full text-[9px] font-black uppercase tracking-widest mb-6 sm:mb-8">{(t.subscales as any)[shuffledQuestions[currentIndex].subscale] || shuffledQuestions[currentIndex].subscale}</span>
+              <h2 className="text-xl sm:text-4xl font-black text-slate-900 dark:text-white leading-[1.3] mb-12 sm:mb-20 tracking-tight min-h-[5rem] sm:min-h-[6rem]">{shuffledQuestions[currentIndex].text[locale]}</h2>
               <LikertScale
                 key={shuffledQuestions[currentIndex].id}
                 value={answers.find(a => a.questionId === shuffledQuestions[currentIndex].id)?.score ?? -1}
@@ -702,7 +722,7 @@ const App: React.FC = () => {
         )}
       </div>
 
-      <footer className="w-full py-10 sm:py-12 bg-white text-center flex flex-col items-center gap-2 mt-auto border-t border-slate-100 shadow-[0_-1px_3px_rgba(0,0,0,0.02)]">
+      <footer className="w-full py-10 sm:py-12 bg-white dark:bg-slate-900 text-center flex flex-col items-center gap-2 mt-auto border-t border-slate-100 dark:border-slate-800 shadow-[0_-1px_3px_rgba(0,0,0,0.02)]">
         <p className="px-6 text-[9px] font-black text-slate-400 uppercase tracking-[0.4em] leading-relaxed max-w-2xl">{t.footer}</p>
         <p className="text-[10px] font-medium text-slate-400">
           Vibe coded by Kash <span className="cursor-pointer hover:scale-125 inline-block transition-transform" onClick={handleUnicornClick}>🦄</span> - 2026 - Open Source - Sharing is caring ❤️
