@@ -16,7 +16,8 @@ export enum FeedbackCategory {
   REPORT = 'report',
   PDF = 'pdf',
   IMPORT = 'import',
-  ACCURACY = 'accuracy'
+  ACCURACY = 'accuracy',
+  TIPS = 'tips',
 }
 
 
