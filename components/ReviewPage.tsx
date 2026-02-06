@@ -17,44 +17,51 @@ const getScaleOptions = (type: ScaleType) => {
   switch (type) {
     case 'yes_no':
       return [
-        { val: 0, color: 'bg-rose-500' },
-        { val: 1, color: 'bg-emerald-500' },
+        { val: 0, color: 'bg-slate-300' },
+        { val: 1, color: 'bg-indigo-600' },
       ];
     case 'frequency_0_4':
       return [
         { val: 0, color: 'bg-slate-200' },
-        { val: 1, color: 'bg-indigo-200' },
+        { val: 1, color: 'bg-indigo-100' },
         { val: 2, color: 'bg-indigo-300' },
-        { val: 3, color: 'bg-indigo-400' },
-        { val: 4, color: 'bg-indigo-600' },
+        { val: 3, color: 'bg-indigo-500' },
+        { val: 4, color: 'bg-indigo-700' },
       ];
     case 'frequency_1_5':
       return [
         { val: 1, color: 'bg-slate-200' },
-        { val: 2, color: 'bg-indigo-200' },
+        { val: 2, color: 'bg-indigo-100' },
         { val: 3, color: 'bg-indigo-300' },
-        { val: 4, color: 'bg-indigo-400' },
-        { val: 5, color: 'bg-indigo-600' },
+        { val: 4, color: 'bg-indigo-500' },
+        { val: 5, color: 'bg-indigo-700' },
       ];
     case 'frequency_0_3':
       return [
         { val: 0, color: 'bg-slate-200' },
-        { val: 1, color: 'bg-indigo-300' },
+        { val: 1, color: 'bg-indigo-200' },
         { val: 2, color: 'bg-indigo-500' },
-        { val: 3, color: 'bg-indigo-700' },
+        { val: 3, color: 'bg-indigo-800' },
       ];
     case 'likert_7':
       return [
-        { val: 1, color: 'bg-rose-600' },
-        { val: 2, color: 'bg-rose-500' },
-        { val: 3, color: 'bg-rose-300' },
-        { val: 4, color: 'bg-slate-300' },
-        { val: 5, color: 'bg-emerald-300' },
-        { val: 6, color: 'bg-emerald-500' },
-        { val: 7, color: 'bg-emerald-600' },
+        { val: 1, color: 'bg-slate-200' },
+        { val: 2, color: 'bg-indigo-100' },
+        { val: 3, color: 'bg-indigo-200' },
+        { val: 4, color: 'bg-indigo-400' },
+        { val: 5, color: 'bg-indigo-600' },
+        { val: 6, color: 'bg-indigo-700' },
+        { val: 7, color: 'bg-indigo-900' },
       ];
     default:
-      return [];
+      // likert_5 default
+      return [
+        { val: 1, color: 'bg-slate-200' },
+        { val: 2, color: 'bg-indigo-200' },
+        { val: 3, color: 'bg-indigo-400' },
+        { val: 4, color: 'bg-indigo-600' },
+        { val: 5, color: 'bg-indigo-800' },
+      ];
   }
 };
 

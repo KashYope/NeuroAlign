@@ -130,7 +130,7 @@ const Report: React.FC<ReportProps> = ({ report, answers, onReset, onReview, loc
       {
         label: t.chart.barrierLevel,
         data: impactEntries.map(([, val]) => val),
-        backgroundColor: impactEntries.map(([, val]) => val >= 4 ? '#f43f5e' : '#818cf8'),
+        backgroundColor: impactEntries.map(([, val]) => val >= 4 ? '#4338ca' : '#a5b4fc'), // indigo-700 for high, indigo-300 for low
         borderRadius: 8,
         barThickness: 24,
       },
@@ -545,8 +545,8 @@ const Report: React.FC<ReportProps> = ({ report, answers, onReset, onReview, loc
     // Only display insights if the score is significant (e.g., > 40%)
     if (domain.score < 40) return null;
 
-    const bgClass = domain.score > 60 ? 'bg-rose-50 border-rose-100' : domain.score > 40 ? 'bg-amber-50 border-amber-100' : 'bg-indigo-50 dark:bg-indigo-900/50 border-indigo-100 dark:border-indigo-900';
-    const textClass = domain.score > 60 ? 'text-rose-900 dark:text-rose-100' : domain.score > 40 ? 'text-amber-900 dark:text-amber-100' : 'text-indigo-900 dark:text-indigo-100';
+    const bgClass = domain.score > 60 ? 'bg-indigo-100 dark:bg-indigo-900/50 border-indigo-200' : 'bg-slate-100 dark:bg-slate-800 border-slate-200';
+    const textClass = 'text-indigo-900 dark:text-indigo-100';
 
     return (
       <div className={`mt-8 p-6 sm:p-8 rounded-3xl border ${bgClass}`}>
@@ -635,7 +635,7 @@ const Report: React.FC<ReportProps> = ({ report, answers, onReset, onReview, loc
           </h3>
           <div className="h-2 w-full max-w-xs bg-slate-100 rounded-full overflow-hidden mt-4">
             <div
-              className={`h-full transition-all duration-1000 ${domain.score > 60 ? 'bg-rose-500' : domain.score > 40 ? 'bg-amber-500' : 'bg-emerald-500'}`}
+              className={`h-full transition-all duration-1000 ${domain.score > 60 ? 'bg-indigo-700' : domain.score > 40 ? 'bg-indigo-500' : 'bg-indigo-300'}`}
               style={{ width: `${domain.score}%` }}
             />
           </div>
@@ -660,7 +660,7 @@ const Report: React.FC<ReportProps> = ({ report, answers, onReset, onReview, loc
                   </div>
                   <div className="h-1.5 bg-slate-100 rounded-full overflow-hidden">
                     <div
-                      className={`h-full rounded-full transition-all duration-1000 ${score > 60 ? 'bg-rose-400' : score > 40 ? 'bg-amber-400' : 'bg-indigo-400'
+                      className={`h-full rounded-full transition-all duration-1000 ${score > 60 ? 'bg-indigo-600' : score > 40 ? 'bg-indigo-400' : 'bg-slate-400'
                         }`}
                       style={{ width: `${score}%` }}
                     />

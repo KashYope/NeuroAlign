@@ -23,55 +23,55 @@ const getScaleConfig = (type: ScaleType): Option[] => {
   switch (type) {
     case 'yes_no':
       return [
-        { val: 0, labelKey: 'no', activeBg: 'bg-rose-500', activeBorder: 'border-rose-500', activeText: 'text-rose-600', hoverBorder: 'hover:border-rose-300' },
-        { val: 1, labelKey: 'yes', activeBg: 'bg-emerald-500', activeBorder: 'border-emerald-500', activeText: 'text-emerald-700', hoverBorder: 'hover:border-emerald-300' },
+        { val: 0, labelKey: 'no', activeBg: 'bg-slate-300', activeBorder: 'border-slate-300', activeText: 'text-slate-700', hoverBorder: 'hover:border-slate-300' },
+        { val: 1, labelKey: 'yes', activeBg: 'bg-indigo-600', activeBorder: 'border-indigo-600', activeText: 'text-white', hoverBorder: 'hover:border-indigo-400' },
       ];
 
     case 'frequency_0_4': // 0-4
       return [
         { val: 0, labelKey: 'frequency.never', activeBg: 'bg-slate-200', activeBorder: 'border-slate-300', activeText: 'text-slate-500', hoverBorder: 'hover:border-slate-300' },
-        { val: 1, labelKey: 'frequency.rarely', activeBg: 'bg-indigo-200', activeBorder: 'border-indigo-300', activeText: 'text-indigo-600', hoverBorder: 'hover:border-indigo-300' },
+        { val: 1, labelKey: 'frequency.rarely', activeBg: 'bg-indigo-100', activeBorder: 'border-indigo-200', activeText: 'text-indigo-600', hoverBorder: 'hover:border-indigo-200' },
         { val: 2, labelKey: 'frequency.sometimes', activeBg: 'bg-indigo-300', activeBorder: 'border-indigo-400', activeText: 'text-indigo-700', hoverBorder: 'hover:border-indigo-400' },
-        { val: 3, labelKey: 'frequency.often', activeBg: 'bg-indigo-400', activeBorder: 'border-indigo-500', activeText: 'text-indigo-800', hoverBorder: 'hover:border-indigo-500' },
-        { val: 4, labelKey: 'frequency.veryOften', activeBg: 'bg-indigo-600', activeBorder: 'border-indigo-600', activeText: 'text-indigo-900', hoverBorder: 'hover:border-indigo-600' },
+        { val: 3, labelKey: 'frequency.often', activeBg: 'bg-indigo-500', activeBorder: 'border-indigo-600', activeText: 'text-indigo-500', hoverBorder: 'hover:border-indigo-500' },
+        { val: 4, labelKey: 'frequency.veryOften', activeBg: 'bg-indigo-700', activeBorder: 'border-indigo-700', activeText: 'text-white', hoverBorder: 'hover:border-indigo-700' },
       ];
 
     case 'frequency_1_5': // 1-5 (Same as old 'frequency')
       return [
         { val: 1, labelKey: 'frequency.never', activeBg: 'bg-slate-200', activeBorder: 'border-slate-300', activeText: 'text-slate-500', hoverBorder: 'hover:border-slate-300' },
-        { val: 2, labelKey: 'frequency.rarely', activeBg: 'bg-indigo-200', activeBorder: 'border-indigo-300', activeText: 'text-indigo-600', hoverBorder: 'hover:border-indigo-300' },
+        { val: 2, labelKey: 'frequency.rarely', activeBg: 'bg-indigo-100', activeBorder: 'border-indigo-200', activeText: 'text-indigo-600', hoverBorder: 'hover:border-indigo-200' },
         { val: 3, labelKey: 'frequency.sometimes', activeBg: 'bg-indigo-300', activeBorder: 'border-indigo-400', activeText: 'text-indigo-700', hoverBorder: 'hover:border-indigo-400' },
-        { val: 4, labelKey: 'frequency.often', activeBg: 'bg-indigo-400', activeBorder: 'border-indigo-500', activeText: 'text-indigo-800', hoverBorder: 'hover:border-indigo-500' },
-        { val: 5, labelKey: 'frequency.veryOften', activeBg: 'bg-indigo-600', activeBorder: 'border-indigo-600', activeText: 'text-indigo-900', hoverBorder: 'hover:border-indigo-600' },
+        { val: 4, labelKey: 'frequency.often', activeBg: 'bg-indigo-500', activeBorder: 'border-indigo-600', activeText: 'text-indigo-500', hoverBorder: 'hover:border-indigo-500' },
+        { val: 5, labelKey: 'frequency.veryOften', activeBg: 'bg-indigo-700', activeBorder: 'border-indigo-700', activeText: 'text-white', hoverBorder: 'hover:border-indigo-700' },
       ];
 
     case 'frequency_0_3': // 0-3 (ADC)
       return [
         { val: 0, labelKey: 'frequency.never', activeBg: 'bg-slate-200', activeBorder: 'border-slate-300', activeText: 'text-slate-500', hoverBorder: 'hover:border-slate-300' },
-        { val: 1, labelKey: 'frequency.sometimes', activeBg: 'bg-indigo-300', activeBorder: 'border-indigo-400', activeText: 'text-indigo-700', hoverBorder: 'hover:border-indigo-400' },
-        { val: 2, labelKey: 'frequency.often', activeBg: 'bg-indigo-500', activeBorder: 'border-indigo-500', activeText: 'text-indigo-800', hoverBorder: 'hover:border-indigo-500' },
-        { val: 3, labelKey: 'frequency.always', activeBg: 'bg-indigo-700', activeBorder: 'border-indigo-700', activeText: 'text-indigo-100', hoverBorder: 'hover:border-indigo-600' },
+        { val: 1, labelKey: 'frequency.sometimes', activeBg: 'bg-indigo-200', activeBorder: 'border-indigo-300', activeText: 'text-indigo-600', hoverBorder: 'hover:border-indigo-300' },
+        { val: 2, labelKey: 'frequency.often', activeBg: 'bg-indigo-500', activeBorder: 'border-indigo-500', activeText: 'text-white', hoverBorder: 'hover:border-indigo-500' },
+        { val: 3, labelKey: 'frequency.always', activeBg: 'bg-indigo-800', activeBorder: 'border-indigo-800', activeText: 'text-white', hoverBorder: 'hover:border-indigo-600' },
       ];
 
     case 'likert_7': // 1-7 (CAT-Q)
       return [
-        { val: 1, labelKey: 'stronglyDisagree', activeBg: 'bg-rose-600', activeBorder: 'border-rose-600', activeText: 'text-rose-700', hoverBorder: 'hover:border-rose-400' },
-        { val: 2, labelKey: 'disagree', activeBg: 'bg-rose-500', activeBorder: 'border-rose-500', activeText: 'text-rose-600', hoverBorder: 'hover:border-rose-300' },
-        { val: 3, labelKey: 'somewhatDisagree', activeBg: 'bg-rose-300', activeBorder: 'border-rose-300', activeText: 'text-rose-500', hoverBorder: 'hover:border-rose-200' },
-        { val: 4, labelKey: 'neutral', activeBg: 'bg-slate-300', activeBorder: 'border-slate-300', activeText: 'text-slate-600', hoverBorder: 'hover:border-slate-200' },
-        { val: 5, labelKey: 'somewhatAgree', activeBg: 'bg-emerald-300', activeBorder: 'border-emerald-300', activeText: 'text-emerald-500', hoverBorder: 'hover:border-emerald-200' },
-        { val: 6, labelKey: 'agree', activeBg: 'bg-emerald-500', activeBorder: 'border-emerald-500', activeText: 'text-emerald-600', hoverBorder: 'hover:border-emerald-300' },
-        { val: 7, labelKey: 'stronglyAgree', activeBg: 'bg-emerald-600', activeBorder: 'border-emerald-600', activeText: 'text-emerald-700', hoverBorder: 'hover:border-emerald-400' },
+        { val: 1, labelKey: 'stronglyDisagree', activeBg: 'bg-slate-200', activeBorder: 'border-slate-300', activeText: 'text-slate-500', hoverBorder: 'hover:border-slate-200' },
+        { val: 2, labelKey: 'disagree', activeBg: 'bg-indigo-100', activeBorder: 'border-indigo-200', activeText: 'text-indigo-600', hoverBorder: 'hover:border-indigo-100' },
+        { val: 3, labelKey: 'somewhatDisagree', activeBg: 'bg-indigo-200', activeBorder: 'border-indigo-300', activeText: 'text-indigo-700', hoverBorder: 'hover:border-indigo-200' },
+        { val: 4, labelKey: 'neutral', activeBg: 'bg-indigo-400', activeBorder: 'border-indigo-400', activeText: 'text-white', hoverBorder: 'hover:border-indigo-300' },
+        { val: 5, labelKey: 'somewhatAgree', activeBg: 'bg-indigo-600', activeBorder: 'border-indigo-600', activeText: 'text-white', hoverBorder: 'hover:border-indigo-400' },
+        { val: 6, labelKey: 'agree', activeBg: 'bg-indigo-700', activeBorder: 'border-indigo-700', activeText: 'text-white', hoverBorder: 'hover:border-indigo-500' },
+        { val: 7, labelKey: 'stronglyAgree', activeBg: 'bg-indigo-900', activeBorder: 'border-indigo-900', activeText: 'text-white', hoverBorder: 'hover:border-indigo-600' },
       ];
 
     case 'likert_5':
     default:
       return [
-        { val: 1, labelKey: 'stronglyDisagree', activeBg: 'bg-rose-500', activeBorder: 'border-rose-500', activeText: 'text-rose-600', hoverBorder: 'hover:border-rose-300' },
-        { val: 2, labelKey: 'disagree', activeBg: 'bg-orange-400', activeBorder: 'border-orange-400', activeText: 'text-orange-600', hoverBorder: 'hover:border-orange-300' },
-        { val: 3, labelKey: 'neutral', activeBg: 'bg-slate-400', activeBorder: 'border-slate-400', activeText: 'text-slate-600', hoverBorder: 'hover:border-slate-300' },
-        { val: 4, labelKey: 'agree', activeBg: 'bg-lime-500', activeBorder: 'border-lime-500', activeText: 'text-lime-600', hoverBorder: 'hover:border-lime-300' },
-        { val: 5, labelKey: 'stronglyAgree', activeBg: 'bg-emerald-500', activeBorder: 'border-emerald-500', activeText: 'text-emerald-700', hoverBorder: 'hover:border-emerald-300' },
+        { val: 1, labelKey: 'stronglyDisagree', activeBg: 'bg-slate-200', activeBorder: 'border-slate-300', activeText: 'text-slate-500', hoverBorder: 'hover:border-slate-200' },
+        { val: 2, labelKey: 'disagree', activeBg: 'bg-indigo-200', activeBorder: 'border-indigo-300', activeText: 'text-indigo-700', hoverBorder: 'hover:border-indigo-200' },
+        { val: 3, labelKey: 'neutral', activeBg: 'bg-indigo-400', activeBorder: 'border-indigo-400', activeText: 'text-white', hoverBorder: 'hover:border-indigo-300' },
+        { val: 4, labelKey: 'agree', activeBg: 'bg-indigo-600', activeBorder: 'border-indigo-600', activeText: 'text-white', hoverBorder: 'hover:border-indigo-400' },
+        { val: 5, labelKey: 'stronglyAgree', activeBg: 'bg-indigo-800', activeBorder: 'border-indigo-800', activeText: 'text-white', hoverBorder: 'hover:border-indigo-500' },
       ];
   }
 };
