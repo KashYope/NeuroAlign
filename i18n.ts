@@ -47,7 +47,8 @@ export const translations = {
         report: "Report Clarity",
         pdf: "PDF Generation",
         import: "Import Function",
-        accuracy: "Result Accuracy"
+        accuracy: "Result Accuracy",
+        tips: "Quality of tips",
       },
       labels: {
         poor: "Poor",
@@ -503,7 +504,8 @@ export const translations = {
         report: "Clarté du rapport",
         pdf: "Génération PDF",
         import: "Fonction d'import",
-        accuracy: "Précision des résultats"
+        accuracy: "Précision des résultats",
+        tips: "Qualité des conseils",
       },
       labels: {
         poor: "Mauvais",
