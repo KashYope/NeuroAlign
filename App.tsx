@@ -14,8 +14,10 @@ import { shuffle } from './utils/random';
 import ModuleIcon from './components/ModuleIcon';
 import BreakMoment from './components/BreakMoment';
 import DopamineRewards from './components/DopamineRewards';
+import AssessmentIntro from './components/AssessmentIntro';
+import ModuleSelection from './components/ModuleSelection';
 import { ChevronDown, Activity, ArrowRight, Mail, Code, Sun, Moon, X, ChevronLeft, BrainCircuit, Sparkles, Camera } from 'lucide-react';
-import EffectCanvas, { EffectCanvasHandle } from './sources/effects';
+import EffectCanvas, { EffectCanvasHandle } from './components/EffectCanvas';
 import { EffectType } from './types';
 
 
@@ -52,7 +54,7 @@ const DomainsOverview: React.FC<{ t: Translation }> = ({ t }) => {
         {domains.map((key) => {
           const title = t.methodology.modules[key]?.title.replace(/Module\s*|\s*Module/gi, '').trim();
           return (
-            <div key={key} className="bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-100 dark:border-slate-700 shadow-[0_2px_10px_rgba(0,0,0,0.02)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center h-full">
+            <div key={key} className="bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-100 dark:border-slate-700 shadow-[0_2px_10px_rgba(0,0,0,0.02)] dark:shadow-none hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] dark:hover:shadow-none hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center h-full">
               <div className="w-8 h-8 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-3 shrink-0">
                 <ModuleIcon name={key} className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
@@ -115,7 +117,7 @@ const MethodologySection: React.FC<{ t: Translation; onShowMethods: () => void }
       </div>
 
       {/* Modules Card */}
-      <div className="bg-indigo-600 p-8 sm:p-10 rounded-[2.5rem] shadow-2xl shadow-indigo-200 text-white md:col-span-1">
+      <div className="bg-indigo-600 p-8 sm:p-10 rounded-[2.5rem] shadow-2xl shadow-indigo-200 dark:shadow-none text-white md:col-span-1">
         <h3 className="text-2xl font-black mb-8 px-2">{t.methodology.sourcesTitle}</h3>
         <div className="space-y-6">
           {Object.entries(t.methodology.modules).map(([key, mod]: [string, any]) => (
@@ -136,7 +138,7 @@ const MethodologySection: React.FC<{ t: Translation; onShowMethods: () => void }
     <div className="mt-12 text-center animate-in fade-in slide-in-from-bottom-4 delay-500 duration-1000">
       <button
         onClick={onShowMethods}
-        className="group relative px-8 py-4 bg-white text-indigo-600 rounded-2xl border-2 border-indigo-100 font-black text-xs sm:text-sm uppercase tracking-widest hover:bg-indigo-50 hover:border-indigo-200 transition-all shadow-lg shadow-indigo-100/50 hover:shadow-indigo-200 hover:-translate-y-1 active:translate-y-0 active:scale-95 flex items-center gap-3 mx-auto overflow-hidden"
+        className="group relative px-8 py-4 bg-white text-indigo-600 rounded-2xl border-2 border-indigo-100 font-black text-xs sm:text-sm uppercase tracking-widest hover:bg-indigo-50 hover:border-indigo-200 transition-all shadow-lg shadow-indigo-100/50 dark:shadow-none hover:shadow-indigo-200 dark:hover:shadow-none hover:-translate-y-1 active:translate-y-0 active:scale-95 flex items-center gap-3 mx-auto overflow-hidden"
       >
         <span className="relative z-10">{t.methodology.learnBtn}</span>
         <ArrowRight className="w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1" />
@@ -156,7 +158,7 @@ const FeedbackBanner: React.FC<{ locale: Locale }> = ({ locale }) => {
     <div className="fixed top-0 left-0 z-[101]">
       <button
         onClick={handleFeedbackClick}
-        className="bg-indigo-600 text-white px-4 py-2 rounded-br-2xl shadow-lg hover:bg-indigo-700 transition-all flex items-center gap-2 group"
+        className="bg-indigo-600 text-white px-4 py-2 rounded-br-2xl shadow-lg dark:shadow-none hover:bg-indigo-700 transition-all flex items-center gap-2 group"
         aria-label={locale === 'fr' ? 'Envoyer des commentaires' : 'Send feedback'}
       >
         <Mail className="w-4 h-4" />
@@ -277,6 +279,9 @@ const App: React.FC = () => {
   const [isDopamineMode, setIsDopamineMode] = useState(false);
   const [seed, setSeed] = useState<number>(Date.now());
   const [activeMouseEffect, setActiveMouseEffect] = useState<EffectType | null>(null);
+  const [showIntro, setShowIntro] = useState(false);
+  const [assessmentMode, setAssessmentMode] = useState<'marathon' | 'modular' | null>(null);
+  const [selectedPhase, setSelectedPhase] = useState<Phase | null>(null);
   const effectCanvasRef = useRef<EffectCanvasHandle>(null);
 
   const ALL_EFFECTS: EffectType[] = [
@@ -315,6 +320,14 @@ const App: React.FC = () => {
   // Memoize shuffled questions based on seed
   const shuffledQuestions = useMemo(() => shuffle(QUESTIONS, seed), [seed]);
 
+  // Active questions based on mode and phase
+  const activeQuestions = useMemo(() => {
+    if (assessmentMode === 'modular' && selectedPhase) {
+      return shuffledQuestions.filter(q => q.phase === selectedPhase);
+    }
+    return shuffledQuestions;
+  }, [shuffledQuestions, assessmentMode, selectedPhase]);
+
   useEffect(() => {
     if (isFirstRender.current) {
       if (!window.history.state) {
@@ -342,11 +355,25 @@ const App: React.FC = () => {
 
       if (!state || state.type === 'home') {
         setShowMethods(false);
+        setShowIntro(false);
+        setAssessmentMode(null);
+        setSelectedPhase(null);
         setCurrentIndex(-1);
       } else if (state.type === 'methods') {
         setShowMethods(true);
+      } else if (state.type === 'intro') {
+        setShowIntro(true);
+        setAssessmentMode(null);
+        setSelectedPhase(null);
+        setCurrentIndex(-1);
+      } else if (state.type === 'module_selection') {
+        setShowIntro(false);
+        setAssessmentMode('modular');
+        setSelectedPhase(null);
+        setCurrentIndex(-1);
       } else if (state.type === 'question') {
         setShowMethods(false);
+        setShowIntro(false);
         setCurrentIndex(state.index);
       }
     };
@@ -359,8 +386,17 @@ const App: React.FC = () => {
     if (isNavigatingViaHistory.current) return;
     if (showMethods) {
       window.history.pushState({ type: 'methods' }, '');
+    } else if (showIntro) {
+      window.history.pushState({ type: 'intro' }, '');
     }
-  }, [showMethods]);
+  }, [showMethods, showIntro]);
+
+  useEffect(() => {
+    if (isNavigatingViaHistory.current) return;
+    if (assessmentMode === 'modular' && !selectedPhase && !report) {
+      window.history.pushState({ type: 'module_selection' }, '');
+    }
+  }, [assessmentMode, selectedPhase, report]);
 
   useEffect(() => {
     if (isNavigatingViaHistory.current) return;
@@ -419,22 +455,29 @@ const App: React.FC = () => {
   const handleAnswer = (score: number) => {
     if (isAdvancing) return;
     setIsAdvancing(true);
-    const questionId = shuffledQuestions[currentIndex].id;
+    const questionId = activeQuestions[currentIndex].id;
     const newAnswers = [...answers.filter(a => a.questionId !== questionId), { questionId, score }];
     setAnswers(newAnswers);
     setTimeout(() => {
       const nextIndex = currentIndex + 1;
 
-      if (nextIndex < shuffledQuestions.length) {
-        // Break every 25 questions
-        if ((currentIndex + 1) % 25 === 0) {
+      if (nextIndex < activeQuestions.length) {
+        // Break every 25 questions in marathon mode
+        if (assessmentMode === 'marathon' && (currentIndex + 1) % 25 === 0) {
           setShowBreak(true);
         } else {
           setCurrentIndex(nextIndex);
         }
         setIsAdvancing(false);
       } else {
-        finishAssessment(newAnswers);
+        if (assessmentMode === 'modular') {
+          // In modular mode, return to module selection
+          setCurrentIndex(-1);
+          setSelectedPhase(null);
+          saveProgress({ answers: newAnswers, locale, seed, isComplete: false });
+        } else {
+          finishAssessment(newAnswers);
+        }
         setIsAdvancing(false);
       }
     }, 450);
@@ -500,6 +543,9 @@ const App: React.FC = () => {
     setCurrentIndex(-1);
     setShowDisclaimer(false);
     setDisclaimerChecked(false);
+    setShowIntro(false);
+    setAssessmentMode(null);
+    setSelectedPhase(null);
     setSeed(Date.now()); // Generate new seed for next attempt
   };
 
@@ -509,8 +555,22 @@ const App: React.FC = () => {
       setCurrentIndex(saved.index ?? 0);
       setShowBreak(saved.showBreak ?? false);
     } else {
-      setShowDisclaimer(true); // Show mandatory disclaimer for new starts
+      setShowIntro(true); // Show the new introductory page
     }
+  };
+
+  const handleChoice = (mode: 'marathon' | 'modular') => {
+    setAssessmentMode(mode);
+    setShowIntro(false);
+    if (mode === 'marathon') {
+      setShowDisclaimer(true);
+    }
+    // For modular, it proceeds to ModuleSelection via the state change
+  };
+
+  const handleModuleSelect = (phase: Phase) => {
+    setSelectedPhase(phase);
+    setCurrentIndex(0);
   };
 
   const handleViewResults = () => {
@@ -591,7 +651,7 @@ const App: React.FC = () => {
 
       {showDisclaimer && (
         <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-md z-[200] flex items-center justify-center p-4 animate-in fade-in duration-300">
-          <div className="bg-white dark:bg-slate-800 max-w-lg w-full p-8 sm:p-10 rounded-[2.5rem] shadow-2xl animate-in zoom-in slide-in-from-bottom-8 duration-500 border border-slate-100">
+          <div className="bg-white dark:bg-slate-800 max-w-lg w-full p-8 sm:p-10 rounded-[2.5rem] shadow-2xl dark:shadow-none animate-in zoom-in slide-in-from-bottom-8 duration-500 border border-slate-100 dark:border-slate-700">
             <h2 className="text-2xl font-black text-slate-900 dark:text-white mb-4">{t.disclaimerTitle}</h2>
             <p className="text-slate-500 dark:text-slate-400 text-sm sm:text-base leading-relaxed mb-8 font-medium">
               {t.disclaimerText}
@@ -636,10 +696,14 @@ const App: React.FC = () => {
           <ReviewPage answers={answers} onSave={handleReviewSave} onBack={() => window.history.back()} locale={locale} />
         ) : report ? (
           <Report report={report} answers={answers} onReset={restart} locale={locale} onReview={() => setShowReview(true)} />
+        ) : showIntro ? (
+          <AssessmentIntro t={t} onChoice={handleChoice} onBack={() => setShowIntro(false)} />
+        ) : assessmentMode === 'modular' && !selectedPhase ? (
+          <ModuleSelection t={t} answers={answers} onSelect={handleModuleSelect} onBack={() => { setAssessmentMode(null); setShowIntro(true); }} />
         ) : currentIndex === -1 ? (
           <main className="flex-1 py-16 sm:py-24 px-4 sm:px-6 flex flex-col items-center">
             <div className="max-w-4xl w-full flex flex-col items-center">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-indigo-600 text-white rounded-2xl sm:rounded-3xl flex items-center justify-center mb-8 sm:mb-10 shadow-xl shadow-indigo-100 animate-in zoom-in duration-700">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-indigo-600 text-white rounded-2xl sm:rounded-3xl flex items-center justify-center mb-8 sm:mb-10 shadow-xl shadow-indigo-100 dark:shadow-none animate-in zoom-in duration-700">
                 <BrainCircuit className="w-8 h-8 sm:w-10 sm:h-10" />
               </div>
               <h1 className="text-4xl sm:text-6xl font-black text-slate-900 dark:text-white mb-6 tracking-tight text-center">{t.introTitle}</h1>
@@ -647,7 +711,7 @@ const App: React.FC = () => {
 
               <DomainsOverview t={t} />
 
-              <button onClick={hasCompletedReport ? handleViewResults : handleStartRequest} className="w-full max-w-sm py-4 sm:py-5 bg-indigo-600 text-white rounded-2xl font-black text-base sm:text-lg uppercase tracking-widest hover:bg-indigo-700 shadow-xl shadow-indigo-100 transition-all active:scale-[0.98] outline-none">{hasCompletedReport ? t.viewResults : (answers.length > 0 ? t.continueBtn : t.startBtn)}</button>
+              <button onClick={hasCompletedReport ? handleViewResults : handleStartRequest} className="w-full max-w-sm py-4 sm:py-5 bg-indigo-600 text-white rounded-2xl font-black text-base sm:text-lg uppercase tracking-widest hover:bg-indigo-700 shadow-xl shadow-indigo-100 dark:shadow-none transition-all active:scale-[0.98] outline-none">{hasCompletedReport ? t.viewResults : (answers.length > 0 ? t.continueBtn : t.startBtn)}</button>
 
               <button
                 onClick={() => setShowScanner(true)}
@@ -662,7 +726,7 @@ const App: React.FC = () => {
                   onClick={() => {
                     if (window.confirm("Are you sure? This will clear your current progress.")) {
                       restart();
-                      setTimeout(() => setShowDisclaimer(true), 100);
+                      setTimeout(() => setShowIntro(true), 100);
                     }
                   }}
                   className="mt-4 text-xs font-bold text-slate-400 hover:text-indigo-600 uppercase tracking-widest transition-colors"
@@ -688,30 +752,46 @@ const App: React.FC = () => {
           <main className="flex-1 flex flex-col items-center pt-24 p-4 sm:p-12 pb-24">
             <nav className="w-full max-w-4xl flex items-center justify-between mb-8 sm:mb-12">
               <button onClick={() => window.history.back()} className="p-2 text-slate-400 hover:text-slate-800 transition-colors"><ChevronLeft className="w-6 h-6" /></button>
-              {/* REMOVED PHASE LABEL HERE */}
-              <div className="text-[10px] sm:text-xs font-black text-indigo-600 bg-indigo-50 px-3 sm:px-4 py-1.5 rounded-full shrink-0">{currentIndex + 1} / {shuffledQuestions.length}</div>
+              <div className="flex flex-col items-center gap-1">
+                {assessmentMode === 'modular' && selectedPhase && (
+                  <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">
+                    {t.phases[selectedPhase] || selectedPhase}
+                  </span>
+                )}
+                <div className="text-[10px] sm:text-xs font-black text-indigo-600 bg-indigo-50 px-3 sm:px-4 py-1.5 rounded-full shrink-0">
+                  {currentIndex + 1} / {activeQuestions.length}
+                </div>
+              </div>
+              <div className="w-10" /> {/* Spacer */}
             </nav>
-            <div className="w-full max-w-4xl h-2 bg-slate-200 rounded-full mb-12 sm:mb-16 overflow-hidden"><div className="h-full bg-indigo-500 transition-all duration-500" style={{ width: `${((currentIndex + 1) / shuffledQuestions.length) * 100}%` }} /></div>
+            <div className="w-full max-w-4xl h-2 bg-slate-200 rounded-full mb-12 sm:mb-16 overflow-hidden">
+              <div className="h-full bg-indigo-500 transition-all duration-500" style={{ width: `${((currentIndex + 1) / activeQuestions.length) * 100}%` }} />
+            </div>
             <article className={`w-full max-w-4xl bg-white dark:bg-slate-800 p-4 sm:p-24 rounded-[3rem] sm:rounded-[4rem] shadow-xl shadow-slate-200/50 dark:shadow-none transition-all duration-500 ${isAdvancing ? 'opacity-40 scale-[0.98]' : 'opacity-100 scale-100'}`}>
-              <span className="inline-block px-3 py-1 bg-slate-50 dark:bg-slate-700 text-slate-500 dark:text-slate-300 rounded-full text-[9px] font-black uppercase tracking-widest mb-6 sm:mb-8">{(t.subscales as any)[shuffledQuestions[currentIndex].subscale] || shuffledQuestions[currentIndex].subscale}</span>
-              <h2 className="text-xl sm:text-4xl font-black text-slate-900 dark:text-white leading-[1.3] mb-12 sm:mb-20 tracking-tight min-h-[5rem] sm:min-h-[6rem]">{shuffledQuestions[currentIndex].text[locale]}</h2>
+              <span className="inline-block px-3 py-1 bg-slate-50 dark:bg-slate-700 text-slate-500 dark:text-slate-300 rounded-full text-[9px] font-black uppercase tracking-widest mb-6 sm:mb-8">{(t.subscales as any)[activeQuestions[currentIndex].subscale] || activeQuestions[currentIndex].subscale}</span>
+              <h2 className="text-xl sm:text-4xl font-black text-slate-900 dark:text-white leading-[1.3] mb-12 sm:mb-20 tracking-tight min-h-[5rem] sm:min-h-[6rem]">{activeQuestions[currentIndex].text[locale]}</h2>
               <LikertScale
-                key={shuffledQuestions[currentIndex].id}
-                value={answers.find(a => a.questionId === shuffledQuestions[currentIndex].id)?.score ?? -1}
+                key={activeQuestions[currentIndex].id}
+                value={answers.find(a => a.questionId === activeQuestions[currentIndex].id)?.score ?? -1}
                 onChange={handleAnswer}
                 locale={locale}
-                type={shuffledQuestions[currentIndex].scale}
+                type={activeQuestions[currentIndex].scale}
               />
               <div className="mt-16 sm:mt-20 flex justify-between items-center">
                 <button
-                  disabled={currentIndex === 0 || isAdvancing}
+                  disabled={isAdvancing || (currentIndex === 0 && assessmentMode !== 'modular')}
                   onClick={() => window.history.back()}
-                  className="text-[10px] font-black text-slate-400 uppercase tracking-widest hover:text-slate-900 disabled:opacity-0 transition-all"
+                  className={`text-[10px] font-black text-slate-400 uppercase tracking-widest hover:text-slate-900 transition-all ${currentIndex === 0 && assessmentMode !== 'modular' ? 'opacity-0 pointer-events-none' : ''}`}
                 >
                   ← {t.back}
                 </button>
                 <button
-                  onClick={() => setCurrentIndex(-1)}
+                  onClick={() => {
+                    setCurrentIndex(-1);
+                    if (assessmentMode === 'modular') {
+                      setSelectedPhase(null);
+                    }
+                  }}
                   className="flex items-center gap-2 px-5 py-2.5 bg-slate-50 dark:bg-slate-800 rounded-xl text-[9px] font-black uppercase tracking-widest text-slate-500 hover:bg-slate-100 transition-colors"
                 >
                   {t.saveAndExit}

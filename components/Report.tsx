@@ -707,7 +707,7 @@ const Report: React.FC<ReportProps> = ({ report, answers, onReset, onReview, loc
       {/* URGENT CLINICAL ALERT */}
       {report.isClinicalUrgent && (
         <div className="mb-12 animate-in fade-in slide-in-from-top-4 duration-700">
-          <div className="bg-rose-50 border-2 border-rose-200 p-6 sm:p-8 rounded-[2.5rem] flex flex-col sm:flex-row items-center gap-6 shadow-xl shadow-rose-100/50">
+          <div className="bg-rose-50 border-2 border-rose-200 p-6 sm:p-8 rounded-[2.5rem] flex flex-col sm:flex-row items-center gap-6 shadow-xl shadow-rose-100/50 dark:shadow-none">
             <div className="w-16 h-16 rounded-3xl bg-rose-600 text-white flex items-center justify-center shrink-0 shadow-lg shadow-rose-200 animate-pulse">
               <AlertTriangle className="w-8 h-8" />
             </div>
@@ -782,7 +782,7 @@ const Report: React.FC<ReportProps> = ({ report, answers, onReset, onReview, loc
           <button
             onClick={generateDetailedPdf}
             disabled={isGeneratingPdf}
-            className="w-full sm:w-auto px-10 py-4 bg-indigo-600 text-white rounded-2xl sm:rounded-[2rem] font-black text-[10px] sm:text-xs uppercase tracking-[0.2em] hover:bg-indigo-700 shadow-xl shadow-indigo-100 transition-all active:scale-95 disabled:opacity-50"
+            className="w-full sm:w-auto px-10 py-4 bg-indigo-600 text-white rounded-2xl sm:rounded-[2rem] font-black text-[10px] sm:text-xs uppercase tracking-[0.2em] hover:bg-indigo-700 shadow-xl shadow-indigo-100 dark:shadow-none transition-all active:scale-95 disabled:opacity-50"
           >
             {isGeneratingPdf ? '...' : t.downloadPdf}
           </button>
@@ -869,7 +869,7 @@ const Report: React.FC<ReportProps> = ({ report, answers, onReset, onReview, loc
           </div>
         </div>
       </section>
-    </div>
+    </div >
   );
 };
 

@@ -99,16 +99,16 @@ const ReviewPage: React.FC<ReviewPageProps> = ({ answers, onSave, onBack, locale
   // Save button component
   const SaveButton = () => (
     <div className="fixed top-0 left-0 z-[101]">
-        <button
-          onClick={() => onSave(localAnswers)}
-          className="bg-indigo-600 text-white px-4 py-2 rounded-br-2xl shadow-lg hover:bg-indigo-700 transition-all flex items-center gap-2 group"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          <span className="text-[10px] sm:text-xs font-black uppercase tracking-wider">
-            {t.saveAndExit || "Save & Exit"}
-          </span>
-        </button>
-      </div>
+      <button
+        onClick={() => onSave(localAnswers)}
+        className="bg-indigo-600 text-white px-4 py-2 rounded-br-2xl shadow-lg dark:shadow-none hover:bg-indigo-700 transition-all flex items-center gap-2 group"
+      >
+        <ArrowLeft className="w-4 h-4" />
+        <span className="text-[10px] sm:text-xs font-black uppercase tracking-wider">
+          {t.saveAndExit || "Save & Exit"}
+        </span>
+      </button>
+    </div>
   );
 
   return (
@@ -117,58 +117,58 @@ const ReviewPage: React.FC<ReviewPageProps> = ({ answers, onSave, onBack, locale
 
       <div className="max-w-4xl mx-auto space-y-12">
         <div className="text-center mb-12">
-           <h1 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white mb-2">{locale === 'fr' ? 'Revue des Réponses' : 'Review Answers'}</h1>
-           <p className="text-slate-500 dark:text-slate-400 dark:text-slate-500 text-sm">{locale === 'fr' ? 'Modifiez vos réponses ci-dessous. Sauvegardez pour mettre à jour le rapport.' : 'Edit your answers below. Save to update your report.'}</p>
+          <h1 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white mb-2">{locale === 'fr' ? 'Revue des Réponses' : 'Review Answers'}</h1>
+          <p className="text-slate-500 dark:text-slate-400 dark:text-slate-500 text-sm">{locale === 'fr' ? 'Modifiez vos réponses ci-dessous. Sauvegardez pour mettre à jour le rapport.' : 'Edit your answers below. Save to update your report.'}</p>
         </div>
 
         {Array.from(groupedQuestions.entries()).map(([phase, subscales]) => (
           <section key={phase} className="bg-white dark:bg-slate-800 rounded-[2rem] p-6 sm:p-8 shadow-sm border border-slate-100 dark:border-slate-700">
-             <h2 className="text-lg font-black text-indigo-600 uppercase tracking-widest mb-6 border-b border-indigo-100 pb-4">
-                {t.phases[phase] || phase}
-             </h2>
+            <h2 className="text-lg font-black text-indigo-600 uppercase tracking-widest mb-6 border-b border-indigo-100 pb-4">
+              {t.phases[phase] || phase}
+            </h2>
 
-             <div className="space-y-8">
-               {Array.from(subscales.entries()).map(([subscale, questions]) => (
-                 <div key={subscale}>
-                    <h3 className="text-xs font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-4 pl-2">
-                       {/* @ts-ignore - Dynamic key access */}
-                       {t.subscales[subscale] || subscale}
-                    </h3>
+            <div className="space-y-8">
+              {Array.from(subscales.entries()).map(([subscale, questions]) => (
+                <div key={subscale}>
+                  <h3 className="text-xs font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-4 pl-2">
+                    {/* @ts-ignore - Dynamic key access */}
+                    {t.subscales[subscale] || subscale}
+                  </h3>
 
-                    <div className="space-y-2">
-                      {questions.map(q => {
-                        const currentScore = getScore(q.id);
-                        const options = getScaleOptions(q.scale);
+                  <div className="space-y-2">
+                    {questions.map(q => {
+                      const currentScore = getScore(q.id);
+                      const options = getScaleOptions(q.scale);
 
-                        return (
-                          <div key={q.id} className="group flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-3 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700 dark:bg-slate-900 transition-colors">
-                             <p className="text-sm font-medium text-slate-700 dark:text-slate-300 leading-relaxed max-w-2xl">
-                                {q.text[locale]}
-                             </p>
+                      return (
+                        <div key={q.id} className="group flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-3 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700 dark:bg-slate-900 transition-colors">
+                          <p className="text-sm font-medium text-slate-700 dark:text-slate-300 leading-relaxed max-w-2xl">
+                            {q.text[locale]}
+                          </p>
 
-                             <div className="flex items-center gap-1 sm:gap-2 shrink-0 self-end sm:self-auto">
-                               {options.map((opt) => (
-                                 <button
-                                   key={opt.val}
-                                   onClick={() => handleAnswerChange(q.id, opt.val)}
-                                   className={`w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center transition-all border
+                          <div className="flex items-center gap-1 sm:gap-2 shrink-0 self-end sm:self-auto">
+                            {options.map((opt) => (
+                              <button
+                                key={opt.val}
+                                onClick={() => handleAnswerChange(q.id, opt.val)}
+                                className={`w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center transition-all border
                                      ${currentScore === opt.val
-                                       ? `${opt.color} border-transparent text-white scale-110 shadow-md`
-                                       : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:border-slate-400 text-transparent'
-                                     }`}
-                                    title={`Score: ${opt.val}`}
-                                 >
-                                   {currentScore === opt.val && <Check size={12} strokeWidth={4} />}
-                                 </button>
-                               ))}
-                             </div>
+                                    ? `${opt.color} border-transparent text-white scale-110 shadow-md dark:shadow-none`
+                                    : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:border-slate-400 text-transparent'
+                                  }`}
+                                title={`Score: ${opt.val}`}
+                              >
+                                {currentScore === opt.val && <Check size={12} strokeWidth={4} />}
+                              </button>
+                            ))}
                           </div>
-                        );
-                      })}
-                    </div>
-                 </div>
-               ))}
-             </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
+            </div>
           </section>
         ))}
       </div>

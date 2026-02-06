@@ -142,7 +142,7 @@ const LikertScale: React.FC<LikertScaleProps> = ({ value, onChange, locale, type
           >
             {/* The Circle Container */}
             <div className={`${circleSize} rounded-full border-[2.5px] mb-2 sm:mb-6 flex items-center justify-center transition-all duration-300 ${isActive
-              ? `${opt.activeBg} ${opt.activeBorder} scale-110 shadow-lg shadow-current/20`
+              ? `${opt.activeBg} ${opt.activeBorder} scale-110 shadow-lg shadow-current/20 dark:shadow-none`
               : 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:border-slate-400 dark:hover:border-slate-500 group-focus-visible:border-indigo-600'
               }`}>
               {isActive && (

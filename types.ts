@@ -235,6 +235,19 @@ export interface Translation {
     scoring: string;
     pdf: string;
   };
+
+  assessmentIntro: {
+    title: string;
+    description: string;
+    howToRespondTitle: string;
+    howToRespondDesc: string;
+    chooseModeTitle: string;
+    marathonTitle: string;
+    marathonDesc: string;
+    modularTitle: string;
+    modularDesc: string;
+    startModuleBtn: string;
+  };
 }
 
 export type EffectType =

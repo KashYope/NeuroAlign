@@ -402,6 +402,18 @@ export const translations = {
     errors: {
       scoring: "Scoring error.",
       pdf: "Could not generate PDF."
+    },
+    assessmentIntro: {
+      title: "Before we begin",
+      description: "This assessment is comprehensive and designed to map your unique cognitive profile. Understanding how to respond will give you the most accurate results.",
+      howToRespondTitle: "How to respond",
+      howToRespondDesc: "Respond according to how you have felt over your life, or how you feel now if it's a persistent trait. There are no right or wrong answers—only your authentic experience.",
+      chooseModeTitle: "Choose your pace",
+      marathonTitle: "Marathon Mode",
+      marathonDesc: "Complete the full assessment in one sitting (approx. 140 questions).",
+      modularTitle: "Module by Module",
+      modularDesc: "Take it one profile at a time. Your progress is saved between modules.",
+      startModuleBtn: "Start Module"
     }
   },
   fr: {
@@ -805,6 +817,18 @@ export const translations = {
     errors: {
       scoring: "Erreur de calcul.",
       pdf: "Impossible de générer le PDF."
+    },
+    assessmentIntro: {
+      title: "Avant de commencer",
+      description: "Cette évaluation est complète et conçue pour cartographier votre profil cognitif unique. Comprendre comment répondre vous donnera les résultats les plus précis.",
+      howToRespondTitle: "Comment répondre",
+      howToRespondDesc: "Répondez selon ce que vous avez ressenti au cours de votre vie, ou comment vous vous sentez maintenant s'il s'agit d'un trait persistant. Il n'y a pas de bonnes ou de mauvaises réponses, seulement votre expérience authentique.",
+      chooseModeTitle: "Choisissez votre rythme",
+      marathonTitle: "Mode Marathon",
+      marathonDesc: "Réalisez l'évaluation complète en une seule fois (environ 140 questions).",
+      modularTitle: "Module par Module",
+      modularDesc: "Avancez un profil à la fois. Votre progression est sauvegardée entre chaque module.",
+      startModuleBtn: "Commencer le module"
     }
   }
 };

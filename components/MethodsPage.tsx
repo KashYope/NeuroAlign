@@ -41,7 +41,7 @@ const MethodModuleCard: React.FC<{
     stats: { q: number; s: number };
     labels: { questions: string; subscales: string };
 }> = ({ title, subtitle, tool, desc, icon, color, citations, stats, labels }) => (
-    <div className="bg-white dark:bg-slate-800 p-8 rounded-[2rem] border border-slate-100 dark:border-slate-700 shadow-xl shadow-slate-200/50 dark:shadow-none hover:shadow-2xl hover:scale-[1.01] transition-all duration-300 flex flex-col h-full">
+    <div className="bg-white dark:bg-slate-800 p-8 rounded-[2rem] border border-slate-100 dark:border-slate-700 shadow-xl shadow-slate-200/50 dark:shadow-none hover:shadow-2xl dark:hover:shadow-none hover:scale-[1.01] transition-all duration-300 flex flex-col h-full">
         <div className={`w-14 h-14 ${color} rounded-2xl flex items-center justify-center mb-6`}>
             {icon}
         </div>
@@ -161,7 +161,7 @@ const MethodsPage: React.FC<MethodsPageProps> = ({ onBack, onStart, t, locale })
             {/* Fixed Back Button */}
             <button
                 onClick={onBack}
-                className="fixed top-4 sm:top-6 left-4 sm:left-6 z-50 flex items-center gap-2 bg-white dark:bg-slate-800/80 backdrop-blur-md border border-slate-200 px-4 py-2 rounded-full shadow-lg shadow-slate-200/50 dark:shadow-none text-slate-500 dark:text-slate-400 hover:text-indigo-600 transition-all font-bold text-xs sm:text-sm"
+                className="fixed top-4 sm:top-6 left-4 sm:left-6 z-50 flex items-center gap-2 bg-white dark:bg-slate-800/80 backdrop-blur-md border border-slate-200 dark:border-slate-700 px-4 py-2 rounded-full shadow-lg shadow-slate-200/50 dark:shadow-none text-slate-500 dark:text-slate-400 hover:text-indigo-600 transition-all font-bold text-xs sm:text-sm"
             >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M15 19l-7-7 7-7" /></svg>
                 {content.backBtn}
@@ -332,7 +332,7 @@ const MethodsPage: React.FC<MethodsPageProps> = ({ onBack, onStart, t, locale })
                 </div>
 
                 {/* Scoring */}
-                <div className="bg-indigo-900 text-white p-12 rounded-[3rem] shadow-2xl relative overflow-hidden">
+                <div className="bg-indigo-900 text-white p-12 rounded-[3rem] shadow-2xl dark:shadow-none relative overflow-hidden">
                     <div className="absolute top-0 right-0 p-12 opacity-10">
                         <svg className="w-64 h-64" fill="currentColor" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
                     </div>
@@ -345,7 +345,7 @@ const MethodsPage: React.FC<MethodsPageProps> = ({ onBack, onStart, t, locale })
                 <div className="mt-20 text-center">
                     <button
                         onClick={onStart}
-                        className="px-10 py-5 bg-indigo-600 text-white rounded-[2rem] font-black text-lg uppercase tracking-widest hover:bg-indigo-700 shadow-xl shadow-indigo-200 transition-all hover:scale-105 active:scale-95"
+                        className="px-10 py-5 bg-indigo-600 text-white rounded-[2rem] font-black text-lg uppercase tracking-widest hover:bg-indigo-700 shadow-xl shadow-indigo-200 dark:shadow-none transition-all hover:scale-105 active:scale-95"
                     >
                         {content.startBtn}
                     </button>
@@ -354,7 +354,7 @@ const MethodsPage: React.FC<MethodsPageProps> = ({ onBack, onStart, t, locale })
                 {/* Floating Action Button (FAB) - Fixed Bottom Right */}
                 <button
                     onClick={onStart}
-                    className="fixed bottom-6 right-6 z-[100] px-6 py-4 bg-indigo-600 text-white rounded-full font-black text-xs uppercase tracking-widest hover:bg-indigo-700 transition-all hover:scale-105 active:scale-95 flex items-center gap-3 animate-in fade-in slide-in-from-bottom-10 duration-700"
+                    className="fixed bottom-6 right-6 z-[100] px-6 py-4 bg-indigo-600 text-white rounded-full font-black text-xs uppercase tracking-widest hover:bg-indigo-700 transition-all shadow-xl dark:shadow-none hover:scale-105 active:scale-95 flex items-center gap-3 animate-in fade-in slide-in-from-bottom-10 duration-700"
                 >
                     <span>{content.startBtn}</span>
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
