@@ -9,9 +9,10 @@ interface ModuleSelectionProps {
     answers: UserAnswer[];
     onSelect: (phase: Phase) => void;
     onBack: () => void;
+    onViewResults: () => void;
 }
 
-const ModuleSelection: React.FC<ModuleSelectionProps> = ({ t, answers, onSelect, onBack }) => {
+const ModuleSelection: React.FC<ModuleSelectionProps> = ({ t, answers, onSelect, onBack, onViewResults }) => {
     const modules = [
         Phase.AUTISM,
         Phase.ADHD,
@@ -90,13 +91,21 @@ const ModuleSelection: React.FC<ModuleSelectionProps> = ({ t, answers, onSelect,
                     })}
                 </div>
 
-                <div className="flex justify-center mb-24">
+                <div className="flex justify-center gap-4 mb-24">
                     <button
                         onClick={onBack}
                         className="px-8 py-3 bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
                     >
                         {t.back}
                     </button>
+                    {answers.length > 0 && (
+                        <button
+                            onClick={onViewResults}
+                            className="px-8 py-3 bg-indigo-600 text-white rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-indigo-700 transition-colors shadow-lg shadow-indigo-200/50 dark:shadow-none"
+                        >
+                            {t.viewResults}
+                        </button>
+                    )}
                 </div>
             </div>
         </div>

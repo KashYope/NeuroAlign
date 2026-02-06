@@ -45,9 +45,11 @@ interface ReportProps {
   onReview?: () => void;
   onScrollTrigger?: () => void;
   locale: Locale;
+  assessmentMode?: 'marathon' | 'modular' | null;
+  onBackToModules?: () => void;
 }
 
-const Report: React.FC<ReportProps> = ({ report, answers, onReset, onReview, locale, onScrollTrigger }) => {
+const Report: React.FC<ReportProps> = ({ report, answers, onReset, onReview, locale, onScrollTrigger, assessmentMode, onBackToModules }) => {
   const t: Translation = translations[locale];
   useEffect(() => {
     if (!onScrollTrigger) return;
@@ -80,10 +82,19 @@ const Report: React.FC<ReportProps> = ({ report, answers, onReset, onReview, loc
   const radarChartRef = useRef<any>(null);
   const barChartRef = useRef<any>(null);
 
-  const allDomains = report.domainScores.filter(d => d.name !== Phase.COMORBIDITIES);
+  // Define all possible domains for reference, but use filtered list for display
+  const allDomainsRaw = report.domainScores.filter(d => d.name !== Phase.COMORBIDITIES);
+  const relevantDomains = allDomainsRaw.filter(d =>
+    answers.some(a => QUESTIONS.find(q => q.id === a.questionId)?.phase === d.name)
+  );
+
+  // Use relevantDomains for the chart to hide unattempted modules
+  // Fallback to allDomainsRaw if no answers (shouldn't happen in report mode usually)
+  const displayDomains = relevantDomains.length > 0 ? relevantDomains : allDomainsRaw;
+
   const wellbeingDomains = report.domainScores.filter(d => d.name === Phase.COMORBIDITIES);
 
-  const radarLabels = allDomains.map(d => {
+  const radarLabels = displayDomains.map(d => {
     const label = t.phases[d.name] || d.name;
     if (label.includes(' & ')) return label.split(' & ');
     if (label.includes(' (')) {
@@ -105,7 +116,7 @@ const Report: React.FC<ReportProps> = ({ report, answers, onReset, onReview, loc
     datasets: [
       {
         label: t.chart.intensity,
-        data: allDomains.map(d => d.score),
+        data: displayDomains.map(d => d.score),
         backgroundColor: 'rgba(79, 70, 229, 0.2)',
         borderColor: 'rgba(79, 70, 229, 1)',
         borderWidth: 3,
@@ -187,6 +198,46 @@ const Report: React.FC<ReportProps> = ({ report, answers, onReset, onReview, loc
     maintainAspectRatio: false
   };
 
+  const profileBarOptions = {
+    scales: {
+      y: {
+        min: 0,
+        max: 100,
+        ticks: { stepSize: 20, color: '#94a3b8', font: { weight: 'bold' as const } },
+        grid: { color: 'rgba(0,0,0,0.06)' }
+      },
+      x: {
+        grid: { display: false },
+        ticks: { color: '#334155', font: { weight: 'bold' as const, size: 11 } }
+      }
+    },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: '#0f172a',
+        padding: 12,
+        titleFont: { size: 14, weight: 'bold' as const },
+        bodyFont: { size: 12 },
+        cornerRadius: 12
+      }
+    },
+    maintainAspectRatio: true,
+    responsive: true
+  };
+
+  const profileBarData = {
+    labels: radarLabels, // Same labels as radar
+    datasets: [
+      {
+        label: t.chart.intensity,
+        data: displayDomains.map(d => d.score),
+        backgroundColor: 'rgba(79, 70, 229, 0.8)',
+        borderRadius: 8,
+        barThickness: 40,
+      },
+    ],
+  };
+
   const generateMedicalSearchQuery = async () => {
     if (!city.trim() || !country.trim()) {
       alert(locale === 'en' ? 'Please enter both city and country' : 'Veuillez saisir la ville et le pays');
@@ -197,7 +248,7 @@ const Report: React.FC<ReportProps> = ({ report, answers, onReset, onReview, loc
 
     // Build the search query based on profile
     let conditions: string[] = [];
-    allDomains.forEach(d => {
+    displayDomains.forEach(d => {
       if (d.score >= 60) {
         const domainName = t.phases[d.name] || d.name;
         conditions.push(domainName);
@@ -331,7 +382,7 @@ const Report: React.FC<ReportProps> = ({ report, answers, onReset, onReview, loc
       }
 
       // Insight Sections (Only for Score >= 40)
-      const significantDomains = allDomains.filter(d => d.score >= 40);
+      const significantDomains = displayDomains.filter(d => d.score >= 40);
 
       const mapKey = (phase: string) => {
         if (phase === Phase.ADHD) return 'adhd';
@@ -749,11 +800,15 @@ const Report: React.FC<ReportProps> = ({ report, answers, onReset, onReview, loc
       {/* CORE VISUALIZATION */}
       <section className="mb-16 sm:mb-24 flex flex-col items-center">
         <div className="w-full max-w-xl aspect-square relative bg-white dark:bg-slate-800 p-4 sm:p-8 rounded-[3rem] shadow-xl shadow-slate-200/50 dark:shadow-none border border-slate-100 dark:border-slate-700 flex items-center justify-center">
-          <div className="relative w-full h-full min-h-[300px]">
-            <Radar ref={radarChartRef} data={radarData} options={radarOptions} />
+          <div className="relative w-full h-full min-h-[300px] flex items-center justify-center">
+            {displayDomains.length < 3 ? (
+              <Bar ref={radarChartRef} data={profileBarData} options={profileBarOptions} />
+            ) : (
+              <Radar ref={radarChartRef} data={radarData} options={radarOptions} />
+            )}
           </div>
           <div className="absolute top-6 left-6 px-4 py-2 bg-slate-900 text-white text-[9px] font-black uppercase tracking-widest rounded-full">
-            {t.reportLabels.spikyProfile}
+            {displayDomains.length < 3 ? t.preliminaryResults : t.reportLabels.spikyProfile}
           </div>
         </div>
         {report.flags.length > 0 && (
@@ -776,7 +831,7 @@ const Report: React.FC<ReportProps> = ({ report, answers, onReset, onReview, loc
           <div className="h-px bg-slate-200 flex-1"></div>
         </div>
         <div className="space-y-12">
-          {allDomains.map(renderDomainSection)}
+          {displayDomains.map(renderDomainSection)}
         </div>
       </section>
 
@@ -810,12 +865,22 @@ const Report: React.FC<ReportProps> = ({ report, answers, onReset, onReview, loc
           >
             {isGeneratingPdf ? '...' : t.downloadPdf}
           </button>
-          <button
-            onClick={onReset}
-            className="w-full sm:w-auto px-10 py-4 bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-2xl sm:rounded-[2rem] font-black text-[10px] sm:text-xs uppercase tracking-[0.2em] hover:bg-slate-50 dark:bg-slate-900 transition-all shadow-sm"
-          >
-            {t.retake}
-          </button>
+
+          {assessmentMode === 'modular' && onBackToModules ? (
+            <button
+              onClick={onBackToModules}
+              className="w-full sm:w-auto px-10 py-4 bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-2xl sm:rounded-[2rem] font-black text-[10px] sm:text-xs uppercase tracking-[0.2em] hover:bg-slate-50 dark:bg-slate-900 transition-all shadow-sm"
+            >
+              {locale === 'fr' ? 'Retour aux modules' : 'Back to Modules'}
+            </button>
+          ) : (
+            <button
+              onClick={onReset}
+              className="w-full sm:w-auto px-10 py-4 bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-2xl sm:rounded-[2rem] font-black text-[10px] sm:text-xs uppercase tracking-[0.2em] hover:bg-slate-50 dark:bg-slate-900 transition-all shadow-sm"
+            >
+              {t.retake}
+            </button>
+          )}
         </div>
       </div>
 

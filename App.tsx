@@ -442,15 +442,16 @@ const App: React.FC = () => {
       if (saved.answers) setAnswers(saved.answers);
       if (saved.locale) setLocale(saved.locale);
       if (saved.seed) setSeed(saved.seed);
+      if (saved.assessmentMode) setAssessmentMode(saved.assessmentMode);
       if (saved.isComplete) setHasCompletedReport(true);
     }
   }, []);
 
   useEffect(() => {
     if (currentIndex >= 0 && !report) {
-      saveProgress({ index: currentIndex, answers, locale, showBreak, seed });
+      saveProgress({ index: currentIndex, answers, locale, showBreak, seed, assessmentMode });
     }
-  }, [currentIndex, answers, report, locale, showBreak, seed]);
+  }, [currentIndex, answers, report, locale, showBreak, seed, assessmentMode]);
 
   // Scroll to top on view change
   useEffect(() => {
@@ -481,10 +482,8 @@ const App: React.FC = () => {
         setIsAdvancing(false);
       } else {
         if (assessmentMode === 'modular') {
-          // In modular mode, return to module selection
-          setCurrentIndex(-1);
-          setSelectedPhase(null);
-          saveProgress({ answers: newAnswers, locale, seed, isComplete: false });
+          // In modular mode, show results immediately for the completed module
+          finishAssessment(newAnswers);
         } else {
           finishAssessment(newAnswers);
         }
@@ -497,7 +496,19 @@ const App: React.FC = () => {
     try {
       const calculatedReport = calculateReport(finalAnswers);
       setReport(calculatedReport);
-      saveProgress({ answers: finalAnswers, locale, seed, isComplete: true });
+
+      const isActuallyComplete = assessmentMode === 'marathon';
+      if (isActuallyComplete) {
+        setHasCompletedReport(true);
+      }
+
+      saveProgress({
+        answers: finalAnswers,
+        locale,
+        seed,
+        isComplete: isActuallyComplete,
+        assessmentMode
+      });
     } catch (e) {
       alert(t.errors.scoring);
     }
@@ -590,6 +601,13 @@ const App: React.FC = () => {
     } catch (e) {
       alert(t.errors.scoring);
     }
+  };
+
+  const handleBackToModules = () => {
+    setReport(null);
+    setCurrentIndex(-1);
+    setSelectedPhase(null);
+    window.history.pushState({ type: 'module_selection' }, '');
   };
 
   const handleScanSuccess = (decodedText: string) => {
@@ -708,11 +726,26 @@ const App: React.FC = () => {
         ) : showReview ? (
           <ReviewPage answers={answers} onSave={handleReviewSave} onBack={() => window.history.back()} locale={locale} />
         ) : report ? (
-          <Report report={report} answers={answers} onReset={restart} locale={locale} onReview={() => setShowReview(true)} onScrollTrigger={handleTriggerFeedback} />
+          <Report
+            report={report}
+            answers={answers}
+            onReset={restart}
+            locale={locale}
+            onReview={() => setShowReview(true)}
+            onScrollTrigger={handleTriggerFeedback}
+            assessmentMode={assessmentMode}
+            onBackToModules={handleBackToModules}
+          />
         ) : showIntro ? (
           <AssessmentIntro t={t} onChoice={handleChoice} onBack={() => setShowIntro(false)} />
         ) : assessmentMode === 'modular' && !selectedPhase ? (
-          <ModuleSelection t={t} answers={answers} onSelect={handleModuleSelect} onBack={() => { setAssessmentMode(null); setShowIntro(true); }} />
+          <ModuleSelection
+            t={t}
+            answers={answers}
+            onSelect={handleModuleSelect}
+            onBack={() => { setAssessmentMode(null); setShowIntro(true); }}
+            onViewResults={() => finishAssessment(answers)}
+          />
         ) : currentIndex === -1 ? (
           <main className="flex-1 py-16 sm:py-24 px-4 sm:px-6 flex flex-col items-center">
             <div className="max-w-4xl w-full flex flex-col items-center">
