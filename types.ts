@@ -9,6 +9,16 @@ export enum Phase {
   IMPACT = 'Functional Impact',
   COMORBIDITIES = 'Comorbidities'
 }
+export enum FeedbackCategory {
+  ASSESSMENT = 'assessment',
+  ONBOARDING = 'onboarding',
+  SAVING = 'saving',
+  REPORT = 'report',
+  PDF = 'pdf',
+  IMPORT = 'import',
+  ACCURACY = 'accuracy'
+}
+
 
 export type Locale = 'en' | 'fr';
 
@@ -231,7 +241,28 @@ export interface Translation {
     item: string;
   };
 
-  errors: {
+
+  feedback: {
+    title: string;
+    subtitle: string;
+    categories: Record<string, string>;
+    labels: {
+      poor: string;
+      excellent: string;
+      didNotUse: string;
+      pros: string;
+      cons: string;
+      suggestions: string;
+      send: string;
+      close: string;
+    };
+    placeholders: {
+      pros: string;
+      cons: string;
+      suggestions: string;
+    };
+  };
+errors: {
     scoring: string;
     pdf: string;
   };
