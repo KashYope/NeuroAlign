@@ -1,41 +1,48 @@
-import re
+def fix_app():
+    with open('App.tsx', 'r') as f:
+        lines = f.readlines()
 
-file_path = 'App.tsx'
+    new_lines = []
+    for line in lines:
+        if 'Vibe coded by Kash' in line:
+            # Reconstruct this line and the following ones to be correct
+            new_lines.append('          Vibe coded by Kash <span className="cursor-pointer hover:scale-125 inline-block transition-transform" onClick={handleUnicornClick}>🦄</span> - 2026 - Open Source - Sharing is caring ❤️\n')
+            new_lines.append('        </p>\n')
+            new_lines.append("        <button onClick={() => { setShowLegal(true); window.history.pushState({ page: 'legal' }, ''); }} className=\"mt-4 text-[10px] font-bold text-slate-300 hover:text-slate-500 uppercase tracking-widest transition-colors\">{t.legal?.footerLink || 'CGU & Privacy'}</button>\n")
+        elif '<button onClick={() => { setShowLegal(true)' in line:
+            # Skip this line as we added it above
+            continue
+        elif 'Vibe coded by Kash' in lines[lines.index(line)-1] if lines.index(line)>0 else False:
+             # This handles the case where the previous line was the broken one and we might have trailing garbage or the next line is the button
+             # But since I'm iterating, the index lookbehind is risky.
+             # Simpler approach:
+             # Just identifying the broken state.
+             pass
+             new_lines.append(line)
+        else:
+             new_lines.append(line)
 
-with open(file_path, 'r') as f:
-    content = f.read()
+    # Actually, the logic above is a bit flaky because of the iterator.
+    # Let's do a read-entire-file and replace approach.
 
-old_start = 'const FeedbackBanner: React.FC<{ locale: Locale }> = ({ locale }) => {'
-new_start = 'const FeedbackBanner: React.FC<{ locale: Locale, onOpen: () => void }> = ({ locale, onOpen }) => {'
+    with open('App.tsx', 'r') as f:
+        content = f.read()
 
-if old_start in content:
-    # Find the end of the function body part we want to replace
-    # We want to replace up to "return ("
-    # But wait, handleFeedbackClick is inside.
+    # The broken segment looks like:
+    # Vibe coded by Kash <span ...>🦄</span> - 2026 - Open Source -  \n        <button ...
 
-    # Let's find the position of old_start
-    start_idx = content.find(old_start)
+    broken_part = 'Vibe coded by Kash <span className="cursor-pointer hover:scale-125 inline-block transition-transform" onClick={handleUnicornClick}>🦄</span> - 2026 - Open Source -  \n        <button'
 
-    # Find "return (" after start_idx
-    return_idx = content.find('return (', start_idx)
+    fixed_part = 'Vibe coded by Kash <span className="cursor-pointer hover:scale-125 inline-block transition-transform" onClick={handleUnicornClick}>🦄</span> - 2026 - Open Source - Sharing is caring ❤️\n        </p>\n        <button'
 
-    # Construct the new content
-    # Everything before old_start
-    # New start
-    # Everything after return_idx (inclusive of return ()
+    if broken_part in content:
+        content = content.replace(broken_part, fixed_part)
+        with open('App.tsx', 'w') as f:
+            f.write(content)
+        print("Fixed App.tsx")
+    else:
+        print("Could not find the specific broken pattern. Dumping last 500 chars to debug.")
+        print(content[-500:])
 
-    new_content = content[:start_idx] + new_start + '\n  ' + content[return_idx:]
-
-    # Now replace handleFeedbackClick usage inside the return block
-    # We need to act on new_content
-    # Find onClick={handleFeedbackClick} after the new start
-    # But wait, handleFeedbackClick is gone now (it was between start_idx and return_idx).
-    # So we just need to replace the usage in JSX.
-
-    new_content = new_content.replace('onClick={handleFeedbackClick}', 'onClick={onOpen}')
-
-    with open(file_path, 'w') as f:
-        f.write(new_content)
-    print("App.tsx precise fix applied")
-else:
-    print("Could not find old FeedbackBanner definition")
+if __name__ == "__main__":
+    fix_app()

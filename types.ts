@@ -263,7 +263,45 @@ export interface Translation {
       suggestions: string;
     };
   };
-errors: {
+legal: {
+    title: string;
+    backBtn: string;
+    mentions: {
+      title: string;
+      editor: string;
+      hosting: string;
+      contact: string;
+    };
+    privacy: {
+      title: string;
+      intro: string;
+      localProcessing: {
+        title: string;
+        text: string;
+      };
+      noDatabase: {
+        title: string;
+        text: string;
+      };
+      rights: {
+        title: string;
+        text: string;
+      };
+    };
+    terms: {
+      title: string;
+      disclaimer: {
+        title: string;
+        text: string;
+      };
+      usage: {
+        title: string;
+        text: string;
+      };
+    };
+    footerLink: string;
+  };
+  errors: {
     scoring: string;
     pdf: string;
   };

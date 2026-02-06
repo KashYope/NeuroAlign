@@ -5,6 +5,7 @@ import { translations } from './i18n';
 import LikertScale from './components/LikertScale';
 import Report from './components/Report';
 import MethodsPage from './components/MethodsPage';
+import LegalPage from './components/LegalPage';
 import ReviewPage from './components/ReviewPage';
 import QRScanner from './components/QRScanner';
 import { calculateReport, getScaleMinMax } from './utils/scoring';
@@ -279,6 +280,7 @@ const App: React.FC = () => {
   const [showDisclaimer, setShowDisclaimer] = useState(false);
   const [disclaimerChecked, setDisclaimerChecked] = useState(false);
   const [showMethods, setShowMethods] = useState(false);
+  const [showLegal, setShowLegal] = useState(false);
   const [showReview, setShowReview] = useState(false);
   const [showBreak, setShowBreak] = useState(false);
   const [showScanner, setShowScanner] = useState(false);
@@ -390,7 +392,9 @@ const App: React.FC = () => {
 
   useEffect(() => {
     if (isNavigatingViaHistory.current) return;
-    if (showMethods) {
+    if (showLegal) {
+          setShowLegal(false);
+        } else if (showMethods) {
       window.history.pushState({ type: 'methods' }, '');
     } else if (showIntro) {
       window.history.pushState({ type: 'intro' }, '');
@@ -697,7 +701,9 @@ const App: React.FC = () => {
       )}
 
       <div className="flex-1 flex flex-col">
-        {showMethods ? (
+        {showLegal ? (
+          <LegalPage t={t} onBack={() => window.history.back()} />
+        ) : showMethods ? (
           <MethodsPage onBack={() => window.history.back()} onStart={() => { setShowMethods(false); handleStartRequest(); }} t={t} locale={locale} />
         ) : showReview ? (
           <ReviewPage answers={answers} onSave={handleReviewSave} onBack={() => window.history.back()} locale={locale} />
@@ -814,6 +820,7 @@ const App: React.FC = () => {
         <p className="text-[10px] font-medium text-slate-400">
           Vibe coded by Kash <span className="cursor-pointer hover:scale-125 inline-block transition-transform" onClick={handleUnicornClick}>🦄</span> - 2026 - Open Source - Sharing is caring ❤️
         </p>
+        <button onClick={() => { setShowLegal(true); window.history.pushState({ page: 'legal' }, ''); }} className="mt-4 text-[10px] font-bold text-slate-300 hover:text-slate-500 uppercase tracking-widest transition-colors">{t.legal?.footerLink || 'CGU & Privacy'}</button>
       </footer>
     </div>
   );
