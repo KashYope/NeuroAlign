@@ -933,7 +933,7 @@ const Report: React.FC<ReportProps> = ({ report, answers, onReset, onReview, loc
 
             <button
               onClick={generateMedicalSearchQuery}
-              className="w-full px-10 py-4 bg-indigo-600 text-white rounded-2xl font-black text-xs uppercase tracking-[0.2em] hover:bg-indigo-700 shadow-xl shadow-indigo-200 transition-all active:scale-95 flex items-center justify-center gap-2"
+              className="w-full px-10 py-4 bg-indigo-600 text-white rounded-2xl font-black text-xs uppercase tracking-[0.2em] hover:bg-indigo-700 shadow-xl shadow-indigo-200 dark:shadow-none transition-all active:scale-95 flex items-center justify-center gap-2"
             >
               {isCopied ? (
                 <>
