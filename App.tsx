@@ -309,6 +309,18 @@ const App: React.FC = () => {
     }
   };
 
+  const handleLegalBack = () => {
+    setShowLegal(false);
+    setShowMethods(false);
+    setReport(null);
+    setAssessmentMode(null);
+    setSelectedPhase(null);
+    setShowReview(false);
+    setShowIntro(false);
+    setCurrentIndex(-1);
+    window.history.pushState({ type: 'home' }, '');
+  };
+
   useEffect(() => {
     if (!activeMouseEffect) return;
 
@@ -720,7 +732,7 @@ const App: React.FC = () => {
 
       <div className="flex-1 flex flex-col">
         {showLegal ? (
-          <LegalPage t={t} onBack={() => window.history.back()} />
+          <LegalPage t={t} onBack={handleLegalBack} />
         ) : showMethods ? (
           <MethodsPage onBack={() => window.history.back()} onStart={() => { setShowMethods(false); handleStartRequest(); }} t={t} locale={locale} />
         ) : showReview ? (
@@ -848,7 +860,7 @@ const App: React.FC = () => {
         )}
       </div>
 
-      <footer className="w-full py-10 sm:py-12 bg-white dark:bg-slate-900 text-center flex flex-col items-center gap-2 mt-auto border-t border-slate-100 dark:border-slate-800 shadow-[0_-1px_3px_rgba(0,0,0,0.02)]">
+      <footer className="relative z-50 w-full py-10 sm:py-12 bg-white dark:bg-slate-900 text-center flex flex-col items-center gap-2 mt-auto border-t border-slate-100 dark:border-slate-800 shadow-[0_-1px_3px_rgba(0,0,0,0.02)]">
         <p className="px-6 text-[9px] font-black text-slate-400 uppercase tracking-[0.4em] leading-relaxed max-w-2xl">{t.footer}</p>
         <p className="text-[10px] font-medium text-slate-400">
           Vibe coded by Kash <span className="cursor-pointer hover:scale-125 inline-block transition-transform" onClick={handleUnicornClick}>🦄</span> - 2026 - Open Source - Sharing is caring ❤️
