@@ -8,11 +8,12 @@ interface ModuleSelectionProps {
     t: Translation;
     answers: UserAnswer[];
     onSelect: (phase: Phase) => void;
+    onRetake: (phase: Phase) => void;
     onBack: () => void;
     onViewResults: () => void;
 }
 
-const ModuleSelection: React.FC<ModuleSelectionProps> = ({ t, answers, onSelect, onBack, onViewResults }) => {
+const ModuleSelection: React.FC<ModuleSelectionProps> = ({ t, answers, onSelect, onRetake, onBack, onViewResults }) => {
     const modules = [
         Phase.AUTISM,
         Phase.ADHD,
@@ -50,10 +51,10 @@ const ModuleSelection: React.FC<ModuleSelectionProps> = ({ t, answers, onSelect,
                         const description = t.domainIntros[key] || '';
 
                         return (
-                            <button
+                            <div
                                 key={phase}
-                                onClick={() => onSelect(phase)}
-                                className="group relative bg-white dark:bg-slate-800 p-6 sm:p-8 rounded-[2rem] border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-xl hover:shadow-indigo-100/30 dark:hover:shadow-none hover:-translate-y-1 transition-all duration-300 flex flex-col items-start text-left"
+                                onClick={() => stats.isFinished ? onViewResults() : onSelect(phase)}
+                                className="group relative bg-white dark:bg-slate-800 p-6 sm:p-8 rounded-[2rem] border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-xl hover:shadow-indigo-100/30 dark:hover:shadow-none hover:-translate-y-1 transition-all duration-300 flex flex-col items-start text-left cursor-pointer"
                             >
                                 <div className="w-full flex justify-between items-start mb-6">
                                     <div className="w-12 h-12 rounded-2xl bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 flex items-center justify-center group-hover:bg-indigo-600 group-hover:text-white transition-colors duration-300">
@@ -81,12 +82,25 @@ const ModuleSelection: React.FC<ModuleSelectionProps> = ({ t, answers, onSelect,
                                         <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{t.methodsPage.assessmentBreakdown.questions}</span>
                                         <span className="text-sm font-bold text-slate-700 dark:text-slate-300">{stats.completed} / {stats.total}</span>
                                     </div>
-                                    <div className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400 font-bold text-xs uppercase tracking-widest group-hover:translate-x-1 transition-transform">
-                                        {t.assessmentIntro.startModuleBtn}
-                                        <ChevronRight className="w-4 h-4" />
+                                    <div className="flex flex-col items-end gap-2">
+                                        <div className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400 font-bold text-xs uppercase tracking-widest group-hover:translate-x-1 transition-transform">
+                                            {stats.isFinished ? t.viewResults : t.assessmentIntro.startModuleBtn}
+                                            <ChevronRight className="w-4 h-4" />
+                                        </div>
+                                        {stats.isFinished && (
+                                            <button
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    onRetake(phase);
+                                                }}
+                                                className="text-[10px] font-bold text-slate-400 hover:text-rose-500 uppercase tracking-widest transition-colors z-10"
+                                            >
+                                                {t.retake}
+                                            </button>
+                                        )}
                                     </div>
                                 </div>
-                            </button>
+                            </div>
                         );
                     })}
                 </div>
