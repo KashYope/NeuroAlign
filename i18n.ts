@@ -36,6 +36,35 @@ export const translations = {
     coreProfiles: "Core Neuro-Profiles",
     specializedProfiles: "Specialized Cognitive Profiles",
     reportFooter: "NeuroAlign Summary Report • Diagnostic context required",
+
+    feedback: {
+      title: "We value your feedback",
+      subtitle: "Help us improve NeuroAlign",
+      categories: {
+        assessment: "Assessment Process",
+        onboarding: "Onboarding",
+        saving: "Saving Progress",
+        report: "Report Clarity",
+        pdf: "PDF Generation",
+        import: "Import Function",
+        accuracy: "Result Accuracy"
+      },
+      labels: {
+        poor: "Poor",
+        excellent: "Excellent",
+        didNotUse: "Did not use / N/A",
+        pros: "Pros",
+        cons: "Cons",
+        suggestions: "Suggestions",
+        send: "Send Feedback",
+        close: "Close"
+      },
+      placeholders: {
+        pros: "What did you like?",
+        cons: "What could be better?",
+        suggestions: "Any feature requests?"
+      }
+    },
     faqTitle: "Frequently Asked Questions",
     breakMoments: {
       title: "Break Moment",
@@ -462,6 +491,35 @@ export const translations = {
       subscaleBreakdown: "Analyse des Sous-échelles",
       insightPrompt: "Consultez les informations ci-dessous pour une interprétation détaillée adaptée à ce profil.",
       spikyProfile: "Visualisation du Profil Hétérogène"
+    },
+
+    feedback: {
+      title: "Votre avis compte",
+      subtitle: "Aidez-nous à améliorer NeuroAlign",
+      categories: {
+        assessment: "Processus d'évaluation",
+        onboarding: "Intégration / Accueil",
+        saving: "Sauvegarde de la progression",
+        report: "Clarté du rapport",
+        pdf: "Génération PDF",
+        import: "Fonction d'import",
+        accuracy: "Précision des résultats"
+      },
+      labels: {
+        poor: "Mauvais",
+        excellent: "Excellent",
+        didNotUse: "Non utilisé / N/A",
+        pros: "Points forts",
+        cons: "Points faibles",
+        suggestions: "Suggestions",
+        send: "Envoyer l'avis",
+        close: "Fermer"
+      },
+      placeholders: {
+        pros: "Qu'avez-vous apprécié ?",
+        cons: "Qu'est-ce qui pourrait être amélioré ?",
+        suggestions: "Des idées de fonctionnalités ?"
+      }
     },
     faqTitle: "Questions Fréquemment Posées",
     breakMoments: {

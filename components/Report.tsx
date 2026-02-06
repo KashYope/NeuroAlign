@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { ScreeningReport, Locale, Phase, UserAnswer, Translation } from '../types';
 import { translations } from '../i18n';
 import { QUESTIONS } from '../questions';
@@ -43,11 +43,35 @@ interface ReportProps {
   answers: UserAnswer[];
   onReset: () => void;
   onReview?: () => void;
+  onScrollTrigger?: () => void;
   locale: Locale;
 }
 
-const Report: React.FC<ReportProps> = ({ report, answers, onReset, onReview, locale }) => {
+const Report: React.FC<ReportProps> = ({ report, answers, onReset, onReview, locale, onScrollTrigger }) => {
   const t: Translation = translations[locale];
+  useEffect(() => {
+    if (!onScrollTrigger) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            onScrollTrigger();
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    const target = document.getElementById(`domain-${Phase.DYSPRAXIA}`);
+    if (target) {
+      observer.observe(target);
+    }
+
+    return () => observer.disconnect();
+  }, [onScrollTrigger]);
+
   const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
   const [city, setCity] = useState('');
   const [country, setCountry] = useState('');
@@ -624,7 +648,7 @@ const Report: React.FC<ReportProps> = ({ report, answers, onReset, onReview, loc
   };
 
   const renderDomainSection = (domain: any) => (
-    <div key={domain.name} className="bg-white dark:bg-slate-800 p-6 sm:p-8 rounded-[2.5rem] sm:rounded-[3rem] shadow-sm border border-slate-100 dark:border-slate-700 mb-8 animate-in slide-in-from-bottom-4 duration-700">
+    <div id={`domain-${domain.name}`} key={domain.name} className="bg-white dark:bg-slate-800 p-6 sm:p-8 rounded-[2.5rem] sm:rounded-[3rem] shadow-sm border border-slate-100 dark:border-slate-700 mb-8 animate-in slide-in-from-bottom-4 duration-700">
       <div className="flex flex-col sm:flex-row justify-between items-start gap-6 border-b border-slate-50 pb-8 mb-8">
         <div className="flex-1">
           <div className="inline-block px-3 py-1 bg-slate-100 rounded-full text-[9px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400 mb-3">

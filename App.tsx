@@ -19,6 +19,7 @@ import ModuleSelection from './components/ModuleSelection';
 import { ChevronDown, Activity, ArrowRight, Mail, Code, Sun, Moon, X, ChevronLeft, BrainCircuit, Sparkles, Camera } from 'lucide-react';
 import EffectCanvas, { EffectCanvasHandle } from './components/EffectCanvas';
 import { EffectType } from './types';
+import FeedbackModal from './components/FeedbackModal';
 
 
 const FAQAccordion: React.FC<{ items: { q: string, a: string }[], title: string }> = ({ items, title }) => {
@@ -146,18 +147,11 @@ const MethodologySection: React.FC<{ t: Translation; onShowMethods: () => void }
     </div>
   </section >
 );
-const FeedbackBanner: React.FC<{ locale: Locale }> = ({ locale }) => {
-  const handleFeedbackClick = () => {
-    const user = 'cestmoikash+neuroalign';
-    const domain = 'gmail.com';
-    const subject = encodeURIComponent('NeuroAlign Beta Feedback');
-    window.location.href = `mailto:${user}@${domain}?subject=${subject}`;
-  };
-
+const FeedbackBanner: React.FC<{ locale: Locale, onOpen: () => void }> = ({ locale, onOpen }) => {
   return (
     <div className="fixed top-0 left-0 z-[101]">
       <button
-        onClick={handleFeedbackClick}
+        onClick={onOpen}
         className="bg-indigo-600 text-white px-4 py-2 rounded-br-2xl shadow-lg dark:shadow-none hover:bg-indigo-700 transition-all flex items-center gap-2 group"
         aria-label={locale === 'fr' ? 'Envoyer des commentaires' : 'Send feedback'}
       >
@@ -250,6 +244,18 @@ const DebugOverlay: React.FC<{
 };
 
 const App: React.FC = () => {
+  const [showFeedback, setShowFeedback] = useState(false);
+  const [hasFeedbackTriggered, setHasFeedbackTriggered] = useState(false);
+
+  const handleOpenFeedback = () => setShowFeedback(true);
+
+  const handleTriggerFeedback = () => {
+    if (!hasFeedbackTriggered) {
+      setShowFeedback(true);
+      setHasFeedbackTriggered(true);
+    }
+  };
+
   const [isDark, setIsDark] = useState(() => {
     if (typeof window !== 'undefined') {
       return window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -625,9 +631,10 @@ const App: React.FC = () => {
           aiConfig={null}
         />
       )}
-      {!showMethods && <FeedbackBanner locale={locale} />}
+      {!showMethods && <FeedbackBanner locale={locale} onOpen={handleOpenFeedback} />}
       <LanguageSwitcher locale={locale} setLocale={setLocale} isDark={isDark} toggleTheme={toggleTheme} />
       <DebugToggle isDebug={isDebug} setIsDebug={setIsDebug} />
+      <FeedbackModal isOpen={showFeedback} onClose={() => setShowFeedback(false)} t={t} locale={locale} />
       <DebugOverlay
         isDebug={isDebug}
         isDopamine={isDopamineMode}
@@ -695,7 +702,7 @@ const App: React.FC = () => {
         ) : showReview ? (
           <ReviewPage answers={answers} onSave={handleReviewSave} onBack={() => window.history.back()} locale={locale} />
         ) : report ? (
-          <Report report={report} answers={answers} onReset={restart} locale={locale} onReview={() => setShowReview(true)} />
+          <Report report={report} answers={answers} onReset={restart} locale={locale} onReview={() => setShowReview(true)} onScrollTrigger={handleTriggerFeedback} />
         ) : showIntro ? (
           <AssessmentIntro t={t} onChoice={handleChoice} onBack={() => setShowIntro(false)} />
         ) : assessmentMode === 'modular' && !selectedPhase ? (
