@@ -606,6 +606,17 @@ const App: React.FC = () => {
     setCurrentIndex(0);
   };
 
+  const handleModuleRetake = (phase: Phase) => {
+    // Filter out answers for this specific phase
+    const moduleQuestions = QUESTIONS.filter(q => q.phase === phase);
+    const moduleQuestionIds = moduleQuestions.map(q => q.id);
+    const newAnswers = answers.filter(a => !moduleQuestionIds.includes(a.questionId));
+    setAnswers(newAnswers);
+    // Restart the module
+    setSelectedPhase(phase);
+    setCurrentIndex(0);
+  };
+
   const handleViewResults = () => {
     try {
       const calculatedReport = calculateReport(answers);
@@ -755,6 +766,7 @@ const App: React.FC = () => {
             t={t}
             answers={answers}
             onSelect={handleModuleSelect}
+            onRetake={handleModuleRetake}
             onBack={() => { setAssessmentMode(null); setShowIntro(true); }}
             onViewResults={() => finishAssessment(answers)}
           />
