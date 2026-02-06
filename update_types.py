@@ -1,54 +1,67 @@
 import re
 
-file_path = 'types.ts'
+def update_types():
+    with open('types.ts', 'r') as f:
+        content = f.read()
 
-with open(file_path, 'r') as f:
-    content = f.read()
-
-# Add FeedbackCategory enum
-if 'enum FeedbackCategory' not in content:
-    enum_def = """
-export enum FeedbackCategory {
-  ASSESSMENT = 'assessment',
-  ONBOARDING = 'onboarding',
-  SAVING = 'saving',
-  REPORT = 'report',
-  PDF = 'pdf',
-  IMPORT = 'import',
-  ACCURACY = 'accuracy'
-}
-"""
-    # Insert after Phase enum
-    content = re.sub(r'(export enum Phase \{[^}]+\})', r'\1' + enum_def, content)
-
-# Update Translation interface
-if 'feedback: {' not in content:
-    translation_field = """
-  feedback: {
+    # Define the new legal section to add to Translation interface
+    legal_type = """
+  legal: {
     title: string;
-    subtitle: string;
-    categories: Record<string, string>;
-    labels: {
-      poor: string;
-      excellent: string;
-      didNotUse: string;
-      pros: string;
-      cons: string;
-      suggestions: string;
-      send: string;
-      close: string;
+    backBtn: string;
+    mentions: {
+      title: string;
+      editor: string;
+      hosting: string;
+      contact: string;
     };
-    placeholders: {
-      pros: string;
-      cons: string;
-      suggestions: string;
+    privacy: {
+      title: string;
+      intro: string;
+      localProcessing: {
+        title: string;
+        text: string;
+      };
+      noDatabase: {
+        title: string;
+        text: string;
+      };
+      rights: {
+        title: string;
+        text: string;
+      };
     };
-  };
-"""
-    # Insert into Translation interface, maybe before 'errors:'
-    content = re.sub(r'(errors: \{)', translation_field + r'\1', content)
+    terms: {
+      title: string;
+      disclaimer: {
+        title: string;
+        text: string;
+      };
+      usage: {
+        title: string;
+        text: string;
+      };
+    };
+    footerLink: string;
+  };"""
 
-with open(file_path, 'w') as f:
-    f.write(content)
+    # Insert it before the 'errors' property or another suitable location within Translation interface
+    # Finding the end of the Translation interface is tricky with regex, so we look for a known property
+    # Let's insert it before 'errors: {' which seems to be near the end
 
-print("types.ts updated")
+    if 'legal:' not in content:
+        pattern = r'errors: \{'
+        replacement = legal_type.strip() + '\n  errors: {'
+        new_content = re.sub(pattern, replacement, content)
+
+        if new_content != content:
+            with open('types.ts', 'w') as f:
+                f.write(new_content)
+            print("Successfully updated types.ts")
+        else:
+            print("Could not find insertion point 'errors: {'")
+    else:
+        print("types.ts already contains legal section")
+
+if __name__ == "__main__":
+    update_types()
