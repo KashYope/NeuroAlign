@@ -5,6 +5,7 @@ import { QUESTIONS } from '../questions';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import ModuleIcon from './ModuleIcon';
+import ReportSWOT from './ReportSWOT';
 import { Check, AlertTriangle, Copy, ArrowRight, Wrench } from 'lucide-react';
 import QRCode from 'qrcode';
 import { encodeAnswers } from '../utils/sharing';
@@ -47,9 +48,10 @@ interface ReportProps {
   locale: Locale;
   assessmentMode?: 'marathon' | 'modular' | null;
   onBackToModules?: () => void;
+  viewMode: 'functional' | 'clinical';
 }
 
-const Report: React.FC<ReportProps> = ({ report, answers, onReset, onReview, locale, onScrollTrigger, assessmentMode, onBackToModules }) => {
+const Report: React.FC<ReportProps> = ({ report, answers, viewMode, onReset, onReview, locale, onScrollTrigger, assessmentMode, onBackToModules }) => {
   const t: Translation = translations[locale];
   useEffect(() => {
     if (!onScrollTrigger) return;
@@ -95,7 +97,7 @@ const Report: React.FC<ReportProps> = ({ report, answers, onReset, onReview, loc
   const wellbeingDomains = report.domainScores.filter(d => d.name === Phase.COMORBIDITIES);
 
   const radarLabels = displayDomains.map(d => {
-    const label = t.phases[d.name] || d.name;
+    const label = (viewMode === 'clinical' && t.phasesClinical ? t.phasesClinical[d.name] : t.phases[d.name]) || d.name;
     if (label.includes(' & ')) return label.split(' & ');
     if (label.includes(' (')) {
       const parts = label.split(' (');
@@ -250,7 +252,7 @@ const Report: React.FC<ReportProps> = ({ report, answers, onReset, onReview, loc
     let conditions: string[] = [];
     displayDomains.forEach(d => {
       if (d.score >= 60) {
-        const domainName = t.phases[d.name] || d.name;
+        const domainName = (viewMode === 'clinical' && t.phasesClinical ? t.phasesClinical[d.name] : t.phases[d.name]) || d.name;
         conditions.push(domainName);
       }
     });
@@ -551,7 +553,7 @@ const Report: React.FC<ReportProps> = ({ report, answers, onReset, onReview, loc
       currentY += 10;
 
       const domainTableData = report.domainScores.map(d => [
-        t.phases[d.name] || d.name,
+        (viewMode === 'clinical' && t.phasesClinical ? t.phasesClinical[d.name] : t.phases[d.name]) || d.name,
         `${d.score}%`,
         t.interpretations[d.interpretation] || d.interpretation
       ]);
@@ -703,7 +705,7 @@ const Report: React.FC<ReportProps> = ({ report, answers, onReset, onReview, loc
       <div className="flex flex-col sm:flex-row justify-between items-start gap-6 border-b border-slate-50 pb-8 mb-8">
         <div className="flex-1">
           <div className="inline-block px-3 py-1 bg-slate-100 rounded-full text-[9px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400 mb-3">
-            {t.phases[domain.name] || domain.name}
+            {(viewMode === 'clinical' && t.phasesClinical ? t.phasesClinical[domain.name] : t.phases[domain.name]) || domain.name}
           </div>
           <h3 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight mb-2">
             {t.interpretations[domain.interpretation] || domain.interpretation}
@@ -720,52 +722,11 @@ const Report: React.FC<ReportProps> = ({ report, answers, onReset, onReview, loc
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
-        {/* Subscales Column */}
-        <div>
-          <h4 className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-6">{t.reportLabels.subscaleBreakdown}</h4>
-          <div className="space-y-5">
-            {Object.entries(domain.subscales)
-              .filter(([name]) => !name.startsWith('_'))
-              .map(([name, score]: [string, any]) => (
-                <div key={name}>
-                  <div className="flex justify-between text-[10px] font-bold text-slate-600 dark:text-slate-400 mb-1.5">
-                    <span className="truncate pr-2">{(t.subscales as any)[name] || name}</span>
-                    <span className="shrink-0">{score}%</span>
-                  </div>
-                  <div className="h-1.5 bg-slate-100 rounded-full overflow-hidden">
-                    <div
-                      className={`h-full rounded-full transition-all duration-1000 ${score > 60 ? 'bg-indigo-600' : score > 40 ? 'bg-indigo-400' : 'bg-slate-400'
-                        }`}
-                      style={{ width: `${score}%` }}
-                    />
-                  </div>
-                </div>
-              ))}
-          </div>
-        </div>
-
-        {/* Large transparent icon background */}
-        <div className="hidden md:flex items-center justify-center p-8 bg-slate-50 dark:bg-slate-900/30 rounded-3xl border border-slate-50 border-dashed relative overflow-hidden h-[300px]">
-          <div className="absolute inset-0 flex items-center justify-center opacity-[0.03] pointer-events-none">
-            <ModuleIcon
-              name={domain.name === Phase.AUTISM ? 'autism' : domain.name === Phase.ADHD ? 'adhd' : domain.name === Phase.DYSLEXIA ? 'dyslexia' : domain.name === Phase.DYSPRAXIA ? 'dyspraxia' : 'dyscalculia'}
-              className="w-80 h-80 rotate-12"
-            />
-          </div>
-          {domain.score >= 40 && (
-            <p className="text-center text-xs text-slate-400 font-medium max-w-[200px] relative z-10">
-              {t.reportLabels.insightPrompt}
-            </p>
-          )}
-        </div>
-      </div>
-
-      {/* Dynamic Insights Block */}
-      <InsightBlock domain={domain} contentKey="" />
-
+      <ReportSWOT domain={domain} t={t} viewMode={viewMode} />
     </div>
   );
+
+
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8 animate-in fade-in slide-in-from-bottom-6 duration-1000">
