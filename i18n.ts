@@ -322,13 +322,24 @@ export const translations = {
     },
     phases: {
       Intake: "Intake",
-      "Autism Spectrum": "Autism (Masking)",
-      ADHD: "ADHD (Executive)",
+      "Autism Spectrum": "Perception & Connection",
+      ADHD: "Attention & Regulation",
+      Dyslexia: "Processing & Reading",
+      Dyscalculia: "Math Logic & Sense",
+      Dyspraxia: "Coordination & Motor Skills",
+      "Language Disorder": "Verbal Communication",
+      Comorbidities: "Co-occurrences",
+      "Functional Impact": "Functional Impact"
+    },
+phasesClinical: {
+      Intake: "Intake",
+      "Autism Spectrum": "Autism Spectrum",
+      ADHD: "ADHD",
       Dyslexia: "Dyslexia",
       Dyscalculia: "Dyscalculia",
       Dyspraxia: "Dyspraxia (DCD)",
-      "Language Disorder": "Language (Legacy)",
-      Comorbidities: "Co-occurring Patterns",
+      "Language Disorder": "Language Disorder",
+      Comorbidities: "Comorbidities",
       "Functional Impact": "Functional Impact"
     },
     chart: {
@@ -422,7 +433,12 @@ export const translations = {
         title: "What to Expect in Your Report",
         text: "After completing the assessment, you will receive a comprehensive, personalized report designed to help you understand your unique cognitive profile.",
         items: {
-          spikyProfile: "Visual Spiky Profile",
+          spikyProfile: "Spiky Profile",
+swot: {
+      strengths: "Strengths",
+      challenges: "Challenges",
+      opportunities: "Opportunities"
+    },
           insights: "Detailed Neuro-Insights",
           medical: "Clinical Appendix",
           impact: "Daily Functional Impact"
@@ -806,6 +822,17 @@ export const translations = {
     },
     phases: {
       Intake: "Admission",
+      "Autism Spectrum": "Perception & Connexion",
+      ADHD: "Attention & Fonctions Exécutives",
+      Dyslexia: "Traitement Linguistique",
+      Dyscalculia: "Logique Numérique",
+      Dyspraxia: "Coordination & Organisation",
+      "Language Disorder": "Communication Verbale",
+      Comorbidities: "Co-occurrences",
+      "Functional Impact": "Impact Fonctionnel"
+    },
+phasesClinical: {
+      Intake: "Admission",
       "Autism Spectrum": "Autisme (Masquage)",
       ADHD: "TDAH (Exécutif)",
       Dyslexia: "Dyslexie",
@@ -907,6 +934,11 @@ export const translations = {
         text: "Après avoir terminé l'évaluation, vous recevrez un rapport complet et personnalisé conçu pour vous aider à comprendre votre profil cognitif unique.",
         items: {
           spikyProfile: "Profil Visuel Hétérogène",
+swot: {
+      strengths: "Forces",
+      challenges: "Challenges",
+      opportunities: "Opportunités"
+    },
           insights: "Neuro-Insights Détaillés",
           medical: "Annexe Clinique",
           impact: "Impact Fonctionnel Quotidien"

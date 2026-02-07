@@ -122,6 +122,11 @@ export interface Translation {
     subscaleBreakdown: string;
     insightPrompt: string;
     spikyProfile: string;
+    swot: {
+      strengths: string;
+      challenges: string;
+      opportunities: string;
+    };
   };
 
   methodology: {
@@ -165,6 +170,11 @@ export interface Translation {
       text: string;
       items: {
         spikyProfile: string;
+    swot: {
+      strengths: string;
+      challenges: string;
+      opportunities: string;
+    };
         insights: string;
         medical: string;
         impact: string;
@@ -229,6 +239,7 @@ export interface Translation {
   };
 
   phases: Record<string, string>;
+  phasesClinical: Record<string, string>;
 
   chart: {
     intensity: string;

@@ -196,7 +196,7 @@ const DebugOverlay: React.FC<{
   forceFinish: () => void,
   close: () => void,
   t: Translation
-}> = ({ isDebug, isDopamine, setDopamine, liveReport, generateRandom, forceFinish, close, t }) => {
+, viewMode: "functional" | "clinical", setViewMode: (m: "functional" | "clinical") => void}> = ({ isDebug, isDopamine, setDopamine, liveReport, generateRandom, forceFinish, close, viewMode, setViewMode, t }) => {
   if (!isDebug) return null;
   return (
     <aside className="fixed bottom-4 sm:bottom-6 left-4 right-4 sm:left-6 sm:right-6 bg-slate-900/95 text-white p-5 sm:p-6 rounded-[2rem] sm:rounded-[2.5rem] shadow-2xl z-[110] backdrop-blur-md border border-slate-800 animate-in slide-in-from-bottom-6 max-h-[50vh] overflow-y-auto">
@@ -215,6 +215,9 @@ const DebugOverlay: React.FC<{
             <button onClick={() => {
               (window as any).triggerChaos();
             }} className="px-2 py-1 bg-rose-600 rounded text-[7px] font-black uppercase hover:bg-rose-500 animate-pulse">Chaos</button>
+            <button onClick={() => setViewMode(viewMode === 'functional' ? 'clinical' : 'functional')} className={`px-2 py-1 ${viewMode === 'clinical' ? 'bg-indigo-600' : 'bg-slate-700'} rounded text-[7px] font-black uppercase hover:bg-indigo-500 transition-all ml-2`}>
+              {viewMode === 'clinical' ? 'Clinical' : 'Functional'}
+            </button>
           </div>
         </div>
         <button onClick={close} className="text-slate-500 hover:text-white"><X className="w-5 h-5" /></button>
@@ -285,6 +288,7 @@ const App: React.FC = () => {
   const [showBreak, setShowBreak] = useState(false);
   const [showScanner, setShowScanner] = useState(false);
   const [isDopamineMode, setIsDopamineMode] = useState(false);
+  const [viewMode, setViewMode] = useState<'functional' | 'clinical'>('functional');
   const [seed, setSeed] = useState<number>(Date.now());
   const [activeMouseEffect, setActiveMouseEffect] = useState<EffectType | null>(null);
   const [showIntro, setShowIntro] = useState(false);
@@ -687,7 +691,7 @@ const App: React.FC = () => {
         liveReport={liveReport}
         generateRandom={generateRandom}
         forceFinish={forceReport}
-        close={() => setIsDebug(false)}
+        viewMode={viewMode} setViewMode={setViewMode} close={() => setIsDebug(false)}
         t={t}
       />
       <DopamineRewards active={isDopamineMode} />
@@ -751,7 +755,7 @@ const App: React.FC = () => {
         ) : report ? (
           <Report
             report={report}
-            answers={answers}
+            viewMode={viewMode} answers={answers}
             onReset={restart}
             locale={locale}
             onReview={() => setShowReview(true)}
